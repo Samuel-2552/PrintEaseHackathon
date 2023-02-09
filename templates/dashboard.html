@@ -40,7 +40,7 @@
 
     <h1>Welcome {{ username }}!</h1>
     <p>Your message: {{ message }}</p>
-    <form action="/dashboard" method="post">
+    <form id="txt" action="/dashboard" method="post">
       <textarea name="message">Type Something</textarea>
       <input type="submit" value="Save Message">
     <a href="/logout">Logout</a>
@@ -53,7 +53,7 @@
   </body>
 
   <script>
-    const form = document.querySelector("form");
+    const form = document.getElementById("txt");
 
     form.addEventListener("submit", (event) => {
       event.preventDefault();

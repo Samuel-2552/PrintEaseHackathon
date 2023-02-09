@@ -13,10 +13,13 @@ def connect_db():
 def index():
     if 'username' in session:
         return redirect(url_for('dashboard'))
-    return render_template('index.html')
+    else:
+        return render_template('index.html')
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
+    if 'username' in session:
+        return redirect(url_for('dashboard'))
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
@@ -35,6 +38,8 @@ def signup():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    if 'username' in session:
+        return redirect(url_for('dashboard'))
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
