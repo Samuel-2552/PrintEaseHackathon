@@ -52,23 +52,4 @@
 
   </body>
 
-  <script>
-    const form = document.getElementById("txt");
-
-    form.addEventListener("submit", (event) => {
-      event.preventDefault();
-
-      const formData = new FormData(form);
-
-      fetch("/upload-file", {
-        method: "POST",
-        body: formData,
-      })
-        .then((response) => response.text())
-        .then((text) => {
-          alert(text);
-        });
-    });
-  </script>
-
 </html>
