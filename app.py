@@ -52,6 +52,7 @@ def login():
         cursor = connection.cursor()
         cursor.execute("SELECT * FROM users WHERE email=? AND password=?", (useremail, password))
         user = cursor.fetchone()
+        
         if user:
             session['username'] = useremail
             return redirect('/dashboard')
@@ -64,17 +65,19 @@ def dashboard():
         return redirect('/')
     # Get the username from the session
     useremail = session['username']
-
-    # Connect to the database
     conn = sqlite3.connect('users.db')
-    username= fetch
+    
     cursor = conn.cursor()
-
+    cursor.execute("SELECT username FROM users WHERE email=?",(useremail,))
+    username=cursor.fetchone()
+    print(username)
     # Close the connection
     conn.close()
+    # Connect to the database
+    
 
     # Render the dashboard template with the username and message
-    return render_template('dashboard.html', username=username, fav_icon=fav_icon, load_img=load_img)
+    return render_template('dashboard.html', username=username[0], fav_icon=fav_icon, load_img=load_img)
 
 @app.route("/upload-file", methods=["POST"])
 def upload_file():
