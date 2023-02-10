@@ -3,11 +3,22 @@
     <title>Dashboard</title>
     <link rel="icon" type="image/x-icon" href="{{fav_icon}}">
     <style>
+      #loading {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      .content {
+        display: none;
+      }
       body {
         display: flex;
         justify-content: center;
         align-items: center;
+        background-color: #1f2029;
         height: 100vh;
+        position: relative;
       }
 
       form {
@@ -38,13 +49,21 @@
     </style>
   </head>
   <body>
-
-    <h1>Welcome {{ username }}!</h1>
+    <img src="{{load_img}}" id="loading">
+    <div class="content">
+      <h1>Welcome {{ username }}!</h1>
     <form action="/upload-file" method="post" enctype="multipart/form-data">
       <input type="file" name="file" accept="application/pdf">
       <input type="submit" value="Upload">
       <a href="/logout">Logout</a>
     </form>
+  </div>
+  <script>
+    setTimeout(function() {
+      document.getElementById("loading").style.display = "none";
+      document.querySelector(".content").style.display = "block";
+    }, 3500);
+  </script>
 
   </body>
 
