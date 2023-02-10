@@ -40,15 +40,10 @@
   <body>
 
     <h1>Welcome {{ username }}!</h1>
-    <p>Your message: {{ message }}</p>
-    <form id="txt" action="/dashboard" method="post">
-      <textarea name="message">Type Something</textarea>
-      <input type="submit" value="Save Message">
-    <a href="/logout">Logout</a>
-    </form>
     <form action="/upload-file" method="post" enctype="multipart/form-data">
       <input type="file" name="file" accept="application/pdf">
       <input type="submit" value="Upload">
+      <a href="/logout">Logout</a>
     </form>
 
   </body>

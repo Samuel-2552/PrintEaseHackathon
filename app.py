@@ -15,6 +15,8 @@ def connect_db():
 
 @app.route('/')
 def index():
+    if 'username' in session:
+        return redirect(url_for('dashboard'))
     return render_template("index.html", fav_icon=fav_icon)
    
 
@@ -43,40 +45,20 @@ def login():
     if 'username' in session:
         return redirect(url_for('dashboard'))
     if request.method == 'POST':
-        username = request.form['logemail']
+        useremail = request.form['logemail']
         password = request.form['logpass']
         connection = connect_db()
         cursor = connection.cursor()
-        cursor.execute("SELECT * FROM users WHERE username=? AND password=?", (username, password))
+        cursor.execute("SELECT * FROM users WHERE email=? AND password=?", (useremail, password))
         user = cursor.fetchone()
         if user:
-            session['username'] = username
+            session['username'] = useremail
             return redirect('/dashboard')
         return "Invalid username or password"
     return render_template('index.html', fav_icon=fav_icon)
 
 @app.route('/dashboard',methods=['GET', 'POST'])
 def dashboard():
-    if request.method == 'POST':
-        # Get the user message from the form
-        message = request.form['message']
-
-        # Connect to the database
-        conn = sqlite3.connect('users.db')
-        cursor = conn.cursor()
-
-        # Update the user message in the database
-        cursor.execute('''
-        UPDATE users SET message=? WHERE username=?
-        ''', (message, session['username']))
-
-        # Commit the changes and close the connection
-        conn.commit()
-        conn.close()
-
-        # Show a success message
-        return 'Message saved successfully'
-
     # Get the username from the session
     username = session['username']
 
@@ -84,17 +66,11 @@ def dashboard():
     conn = sqlite3.connect('users.db')
     cursor = conn.cursor()
 
-    # Get the user message from the database
-    cursor.execute('''
-    SELECT message FROM users WHERE username=?
-    ''', (username,))
-    message = cursor.fetchone()[0]
-
     # Close the connection
     conn.close()
 
     # Render the dashboard template with the username and message
-    return render_template('dashboard.html', username=username, message=message, fav_icon=fav_icon)
+    return render_template('dashboard.html', username=username, fav_icon=fav_icon)
 
 @app.route("/upload-file", methods=["POST"])
 def upload_file():
