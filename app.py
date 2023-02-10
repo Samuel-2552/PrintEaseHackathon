@@ -60,11 +60,14 @@ def login():
 
 @app.route('/dashboard',methods=['GET', 'POST'])
 def dashboard():
+    if 'username' not in session:
+        return redirect('/')
     # Get the username from the session
-    username = session['username']
+    useremail = session['username']
 
     # Connect to the database
     conn = sqlite3.connect('users.db')
+    username= fetch
     cursor = conn.cursor()
 
     # Close the connection
