@@ -23,9 +23,9 @@ def signup():
     if 'username' in session:
         return redirect(url_for('dashboard'))
     if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        email = request.form['email']
+        username = request.form['logname']
+        password = request.form['logpass']
+        email = request.form['logemail']
         connection = connect_db()
         cursor = connection.cursor()
         cursor.execute("SELECT * FROM users WHERE username=?", (username,))
@@ -36,15 +36,15 @@ def signup():
         connection.commit()
         connection.close()
         return redirect('/login')
-    return render_template('signup.html', fav_icon=fav_icon)
+    return render_template('index.html', fav_icon=fav_icon)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if 'username' in session:
         return redirect(url_for('dashboard'))
     if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
+        username = request.form['logemail']
+        password = request.form['logpass']
         connection = connect_db()
         cursor = connection.cursor()
         cursor.execute("SELECT * FROM users WHERE username=? AND password=?", (username, password))
@@ -53,7 +53,7 @@ def login():
             session['username'] = username
             return redirect('/dashboard')
         return "Invalid username or password"
-    return render_template('login.html', fav_icon=fav_icon)
+    return render_template('index.html', fav_icon=fav_icon)
 
 @app.route('/dashboard',methods=['GET', 'POST'])
 def dashboard():
