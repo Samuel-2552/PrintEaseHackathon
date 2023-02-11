@@ -1,27 +1,10 @@
 <html>
   <head>
-    <style>
-      table, th, td {
-        border: 1px solid black;
-        border-collapse: collapse;
-        padding: 5px;
-      }
-    </style>
+    <title>Data from Excel</title>
   </head>
   <body>
-    <table>
-      <tr>
-        {% for header in headers %}
-        <th>{{ header }}</th>
-        {% endfor %}
-      </tr>
-      {% for row in data %}
-      <tr>
-        {% for header in headers %}
-        <td>{{ row[header] }}</td>
-        {% endfor %}
-      </tr>
-      {% endfor %}
-    </table>
-  </body>
+    {% for table in tables %}
+      {{ table|safe }}
+    {% endfor %}
+  </body>
 </html>
