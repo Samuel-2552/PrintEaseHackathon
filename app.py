@@ -101,12 +101,20 @@ def logout():
     session.pop('username', None)
     return redirect('/')
 
-# @app.route("/update", method=['POST', 'GET'])
+# @app.route("/update", methods=['POST', 'GET'])
 # def update():
 #     if request.method == 'POST':
 #         year = request.form['year']
 #         dept = request.form['dept']
 #         section = request.form['section']
+#         conn = sqlite3.connect('users.db')
+    
+#         cursor = conn.cursor()
+#         cursor.execute("SELECT username FROM users WHERE email=?",(useremail,))
+#         username=cursor.fetchone()
+#         print(username)
+#         # Close the connection
+#         conn.close()
 
 
 
