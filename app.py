@@ -93,7 +93,12 @@ def dashboard():
 
 @app.route('/display',methods=['GET', 'POST'])
 def display():
-    df = pd.read_excel("files/excel.xlsx")
+    # df = pd.read_excel("files/excel.xlsx")
+    conn = sqlite3.connect('users.db')
+    
+    cursor = conn.cursor()
+    cursor.execute("SELECT loc FROM TimeTable WHERE Year=? AND Dept=? AND Section=?",(year, dept, section))
+    df=cursor.fetchone()
     return render_template("display.html",  tables=[df.to_html(classes='data')], titles=df.columns.values)
 
 @app.route("/upload-file", methods=["POST"])
@@ -105,7 +110,7 @@ def upload_file():
         os.rename(os.path.join("files", file.filename), os.path.join("files", year+dept+section+".png"))
         conn = sqlite3.connect('users.db')
         cursor = conn.cursor()
-        cursor.execute("INSERT INTO users (Year, Dept, Section, loc) VALUES (?, ?, ?, ?)", (year, dept, section, os.path.join("files", year+dept+section+".png")))
+        cursor.execute("INSERT INTO TimeTable (Year, Dept, Section, loc) VALUES (?, ?, ?, ?)", (year, dept, section, os.path.join("files", year+dept+section+".png")))
         return "File uploaded successfully!"
     return "No file was provided."
 
@@ -116,12 +121,15 @@ def logout():
 
 @app.route("/update", methods=['POST', 'GET'])
 def update():
-    if 'username' not in session:
+    global year, dept, section
+    if 'username' not in session and request.method == 'POST':
+        year = request.form.get("Year")
+        dept = request.form['Dept']
+        section = request.form['section']
         return redirect('/display')
 
     else:
         if request.method == 'POST':
-            global year, dept, section
             year = request.form.get("Year")
             dept = request.form['Dept']
             section = request.form['section']
@@ -130,4 +138,4 @@ def update():
     
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0")
