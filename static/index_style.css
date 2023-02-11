@@ -291,11 +291,11 @@ h6 span{
 select {
   margin-bottom: 10px;
   margin-top: 10px;
-  font-family: cursive, sans-serif;
+  font-family:'Times New Roman', Times, serif;
   outline: 0;
-  background: #2ecc71;
+  background: #166ced8d;
   color: #fff;
-  border: 1px solid crimson;
+  border: 1px solid rgb(0, 0, 0);
   padding: 4px;
   border-radius: 9px;
 }
@@ -312,4 +312,9 @@ select {
 	height: 26px;
 	width: auto;
 	display: block;
+}
+submit{
+  
+  font-family:'Times New Roman', Times, serif;
+  
 }
