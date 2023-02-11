@@ -111,6 +111,8 @@ def upload_file():
         conn = sqlite3.connect('users.db')
         cursor = conn.cursor()
         cursor.execute("INSERT INTO TimeTable (Year, Dept, Section, loc) VALUES (?, ?, ?, ?)", (year, dept, section, os.path.join("files", year+dept+section+".png")))
+        conn.commit()
+        conn.close()
         return "File uploaded successfully!"
     return "No file was provided."
 
