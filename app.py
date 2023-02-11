@@ -29,13 +29,14 @@ def signup():
         username = request.form['logname']
         password = request.form['logpass']
         email = request.form['logemail']
+        phoneno=request.form['lognumber']
         connection = connect_db()
         cursor = connection.cursor()
         cursor.execute("SELECT * FROM users WHERE username=?", (username,))
         user = cursor.fetchone()
         if user:
             return "User already exists"
-        cursor.execute("INSERT INTO users (username, password, email) VALUES (?, ?, ?)", (username, password, email))
+        cursor.execute("INSERT INTO users (username, password, email,phoneno) VALUES (?, ?, ?,?)", (username, password, email,phoneno))
         connection.commit()
         connection.close()
         return redirect('/login')

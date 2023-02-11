@@ -13,7 +13,8 @@ CREATE TABLE IF NOT EXISTS users (
   username TEXT NOT NULL,
   password TEXT NOT NULL,
   email TEXT NOT NULL,
-  message TEXT
+  message TEXT,
+  phoneno INTEGER
 )
 ''')
 
