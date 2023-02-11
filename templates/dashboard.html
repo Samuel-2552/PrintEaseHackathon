@@ -13,10 +13,13 @@
     <title>PrintEase</title>
     <link rel="icon" type="image/x-icon" href="{{fav_icon}}">
     <script>
+      
       if (window.performance && window.performance.navigation.type === window.performance.navigation.TYPE_BACK_FORWARD) {
         window.location="http://127.0.0.1:5000";
 }
+
     </script>
+
 </head>
 <body>
   <img src="{{load_img}}" id="loading">
@@ -38,55 +41,43 @@
                         <h4 class="mb-4 pb-3">Check out your Time Table</h4>
                         <br><br>
                         <!-- <h4 class="mb-4 pb-3">Welcome to PrintEase</h4> -->
-                        <form action="/login" method="post">
-                          <div class="dropdown">
-                            <button style="width:300px" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
-                              Department
-                            </button>
-                            <ul class="dropdown-menu">
-                              <li><a class="dropdown-item" href="#">AIML</a></li>
-                              <li><a class="dropdown-item" href="#">CSE</a></li>
-                              <li><a class="dropdown-item" href="#">IT</a></li>
-                            </ul>
-                          </div>
-                          <br>
-                          <div class="dropdown">
-                            <button style="width:300px" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
-                              Year
-                            </button>
-                            <ul class="dropdown-menu">
-                              <li><a class="dropdown-item" href="#">1st year</a></li>
-                              <li><a class="dropdown-item" href="#">2nd year</a></li>
-                              <li><a class="dropdown-item" href="#">3rd year</a></li>
-                              <li><a class="dropdown-item" href="#">4th year</a></li>
-                            </ul>
-                          </div>
-                          <br>
-                          <div class="dropdown">
-                            <button style="width:300px" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
-                              Section
-                            </button>
-                            <ul class="dropdown-menu">
-                              <li><a class="dropdown-item" href="#">A</a></li>
-                              <li><a class="dropdown-item" href="#">B</a></li>
-                              <li><a class="dropdown-item" href="#">C</a></li>
-                              <li><a class="dropdown-item" href="#">D</a></li>
-                            </ul>
-                          </div>
-                          <br><br>
-                          <!-- <div class="form-group mt-2">
-                            <input type="email" name="logemail" class="form-style" placeholder="Email" id="logemail" autocomplete="off" required>
-                            <i class="input-icon bi bi-envelope-at"></i>
-                          </div>	
-                          <div class="form-group mt-2">
-                            <input type="password" name="logpass" class="form-style" placeholder="Password" id="logpass" autocomplete="off" required>
-                            <i class="input-icon bi bi-key"></i>
-                          </div> -->
-                          <input class="btn mt-4" type="submit" value="Log In">
-                                        <!-- <p class="mb-0 mt-4 text-center"><a href="/forgot" class="link">Forgot your password?</a></p> -->
-                            </div>
-                          </div>
-                        </form>
+                        <form action="#">
+                          <label for="lang">Language</label>
+                          <select name="Year" id="lang">
+                            <option value="select">Select Year</option>
+                            <option value="javascript">I Year</option>
+                            <option value="php">II Year</option>
+                            <option value="java">III Year</option>
+                            <option value="golang">IV Year</option>
+                            <!-- <option value="python">Python</option>
+                            <option value="c#">C#</option>
+                            <option value="C++">C++</option>
+                            <option value="erlang">Erlang</option> -->
+                          </select>
+                          <select name="Dept" id="lang">
+                            <option value="select">Select Department</option>
+                            <option value="javascript">AIML</option>
+                            <option value="php">CSE</option>
+                            <option value="java">Civil</option>
+                            <option value="golang">Mechanical</option>
+                            <!-- <option value="python">Python</option>
+                            <option value="c#">C#</option>
+                            <option value="C++">C++</option>
+                            <option value="erlang">Erlang</option> -->
+                          </select>
+                          <select name="section" id="lang">
+                            <option value="select">Select Section</option>
+                            <option value="javascript">A</option>
+                            <option value="php">B</option>
+                            <option value="java">C</option>
+                            <option value="golang">D</option>
+                            <!-- <option value="python">Python</option>
+                            <option value="c#">C#</option>
+                            <option value="C++">C++</option>
+                            <option value="erlang">Erlang</option> -->
+                          </select>
+                          <input type="submit" value="Submit" />
+                    </form>
                       </div>
                   <!-- <div class="card-back">
                     <div class="center-wrap">
