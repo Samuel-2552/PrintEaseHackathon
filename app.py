@@ -101,5 +101,14 @@ def logout():
     session.pop('username', None)
     return redirect('/')
 
+# @app.route("/update", method=['POST', 'GET'])
+# def update():
+#     if request.method == 'POST':
+#         year = request.form['year']
+#         dept = request.form['dept']
+#         section = request.form['section']
+
+
+
 if __name__ == '__main__':
     app.run(debug=True)

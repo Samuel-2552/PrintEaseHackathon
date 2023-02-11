@@ -17,6 +17,16 @@ CREATE TABLE IF NOT EXISTS users (
 )
 ''')
 
+cursor.execute('''
+CREATE TABLE IF NOT EXISTS TimeTable (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  username TEXT NOT NULL,
+  password TEXT NOT NULL,
+  email TEXT NOT NULL,
+  message TEXT
+)
+''')
+
 # Commit the changes and close the connection
 conn.commit()
 conn.close()
