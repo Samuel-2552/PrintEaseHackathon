@@ -22,8 +22,8 @@ def connect_db():
 @app.route('/')
 def index():
     if 'username' in session:
-        return render_template("dashboard.html", fav_icon=fav_icon, load_img=load_img, sess = "True")
-    return render_template("dashboard.html", fav_icon=fav_icon, load_img=load_img, sess="False")
+        return render_template("dashboard.html", fav_icon=fav_icon, load_img=load_img, data="true")
+    return render_template("dashboard.html", fav_icon=fav_icon, load_img=load_img, data="false")
    
 
 @app.route('/signup', methods=['GET', 'POST'])
@@ -49,7 +49,7 @@ def signup():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if 'username' in session:
-        return redirect(url_for('dashboard'))
+        return render_template("dashboard.html", fav_icon=fav_icon, load_img=load_img, data="true")
     if request.method == 'POST':
         useremail = request.form['logemail']
         password = request.form['logpass']
