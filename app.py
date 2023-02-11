@@ -98,17 +98,9 @@ def display():
     cur=conn.cursor()
     cur.execute("select loc from timetable where year = ? and dept = ? and section = ?",(year,dept,section))
     data=cur.fetchone()
-    wb = openpyxl.load_workbook(data)
-    sheet = wb["Sheet1"]
-    rows = sheet.rows
-    headers = [cell.value for cell in next(rows)]
-    data = []
-    for row in rows:
-        row_data = {}
-        for header, cell in zip(headers, row):
-            row_data[header] = cell.value
-        data.append(row_data)
-    return render_template("display.html", data=data, headers=headers)
+    print(data[0])
+    df = pd.read_excel(data[0])
+    return render_template("display.html",  tables=[df.to_html(classes='data')], titles=df.columns.values)
 
 @app.route("/upload-file", methods=["POST"])
 def upload_file():
@@ -119,7 +111,7 @@ def upload_file():
         os.rename(os.path.join("files", file.filename), os.path.join("files", year+dept+section+".xlsx"))
         conn = sqlite3.connect('users.db')
         cursor = conn.cursor()
-        cursor.execute("INSERT INTO TimeTable (Year, Dept, Section, loc) VALUES (?, ?, ?, ?)", (year, dept, section, os.path.join("files", year+dept+section+".xlsx")))
+        cursor.execute("INSERT INTO TimeTable (Year, Dept, Section, loc) VALUES (?, ?, ?, ?)", (year, dept, section, "files/"+ year+dept+section+".xlsx"))
         conn.commit()
         conn.close()
         return "File uploaded successfully!"

@@ -25,7 +25,10 @@ CREATE TABLE IF NOT EXISTS TimeTable (
   loc TEXT
 )
 ''')
-
+# cursor.execute("Drop table timetable")
+# cursor.execute("Select * from TimeTable")
+# res = cursor.fetchall()
+# print(res)
 # Commit the changes and close the connection
 conn.commit()
 conn.close()
