@@ -21,9 +21,9 @@ def connect_db():
 
 @app.route('/')
 def index():
-    # if 'username' in session:
-    #     return redirect(url_for('dashboard'))
-    return render_template("dashboard.html", fav_icon=fav_icon, load_img=load_img)
+    if 'username' in session:
+        return render_template("dashboard.html", fav_icon=fav_icon, load_img=load_img, sess = "True")
+    return render_template("dashboard.html", fav_icon=fav_icon, load_img=load_img, sess="False")
    
 
 @app.route('/signup', methods=['GET', 'POST'])
@@ -98,9 +98,12 @@ def display():
     cur=conn.cursor()
     cur.execute("select loc from timetable where year = ? and dept = ? and section = ?",(year,dept,section))
     data=cur.fetchone()
-    print(data[0])
-    df = pd.read_excel(data[0])
-    return render_template("display.html",  tables=[df.to_html(classes='data')], titles=df.columns.values)
+    # print(data[0])
+    if(data == None):
+        return "No timetable provided. Contact your administrator"
+    else:
+        df = pd.read_excel(data[0])
+        return render_template("display.html",  tables=[df.to_html(classes='data')], titles=df.columns.values)
 
 @app.route("/upload-file", methods=["POST"])
 def upload_file():

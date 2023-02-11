@@ -13,7 +13,12 @@
     <title>PrintEase</title>
     <link rel="icon" type="image/x-icon" href="{{fav_icon}}">
     <script>
-      
+      if("{{sess}}" == "False"){
+        document.getElementById("admin").hidden = false;
+      }
+      else{
+        document.getElementById("admin").hidden = true;
+      }
       if (window.performance && window.performance.navigation.type === window.performance.navigation.TYPE_BACK_FORWARD) {
         window.location="http://127.0.0.1:5000";
 }
@@ -25,7 +30,7 @@
   <!-- <form action="/admin" method="get">
     <input class="btn btn-light" style="float:right;background-color: #1F2029; box-shadow: none; color:white;" value="Admin" type="submit"/>
   </form> -->
-  <a href="/login" style="text-decoration: none; color:white;">Admin</a>
+  <a href="/login" style="text-decoration: none; color:white;" hidden id="admin">Admin</a>
   <img src="{{load_img}}" id="loading">
   
   <div class="content">
