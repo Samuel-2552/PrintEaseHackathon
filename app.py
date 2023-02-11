@@ -22,7 +22,7 @@ def connect_db():
 def index():
     if 'username' in session:
         return redirect(url_for('dashboard'))
-    return render_template("index.html", fav_icon=fav_icon, load_img=load_img)
+    return render_template("dashboard.html", fav_icon=fav_icon, load_img=load_img)
    
 
 @app.route('/signup', methods=['GET', 'POST'])
