@@ -19,11 +19,10 @@ CREATE TABLE IF NOT EXISTS users (
 
 cursor.execute('''
 CREATE TABLE IF NOT EXISTS TimeTable (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  username TEXT NOT NULL,
-  password TEXT NOT NULL,
-  email TEXT NOT NULL,
-  message TEXT
+  Year TEXT NOT NULL,
+  Dept TEXT NOT NULL,
+  Section TEXT NOT NULL,
+  loc TEXT
 )
 ''')
 

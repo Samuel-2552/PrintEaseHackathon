@@ -9,6 +9,9 @@ app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 app.config['icons'] = images
 fav_icon = os.path.join(app.config['icons'], 'logo.png')
 load_img = os.path.join(app.config['icons'], 'printease.gif')
+year = ""
+dept = ""
+section = ""
 
 def connect_db():
     connection = sqlite3.connect('users.db')
@@ -91,8 +94,12 @@ def dashboard():
 @app.route("/upload-file", methods=["POST"])
 def upload_file():
     file = request.files["file"]
-    if file and file.content_type == "application/pdf":
+    # if file and file.content_type == "application/pdf":
+    if file:
         file.save(os.path.join("files", file.filename))
+        conn = sqlite3.connect('users.db')
+        cursor = conn.cursor()
+        cursor.execute("INSERT INTO users (Year, Dept, Section, loc) VALUES (?, ?, ?, ?)", (year, dept, section, ))
         return "File uploaded successfully!"
     return "No file was provided."
 
@@ -101,22 +108,16 @@ def logout():
     session.pop('username', None)
     return redirect('/')
 
-# @app.route("/update", methods=['POST', 'GET'])
-# def update():
-#     if request.method == 'POST':
-#         year = request.form['year']
-#         dept = request.form['dept']
-#         section = request.form['section']
-#         conn = sqlite3.connect('users.db')
+@app.route("/update", methods=['POST', 'GET'])
+def update():
+    if request.method == 'POST':
+        global year, dept, section
+        year = request.form.get("Year")
+        dept = request.form['Dept']
+        section = request.form['section']
+        print(year)
+        return render_template("upload.html")
     
-#         cursor = conn.cursor()
-#         cursor.execute("SELECT username FROM users WHERE email=?",(useremail,))
-#         username=cursor.fetchone()
-#         print(username)
-#         # Close the connection
-#         conn.close()
-
-
 
 if __name__ == '__main__':
     app.run(debug=True)
