@@ -20,8 +20,8 @@ def connect_db():
 
 @app.route('/')
 def index():
-    if 'username' in session:
-        return redirect(url_for('dashboard'))
+    # if 'username' in session:
+    #     return redirect(url_for('dashboard'))
     return render_template("dashboard.html", fav_icon=fav_icon, load_img=load_img)
    
 
@@ -93,7 +93,7 @@ def dashboard():
 
 @app.route('/display',methods=['GET', 'POST'])
 def display():
-    df = pd.read_excel("data.xlsx")
+    df = pd.read_excel("files/excel.xlsx")
     return render_template("display.html",  tables=[df.to_html(classes='data')], titles=df.columns.values)
 
 @app.route("/upload-file", methods=["POST"])
@@ -116,13 +116,17 @@ def logout():
 
 @app.route("/update", methods=['POST', 'GET'])
 def update():
-    if request.method == 'POST':
-        global year, dept, section
-        year = request.form.get("Year")
-        dept = request.form['Dept']
-        section = request.form['section']
-        print(year)
-        return render_template("upload.html")
+    if 'username' not in session:
+        return redirect('/display')
+
+    else:
+        if request.method == 'POST':
+            global year, dept, section
+            year = request.form.get("Year")
+            dept = request.form['Dept']
+            section = request.form['section']
+            print(year)
+            return render_template("upload.html")
     
 
 if __name__ == '__main__':
