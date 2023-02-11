@@ -13,32 +13,55 @@
     <title>SCHEDULER</title>
     <link rel="icon" type="image/x-icon" href="{{fav_icon}}">
     <script>
-      if("{{sess}}" == "False"){
-        document.getElementById("admin").hidden = false;
-      }
-      else{
-        document.getElementById("admin").hidden = true;
-      }
+      
+      console.log("{{data}}");
       if (window.performance && window.performance.navigation.type === window.performance.navigation.TYPE_BACK_FORWARD) {
         window.location="http://127.0.0.1:5000";
 }
-
     </script>
+    <style>
+      .logout {
+      position: sticky;
+      margin-top: 50px;
+      /* float: left; */
+      margin-left: 15px;
+      width: 180px;
+      height: 40px;
+      display: block;
+      border: 0.16em solid rgba(203, 244, 21, 0);
+      border-radius: 4em;
+      box-sizing: border-box;
+      text-decoration: none;
+      /* font-family: "Gill Sans", sans-serif; */
+      color: black;
+      text-shadow: 0 0.04em 0.04em rgba(0, 0, 0, 0.35);
+      text-align: center;
+      transition: all 0.2s;
+      font-style: italic;
+      font-size: 20px;
+      line-height: 1.7;
+    }
 
+    
+    </style>
 </head>
-<body>
+<body id="body">
   <!-- <form action="/admin" method="get">
     <input class="btn btn-light" style="float:right;background-color: #1F2029; box-shadow: none; color:white;" value="Admin" type="submit"/>
   </form> -->
-  <a href="/login" style="text-decoration: none; color:white;" hidden id="admin">Admin</a>
+  <a href="/login" style="text-decoration: none; color:white;" id="admin">Admin</a>
   <img src="{{load_img}}" id="loading">
-  
+  <a href="/logout" style="text-decoration: none;"><button class="button logout">
+     Log out </button>
+    </a>
+  <!-- <h3 style="color:white; display: none;" id="loggedin">You are logged in as Admin</h3> -->
   <div class="content">
     <div class="section">
       <div class="container">
         <div class="row full-height justify-content-center">
           <div class="col-12 text-center align-self-center py-5">
             <img src="{{load_img}}" style="height:80px;width:auto;">
+            <h3 style="color:white; display: none;" id="loggedin">You are logged in as Admin</h3>
             <div class="section pb-5 pt-5 pt-sm-2 text-center">
               <!-- <h6 class="mb-0 pb-3"><span>Log In </span><span>Sign Up</span></h6> -->
                     <!-- <input class="checkbox" type="checkbox" id="reg-log" name="reg-log"/>
@@ -136,6 +159,18 @@
     }, 3000);
   </script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    if("{{data}}" == "true"){
+        console.log("{{data}}");
+        document.getElementById("admin").style.display = "none";
+        document.getElementById("loggedin").style.display = "block";
+        // var child = document.createElement("a");
+        // child.href="/login";
+        // child.style.textDecoration = "none";
+        // child.style.color = "white";
+        // document.getElementById("body").insertAdjacentElement("afterbegin", child);
+      }
+  </script>
 </body>
 
 </html>
