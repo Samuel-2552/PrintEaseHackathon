@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, session, url_for
+import pandas as pd
 import sqlite3
 import os
 
@@ -86,10 +87,14 @@ def dashboard():
     # Close the connection
     conn.close()
     # Connect to the database
-    
 
     # Render the dashboard template with the username and message
     return render_template('dashboard.html', username=username[0], fav_icon=fav_icon, load_img=load_img)
+
+@app.route('/display',methods=['GET', 'POST'])
+def display():
+    df = pd.read_excel("data.xlsx")
+    return render_template("display.html",  tables=[df.to_html(classes='data')], titles=df.columns.values)
 
 @app.route("/upload-file", methods=["POST"])
 def upload_file():

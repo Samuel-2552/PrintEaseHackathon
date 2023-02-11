@@ -1,0 +1,10 @@
+<html>
+  <head>
+    <title>Data from Excel</title>
+  </head>
+  <body>
+    {% for table in tables %}
+      {{ table|safe }}
+    {% endfor %}
+  </body>
+</html>
