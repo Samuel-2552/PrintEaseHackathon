@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, session, url_for
 import pandas as pd
 import sqlite3
 import os
+import openpyxl
 
 images=os.path.join('static','images')
 
@@ -93,13 +94,21 @@ def dashboard():
 
 @app.route('/display',methods=['GET', 'POST'])
 def display():
-    # df = pd.read_excel("files/excel.xlsx")
-    conn = sqlite3.connect('users.db')
-    
-    cursor = conn.cursor()
-    cursor.execute("SELECT loc FROM TimeTable WHERE Year=? AND Dept=? AND Section=?",(year, dept, section))
-    df=cursor.fetchone()
-    return render_template("display.html",  tables=[df.to_html(classes='data')], titles=df.columns.values)
+    conn=sqlite3.connect("users.db")
+    cur=conn.cursor()
+    cur.execute("select loc from timetable where year = ? and dept = ? and section = ?",(year,dept,section))
+    data=cur.fetchone()
+    wb = openpyxl.load_workbook(data)
+    sheet = wb["Sheet1"]
+    rows = sheet.rows
+    headers = [cell.value for cell in next(rows)]
+    data = []
+    for row in rows:
+        row_data = {}
+        for header, cell in zip(headers, row):
+            row_data[header] = cell.value
+        data.append(row_data)
+    return render_template("display.html", data=data, headers=headers)
 
 @app.route("/upload-file", methods=["POST"])
 def upload_file():
@@ -107,10 +116,10 @@ def upload_file():
     # if file and file.content_type == "application/pdf":
     if file:
         file.save(os.path.join("files", file.filename))
-        os.rename(os.path.join("files", file.filename), os.path.join("files", year+dept+section+".png"))
+        os.rename(os.path.join("files", file.filename), os.path.join("files", year+dept+section+".xlsx"))
         conn = sqlite3.connect('users.db')
         cursor = conn.cursor()
-        cursor.execute("INSERT INTO TimeTable (Year, Dept, Section, loc) VALUES (?, ?, ?, ?)", (year, dept, section, os.path.join("files", year+dept+section+".png")))
+        cursor.execute("INSERT INTO TimeTable (Year, Dept, Section, loc) VALUES (?, ?, ?, ?)", (year, dept, section, os.path.join("files", year+dept+section+".xlsx")))
         conn.commit()
         conn.close()
         return "File uploaded successfully!"
