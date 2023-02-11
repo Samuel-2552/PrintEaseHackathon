@@ -1,378 +1,411 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<!-- <link rel="stylesheet" href="static/style.css"> -->
-<style>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <!-- <link rel="stylesheet" href="static/style.css"> -->
+  <style>
+    /* Please ❤ this if you like it! */
 
 
-/* Please ❤ this if you like it! */
+    @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900');
+    @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css");
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 300;
+      font-size: 15px;
+      line-height: 1.7;
+      color: #c4c3ca;
+      background-color: #1f2029;
+      overflow-x: hidden;
+    }
+
+    a {
+      cursor: pointer;
+      transition: all 200ms linear;
+    }
+
+    a:hover {
+      text-decoration: none;
+    }
+
+    .link {
+      color: #c4c3ca;
+    }
+
+    .link:hover {
+      color: #ffeba7;
+    }
+
+    p {
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    h4 {
+      font-weight: 600;
+    }
+
+    h6 span {
+      padding: 0 20px;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .section {
+      position: relative;
+      width: 100%;
+      display: block;
+    }
+
+    .full-height {
+      min-height: 100vh;
+    }
+
+    [type="checkbox"]:checked,
+    [type="checkbox"]:not(:checked) {
+      position: absolute;
+      left: -9999px;
+    }
+
+    .checkbox:checked+label,
+    .checkbox:not(:checked)+label {
+      position: relative;
+      display: block;
+      text-align: center;
+      width: 60px;
+      height: 16px;
+      border-radius: 8px;
+      padding: 0;
+      margin: 10px auto;
+      cursor: pointer;
+      background-color: #ffeba7;
+    }
+
+    .checkbox:checked+label:before,
+    .checkbox:not(:checked)+label:before {
+      position: absolute;
+      display: block;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      color: #ffeba7;
+      background-color: #102770;
+      font-family: 'bootstrap-icons';
+      content: '\F13F';
+      z-index: 20;
+      top: -10px;
+      left: -10px;
+      line-height: 36px;
+      text-align: center;
+      font-size: 24px;
+      transition: all 0.5s ease;
+    }
+
+    .checkbox:checked+label:before {
+      transform: translateX(44px) rotate(-270deg);
+    }
 
 
-@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900');
-@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css");
+    .card-3d-wrap {
+      position: relative;
+      width: 440px;
+      max-width: 100%;
+      height: 400px;
+      -webkit-transform-style: preserve-3d;
+      transform-style: preserve-3d;
+      perspective: 800px;
 
-body{
-	font-family: 'Poppins', sans-serif;
-	font-weight: 300;
-	font-size: 15px;
-	line-height: 1.7;
-	color: #c4c3ca;
-	background-color: #1f2029;
-	overflow-x: hidden;
-}
-a {
-	cursor: pointer;
-  transition: all 200ms linear;
-}
-a:hover {
-	text-decoration: none;
-}
-.link {
-  color: #c4c3ca;
-}
-.link:hover {
-  color: #ffeba7;
-}
-p {
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 1.7;
-}
-h4 {
-  font-weight: 600;
-}
-h6 span{
-  padding: 0 20px;
-  text-transform: uppercase;
-  font-weight: 700;
-}
-.section{
-  position: relative;
-  width: 100%;
-  display: block;
-}
-.full-height{
-  min-height: 100vh;
-}
-[type="checkbox"]:checked,
-[type="checkbox"]:not(:checked){
-  position: absolute;
-  left: -9999px;
-}
-.checkbox:checked + label,
-.checkbox:not(:checked) + label{
-  position: relative;
-  display: block;
-  text-align: center;
-  width: 60px;
-  height: 16px;
-  border-radius: 8px;
-  padding: 0;
-  margin: 10px auto;
-  cursor: pointer;
-  background-color: #ffeba7;
-}
-.checkbox:checked + label:before,
-.checkbox:not(:checked) + label:before{
-  position: absolute;
-  display: block;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  color: #ffeba7;
-  background-color: #102770;
-  font-family: 'bootstrap-icons';
-  content: '\F13F';
-  z-index: 20;
-  top: -10px;
-  left: -10px;
-  line-height: 36px;
-  text-align: center;
-  font-size: 24px;
-  transition: all 0.5s ease;
-}
-.checkbox:checked + label:before {
-  transform: translateX(44px) rotate(-270deg);
-}
+    }
+
+    .card-3d-wrapper {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      -webkit-transform-style: preserve-3d;
+      transform-style: preserve-3d;
+      transition: all 600ms ease-out;
+    }
+
+    .card-front,
+    .card-back {
+      width: 100%;
+      height: 120%;
+      background-color: #2a2b38;
+      background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat.svg');
+      background-position: bottom center;
+      background-repeat: no-repeat;
+      background-size: 200%;
+      position: absolute;
+      border-radius: 6px;
+
+      -webkit-transform-style: preserve-3d;
+      transform-style: preserve-3d;
+      -webkit-backface-visibility: hidden;
+      -moz-backface-visibility: hidden;
+      -o-backface-visibility: hidden;
+      backface-visibility: hidden;
+    }
+
+    .card-back {
+      transform: rotateY(180deg);
+    }
+
+    .checkbox:checked~.card-3d-wrap .card-3d-wrapper {
+      transform: rotateY(180deg);
+    }
+
+    .center-wrap {
+      position: absolute;
+      width: 100%;
+      top: 230px;
+      transform: translate3d(0, -50%, 35px) perspective(100px);
+      z-index: 20;
+      display: block;
+    }
 
 
-.card-3d-wrap {
-  position: relative;
-  width: 440px;
-  max-width: 100%;
-  height: 400px;
-  -webkit-transform-style: preserve-3d;
-  transform-style: preserve-3d;
-  perspective: 800px;
-  
-}
-.card-3d-wrapper {
-  width: 100%;
-  height: 100%;
-  position:absolute;    
-  top: 0;
-  left: 0;  
-  -webkit-transform-style: preserve-3d;
-  transform-style: preserve-3d;
-  transition: all 600ms ease-out; 
-}
-.card-front, .card-back {
-  width: 100%;
-  height: 120%;
-  background-color: #2a2b38;
-  background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat.svg');
-  background-position: bottom center;
-  background-repeat: no-repeat;
-  background-size: 200%;
-  position: absolute;
-  border-radius: 6px;
-  
-  -webkit-transform-style: preserve-3d;
-  transform-style: preserve-3d;
-  -webkit-backface-visibility: hidden;
-  -moz-backface-visibility: hidden;
-  -o-backface-visibility: hidden;
-  backface-visibility: hidden;
-}
-.card-back {
-  transform: rotateY(180deg);
-}
-.checkbox:checked ~ .card-3d-wrap .card-3d-wrapper {
-  transform: rotateY(180deg);
-}
-.center-wrap{
-  position: absolute;
-  width: 100%;
-  top:230px;
-  transform: translate3d(0, -50%, 35px) perspective(100px);
-  z-index: 20;
-  display: block;
-}
+    .form-group {
+      position: relative;
+      display: block;
+      margin: 0;
+      padding: 0;
+    }
 
+    .form-style {
+      padding: 13px 20px;
+      padding-left: 55px;
+      height: 48px;
+      width: 100%;
+      font-weight: 500;
+      border-radius: 4px;
+      font-size: 14px;
+      line-height: 22px;
+      letter-spacing: 0.5px;
+      outline: none;
+      color: #c4c3ca;
+      background-color: #1f2029;
+      border: none;
+      -webkit-transition: all 200ms linear;
+      transition: all 200ms linear;
+      box-shadow: 0 4px 8px 0 rgba(21, 21, 21, .2);
+    }
 
-.form-group{ 
-  position: relative;
-  display: block;
-    margin: 0;
-    padding: 0;
-}
-.form-style {
-  padding: 13px 20px;
-  padding-left: 55px;
-  height: 48px;
-  width: 100%;
-  font-weight: 500;
-  border-radius: 4px;
-  font-size: 14px;
-  line-height: 22px;
-  letter-spacing: 0.5px;
-  outline: none;
-  color: #c4c3ca;
-  background-color: #1f2029;
-  border: none;
-  -webkit-transition: all 200ms linear;
-  transition: all 200ms linear;
-  box-shadow: 0 4px 8px 0 rgba(21,21,21,.2);
-}
-.form-style:focus,
-.form-style:active {
-  border: none;
-  outline: none;
-  box-shadow: 0 4px 8px 0 rgba(21,21,21,.2);
-}
-.input-icon {
-  position: absolute;
-  top: 0;
-  left: 18px;
-  height: 48px;
-  font-size: 24px;
-  line-height: 48px;
-  text-align: left;
-  color: #ffeba7;
-  -webkit-transition: all 200ms linear;
-    transition: all 200ms linear;
-}
+    .form-style:focus,
+    .form-style:active {
+      border: none;
+      outline: none;
+      box-shadow: 0 4px 8px 0 rgba(21, 21, 21, .2);
+    }
 
-.form-group input:-ms-input-placeholder  {
-  color: #c4c3ca;
-  opacity: 0.7;
-  -webkit-transition: all 200ms linear;
-    transition: all 200ms linear;
-}
-.form-group input::-moz-placeholder  {
-  color: #c4c3ca;
-  opacity: 0.7;
-  -webkit-transition: all 200ms linear;
-    transition: all 200ms linear;
-}
-.form-group input:-moz-placeholder  {
-  color: #c4c3ca;
-  opacity: 0.7;
-  -webkit-transition: all 200ms linear;
-    transition: all 200ms linear;
-}
-.form-group input::-webkit-input-placeholder  {
-  color: #c4c3ca;
-  opacity: 0.7;
-  -webkit-transition: all 200ms linear;
-    transition: all 200ms linear;
-}
-.form-group input:focus:-ms-input-placeholder  {
-  opacity: 0;
-  -webkit-transition: all 200ms linear;
-    transition: all 200ms linear;
-}
-.form-group input:focus::-moz-placeholder  {
-  opacity: 0;
-  -webkit-transition: all 200ms linear;
-    transition: all 200ms linear;
-}
-.form-group input:focus:-moz-placeholder  {
-  opacity: 0;
-  -webkit-transition: all 200ms linear;
-    transition: all 200ms linear;
-}
-.form-group input:focus::-webkit-input-placeholder  {
-  opacity: 0;
-  -webkit-transition: all 200ms linear;
-    transition: all 200ms linear;
-}
+    .input-icon {
+      position: absolute;
+      top: 0;
+      left: 18px;
+      height: 48px;
+      font-size: 24px;
+      line-height: 48px;
+      text-align: left;
+      color: #ffeba7;
+      -webkit-transition: all 200ms linear;
+      transition: all 200ms linear;
+    }
 
-.btn{  
-  border-radius: 4px;
-  height: 44px;
-  font-size: 13px;
-  font-weight: bold;
-  text-transform: uppercase;
-  -webkit-transition : all 200ms linear;
-  transition: all 200ms linear;
-  padding: 0 30px;
-  letter-spacing: 1px;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-align-items: center;
-  -moz-align-items: center;
-  -ms-align-items: center;
-  align-items: center;
-  -webkit-justify-content: center;
-  -moz-justify-content: center;
-  -ms-justify-content: center;
-  justify-content: center;
-  -ms-flex-pack: center;
-  text-align: center;
-  border: none;
-  background-color: #ffeba7;
-  color: black;
-  box-shadow: 0 8px 24px 0 rgba(255,235,167,.2);
-}
-.btn:active,
-.btn:focus{  
-  background-color: #102770;
-  color: #ffeba7;
-  box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
-}
-.btn:hover{  
-  background-color: #102770;
-  color: #ffeba7;
-  box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
-}
+    .form-group input:-ms-input-placeholder {
+      color: #c4c3ca;
+      opacity: 0.7;
+      -webkit-transition: all 200ms linear;
+      transition: all 200ms linear;
+    }
+
+    .form-group input::-moz-placeholder {
+      color: #c4c3ca;
+      opacity: 0.7;
+      -webkit-transition: all 200ms linear;
+      transition: all 200ms linear;
+    }
+
+    .form-group input:-moz-placeholder {
+      color: #c4c3ca;
+      opacity: 0.7;
+      -webkit-transition: all 200ms linear;
+      transition: all 200ms linear;
+    }
+
+    .form-group input::-webkit-input-placeholder {
+      color: #c4c3ca;
+      opacity: 0.7;
+      -webkit-transition: all 200ms linear;
+      transition: all 200ms linear;
+    }
+
+    .form-group input:focus:-ms-input-placeholder {
+      opacity: 0;
+      -webkit-transition: all 200ms linear;
+      transition: all 200ms linear;
+    }
+
+    .form-group input:focus::-moz-placeholder {
+      opacity: 0;
+      -webkit-transition: all 200ms linear;
+      transition: all 200ms linear;
+    }
+
+    .form-group input:focus:-moz-placeholder {
+      opacity: 0;
+      -webkit-transition: all 200ms linear;
+      transition: all 200ms linear;
+    }
+
+    .form-group input:focus::-webkit-input-placeholder {
+      opacity: 0;
+      -webkit-transition: all 200ms linear;
+      transition: all 200ms linear;
+    }
+
+    .btn {
+      border-radius: 4px;
+      height: 44px;
+      font-size: 13px;
+      font-weight: bold;
+      text-transform: uppercase;
+      -webkit-transition: all 200ms linear;
+      transition: all 200ms linear;
+      padding: 0 30px;
+      letter-spacing: 1px;
+      display: -webkit-inline-flex;
+      display: -ms-inline-flexbox;
+      display: inline-flex;
+      -webkit-align-items: center;
+      -moz-align-items: center;
+      -ms-align-items: center;
+      align-items: center;
+      -webkit-justify-content: center;
+      -moz-justify-content: center;
+      -ms-justify-content: center;
+      justify-content: center;
+      -ms-flex-pack: center;
+      text-align: center;
+      border: none;
+      background-color: #ffeba7;
+      color: black;
+      box-shadow: 0 8px 24px 0 rgba(255, 235, 167, .2);
+    }
+
+    .btn:active,
+    .btn:focus {
+      background-color: #102770;
+      color: #ffeba7;
+      box-shadow: 0 8px 24px 0 rgba(16, 39, 112, .2);
+    }
+
+    .btn:hover {
+      background-color: #102770;
+      color: #ffeba7;
+      box-shadow: 0 8px 24px 0 rgba(16, 39, 112, .2);
+    }
 
 
 
 
-.logo {
-	position: absolute;
-	top: 30px;
-	right: 30px;
-	display: block;
-	z-index: 100;
-	transition: all 250ms linear;
-}
-.logo img {
-	height: 26px;
-	width: auto;
-	display: block;
-}
-.rad-cntnt{
-    position: absolute;
-    display: table;
-    vertical-align: middle;
-    text-align: center;
-    color:#fff;
-    width: 100%;
-    top:48%;
-    -webkit-transform: translateY(-50%);
-    -moz-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    -o-transform: translateY(-50%);
-    transform: translateY(-50%);
-    font-size:20px;
-    line-height: 24px;
-} 
- 
- 
-#prgFileSelector{
-    position: absolute;
-    width: 50%;
-    height: 75%;
-    opacity: 0;
-    background-color:black;
-    top:0;
-    left: 110px;
-    z-index: 10;
-}
+    .logo {
+      position: absolute;
+      top: 30px;
+      right: 30px;
+      display: block;
+      z-index: 100;
+      transition: all 250ms linear;
+    }
 
-/*button css */
-.logout{
-    position:sticky;
-    margin-top: 6px;
-    left:1350px;
-    width:180px;
-    height:40px;
-    display:inline-block;
-    border:0.16em solid rgba(203, 244, 21, 0);
-    border-radius:4em;
-    box-sizing: border-box;
-    text-decoration:none;
-    font-family: "Gill Sans", sans-serif; 
-    color:black;
-    text-shadow: 0 0.04em 0.04em rgba(0,0,0,0.35);
-    text-align:center;
-    transition: all 0.2s;
-    font-style: italic;
-    font-size: 20px;
-    line-height: 1.7;
-}
-</style>
+    .logo img {
+      height: 26px;
+      width: auto;
+      display: block;
+    }
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-<script src="static/script.js"></script>
-<title>PrintEase</title>
+    .rad-cntnt {
+      position: absolute;
+      display: table;
+      vertical-align: middle;
+      text-align: center;
+      color: #fff;
+      width: 100%;
+      top: 48%;
+      -webkit-transform: translateY(-50%);
+      -moz-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+      -o-transform: translateY(-50%);
+      transform: translateY(-50%);
+      font-size: 20px;
+      line-height: 24px;
+    }
+
+
+    #prgFileSelector {
+      position: absolute;
+      width: 50%;
+      height: 75%;
+      opacity: 0;
+      background-color: black;
+      top: 0;
+      left: 110px;
+      z-index: 10;
+    }
+
+    /*button css */
+    .logout {
+      position: sticky;
+      margin-top: 6px;
+      left: 1350px;
+      width: 180px;
+      height: 40px;
+      display: inline-block;
+      border: 0.16em solid rgba(203, 244, 21, 0);
+      border-radius: 4em;
+      box-sizing: border-box;
+      text-decoration: none;
+      font-family: "Gill Sans", sans-serif;
+      color: black;
+      text-shadow: 0 0.04em 0.04em rgba(0, 0, 0, 0.35);
+      text-align: center;
+      transition: all 0.2s;
+      font-style: italic;
+      font-size: 20px;
+      line-height: 1.7;
+    }
+  </style>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script src="static/script.js"></script>
+  <title>PrintEase</title>
 </head>
+
 <body>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/radialIndicator/1.4.0/radialIndicator.js"></script>
   <button class="btn btn-info btn-lg logout">
     <span class="glyphicon glyphicon-log-out"></span> Log out </button></div>
-    
+
   <!--upload card-->
   <div class="section">
-  <div class="container">
-  <div class="row medium-height justify-content-center">
-  <div class="col-13 text-center align-self-center py-5">
-  <div class="section pb-5 pt-5 pt-sm-2 text-center">
-  <div class="card-3d-wrap mx-auto">
-  <div class="card-3d-wrapper">
-  <div class="card-front"  >
-  <div class="center-wrap">
-    <!--ques3-->
-      <!-- <div class="section" id="ques3" hidden>
+    <div class="container">
+      <div class="row medium-height justify-content-center">
+        <div class="col-13 text-center align-self-center py-5">
+          <div class="section pb-5 pt-5 pt-sm-2 text-center">
+            <div class="card-3d-wrap mx-auto">
+              <div class="card-3d-wrapper">
+                <div class="card-front">
+                  <div class="center-wrap">
+                    <!--ques3-->
+                    <!-- <div class="section" id="ques3" hidden>
         <label>
           <h2>How do you want to print?</h2><br>
           <h4><input type="radio" name="side" value=0 checked>Front And Back&emsp;
@@ -383,8 +416,8 @@ h6 span{
         </div>
         </label>
       </div>   -->
-    <!--ques2-->
-  <!-- <div class="section" id="ques2" hidden>
+                    <!--ques2-->
+                    <!-- <div class="section" id="ques2" hidden>
     <label>
       <h2>How do you want to print?</h2><br>
       <h4><input type="radio" name="side" value=0 checked>Black and White&emsp;
@@ -395,8 +428,8 @@ h6 span{
     </div>
     </label>
   </div>   -->
-  <!--ques1-->
-  <!-- <div class="section" id="ques1" hidden>
+                    <!--ques1-->
+                    <!-- <div class="section" id="ques1" hidden>
   <label>
     <h2>How many copies do you want?</h2><br>
     <h1><input type="number" name="quantity" min="1" max="10" required value="1">
@@ -407,35 +440,37 @@ h6 span{
     </div>
   </label>
 </div> -->
-  <!--upload-->
-  <div class="section" id="upload">
-    <h4 class="mb-4 pb-3" style="text-align:center;position:relative;font-size: 25px;" id="infotext">Upload your document</h4>
-    <div class="form-group mt-2 justify-center">
-    <div id="indicatorContainerWrap">
-    <div class="rad-prg" id="indicatorContainer"></div>
-    <div class="rad-cntnt">Click here to<br> select a file.</div>
-    <input type="file" id="prgFileSelector" name="file" />
-    </div>
-    <div class="form-group mt-2">
-      <div id="feedback" class="indict"> 
-    </div>
-    <button onclick="next1()" class="btn mt-4" id="next1" hidden>next</button>
-    </div>
+                    <!--upload-->
+                    <div class="section" id="upload">
+                      <h4 class="mb-4 pb-3" style="text-align:center;position:relative;font-size: 25px;" id="infotext">
+                        Upload your document</h4>
+                      <div class="form-group mt-2 justify-center">
+                        <div id="indicatorContainerWrap">
+                          <div class="rad-prg" id="indicatorContainer"></div>
+                          <div class="rad-cntnt">Click here to<br> select a file.</div>
+                          <input type="file" id="prgFileSelector" name="file" />
+                        </div>
+                        <div class="form-group mt-2">
+                          <div id="feedback" class="indict">
+                          </div>
+                          <button class="btn mt-4" id="next1" hidden><a href="/dashboard">Back</a></button>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
-  </div>
-  </div>
-  </div>
-  </div>
-  </div>
-  </div>
-  </div>
-  </div>
-  </div>
-  
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
+
 </html>

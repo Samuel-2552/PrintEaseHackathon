@@ -7,8 +7,8 @@ images=os.path.join('static','images')
 app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 app.config['icons'] = images
-fav_icon = os.path.join(app.config['icons'], 'logo.png')
-load_img = os.path.join(app.config['icons'], 'printease.gif')
+fav_icon = os.path.join(app.config['icons'], 'onlylogo.png')
+load_img = os.path.join(app.config['icons'], 'completelogo.gif')
 year = ""
 dept = ""
 section = ""
@@ -97,9 +97,10 @@ def upload_file():
     # if file and file.content_type == "application/pdf":
     if file:
         file.save(os.path.join("files", file.filename))
+        os.rename(os.path.join("files", file.filename), os.path.join("files", year+dept+section+".png"))
         conn = sqlite3.connect('users.db')
         cursor = conn.cursor()
-        cursor.execute("INSERT INTO users (Year, Dept, Section, loc) VALUES (?, ?, ?, ?)", (year, dept, section, ))
+        cursor.execute("INSERT INTO users (Year, Dept, Section, loc) VALUES (?, ?, ?, ?)", (year, dept, section, os.path.join("files", year+dept+section+".png")))
         return "File uploaded successfully!"
     return "No file was provided."
 
