@@ -4,7 +4,7 @@ import random
 def send_otp(to_number):
     # Your Twilio account SID and auth token
     account_sid = 'AC0d4c5f5ddc683a69f2dc0bb95e7304d4'
-    auth_token = 'bd7c3b87d7f437b9c4b6eb2558ccbe6c'
+    auth_token = 'ba41ec8d98a5bb64edc0aa877a7faa0a'
 
     # Twilio phone number
     from_number = '+19786789175'
