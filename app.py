@@ -32,11 +32,11 @@ def signup():
         phoneno=request.form['lognumber']
         connection = connect_db()
         cursor = connection.cursor()
-        cursor.execute("SELECT * FROM users WHERE username=?", (username,))
+        cursor.execute("SELECT * FROM user WHERE username=?", (username,))
         user = cursor.fetchone()
         if user:
             return "User already exists"
-        cursor.execute("INSERT INTO users (username, password, email,phoneno) VALUES (?, ?, ?,?)", (username, password, email,phoneno))
+        cursor.execute("INSERT INTO user (username, password, email,phoneno) VALUES (?, ?, ?,?)", (username, password, email,phoneno))
         connection.commit()
         connection.close()
         return redirect('/login')
@@ -51,7 +51,7 @@ def login():
         password = request.form['logpass']
         connection = connect_db()
         cursor = connection.cursor()
-        cursor.execute("SELECT * FROM users WHERE email=? AND password=?", (useremail, password))
+        cursor.execute("SELECT * FROM user WHERE email=? AND password=?", (useremail, password))
         user = cursor.fetchone()
         
         if user:
@@ -78,7 +78,7 @@ def dashboard():
     conn = sqlite3.connect('users.db')
     
     cursor = conn.cursor()
-    cursor.execute("SELECT username FROM users WHERE email=?",(useremail,))
+    cursor.execute("SELECT username FROM user WHERE email=?",(useremail,))
     username=cursor.fetchone()
     print(username)
     # Close the connection
