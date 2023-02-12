@@ -69,6 +69,13 @@ def forgot():
         return "Email Sent"
     return render_template('forgot.html', fav_icon=fav_icon, load_img=load_img)
 
+
+# contact page has been added-Meena
+@app.route('/contact', methods=['GET', 'POST'])
+def contact():
+    return render_template('contact.html', fav_icon=fav_icon, load_img=load_img)
+
+
 @app.route('/dashboard',methods=['GET', 'POST'])
 def dashboard():
     if 'username' not in session:
