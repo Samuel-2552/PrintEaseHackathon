@@ -29,13 +29,14 @@ def signup():
         username = request.form['logname']
         password = request.form['logpass']
         email = request.form['logemail']
+        phoneno=request.form['lognumber']
         connection = connect_db()
         cursor = connection.cursor()
-        cursor.execute("SELECT * FROM users WHERE username=?", (username,))
+        cursor.execute("SELECT * FROM user WHERE username=?", (username,))
         user = cursor.fetchone()
         if user:
             return "User already exists"
-        cursor.execute("INSERT INTO users (username, password, email) VALUES (?, ?, ?)", (username, password, email))
+        cursor.execute("INSERT INTO user (username, password, email,phoneno) VALUES (?, ?, ?,?)", (username, password, email,phoneno))
         connection.commit()
         connection.close()
         return redirect('/login')
@@ -50,13 +51,23 @@ def login():
         password = request.form['logpass']
         connection = connect_db()
         cursor = connection.cursor()
-        cursor.execute("SELECT * FROM users WHERE email=? AND password=?", (useremail, password))
+        cursor.execute("SELECT * FROM user WHERE email=? AND password=?", (useremail, password))
         user = cursor.fetchone()
+        
         if user:
             session['username'] = useremail
             return redirect('/dashboard')
         return "Invalid username or password"
     return render_template('index.html', fav_icon=fav_icon, load_img=load_img)
+
+@app.route('/forgot', methods=['GET', 'POST'])
+def forgot():
+    if 'username' in session:
+        return redirect(url_for('dashboard'))
+    if request.method == 'POST':
+        useremail = request.form['logemail']
+        return "Email Sent"
+    return render_template('forgot.html', fav_icon=fav_icon, load_img=load_img)
 
 @app.route('/dashboard',methods=['GET', 'POST'])
 def dashboard():
@@ -64,17 +75,19 @@ def dashboard():
         return redirect('/')
     # Get the username from the session
     useremail = session['username']
-
-    # Connect to the database
     conn = sqlite3.connect('users.db')
-    username= fetch
+    
     cursor = conn.cursor()
-
+    cursor.execute("SELECT username FROM user WHERE email=?",(useremail,))
+    username=cursor.fetchone()
+    print(username)
     # Close the connection
     conn.close()
+    # Connect to the database
+    
 
     # Render the dashboard template with the username and message
-    return render_template('dashboard.html', username=username, fav_icon=fav_icon, load_img=load_img)
+    return render_template('dashboard.html', username=username[0], fav_icon=fav_icon, load_img=load_img)
 
 @app.route("/upload-file", methods=["POST"])
 def upload_file():

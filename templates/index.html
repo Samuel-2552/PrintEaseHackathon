@@ -35,7 +35,7 @@
                   <div class="card-front">
                     <div class="center-wrap">
                       <div class="section text-center">
-                        <h4 class="mb-4 pb-3">Log in</h4>
+                        <h4 class="mb-4 pb-3">Log In</h4>
                         <h4 class="mb-4 pb-3">Welcome to PrintEase</h4>
                         <form action="/login" method="post">
                           <div class="form-group mt-2">
@@ -47,7 +47,7 @@
                             <i class="input-icon bi bi-key"></i>
                           </div>
                           <input class="btn mt-4" type="submit" value="Log In">
-                                        <p class="mb-0 mt-4 text-center"><a href="#0" class="link">Forgot your password?</a></p>
+                                        <p class="mb-0 mt-4 text-center"><a href="/forgot" class="link">Forgot your password?</a></p>
                             </div>
                           </div>
                         </form>
@@ -61,8 +61,12 @@
                           <div class="form-group">
                             <input type="text" name="logname" class="form-style" placeholder="Username" id="logname" autocomplete="off" required>
                             <i class="input-icon bi bi-person"></i>
-                                                </div>
-                                                <div class="form-group mt-2">
+                          </div>
+                          <div class="form-group mt-2">
+                          <input type="tel" name="lognumber" class="form-style" placeholder="Phone Number" id="logname" autocomplete="off" maxlength="10" minlength="0" required>
+                            <i class="input-icon bi bi-telephone"></i>
+                          </div>
+                          <div class="form-group mt-2">
                             <input type="email" name="logemail" class="form-style" placeholder="Email" id="logemail" autocomplete="off" required>
                             <i class="input-icon bi bi-envelope-at"></i>
                           </div>	
