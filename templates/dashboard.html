@@ -2,6 +2,10 @@
   <head>
     <title>Dashboard</title>
     <link rel="icon" type="image/x-icon" href="{{fav_icon}}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    
     <style>
       #loading {
         position: absolute;
@@ -14,7 +18,14 @@
       .content {
         display: none;
       }
+      
+      
+
+      
+      
+
       body {
+        
         display: flex;
         justify-content: center;
         align-items: center;
@@ -50,7 +61,13 @@
       }
     </style>
   </head>
+  
+    
+
   <body>
+    <div class ="topnav">
+     
+      
     <img src="{{load_img}}" id="loading">
     <div class="content">
       <h1>Welcome {{ username }}!</h1>
