@@ -103,6 +103,8 @@ def upload_file():
 # contact page has been added-Meena
 @app.route('/contact', methods=['GET', 'POST'])
 def contact():
+    if 'username' in session:
+        return redirect(url_for('dashboard'))
     return render_template('contact.html', fav_icon=fav_icon, load_img=load_img)
 
 
