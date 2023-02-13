@@ -14,13 +14,15 @@
     
   <link rel="stylesheet" href="static/index_style.css">
 
-    <title>PrintEase</title>
-    <link rel="icon" type="image/x-icon" href="{{fav_icon}}">
-    <script>
-      if (window.performance && window.performance.navigation.type === window.performance.navigation.TYPE_BACK_FORWARD) {
-        window.location="http://127.0.0.1:5000";
+  <title>PrintEase</title>
+  <link rel="icon" type="image/x-icon" href="{{fav_icon}}">
+
+  
+  <script>
+    if (window.performance && window.performance.navigation.type === window.performance.navigation.TYPE_BACK_FORWARD) {
+      window.location="http://127.0.0.1:5000";
 }
-    </script>
+  </script>
 </head>
 <body>
   <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
@@ -56,6 +58,7 @@
     <p>A fixed navigation bar stays visible in a fixed position (top or bottom) independent of the page scroll.</p>
     <h1>Scroll this page to see the effect</h1>
   </div>
+
 
   <img src="{{load_img}}" id="loading">
   <div class="content">
