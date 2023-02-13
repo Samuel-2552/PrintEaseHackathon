@@ -15,10 +15,10 @@ def connect_db():
     return connection
 
 @app.route('/')
-def index():
+def landing():
     if 'username' in session:
         return redirect(url_for('dashboard'))
-    return render_template("index.html", fav_icon=fav_icon, load_img=load_img)
+    return render_template("landing.html", fav_icon=fav_icon, load_img=load_img)
    
 
 @app.route('/signup', methods=['GET', 'POST'])
@@ -75,7 +75,7 @@ def forgot():
 @app.route('/dashboard',methods=['GET', 'POST'])
 def dashboard():
     if 'username' not in session:
-        return redirect('/')
+        return redirect('/login')
     # Get the username from the session
     useremail = session['username']
     conn = sqlite3.connect('users.db')
