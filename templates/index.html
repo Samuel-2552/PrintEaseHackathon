@@ -25,10 +25,11 @@
 }
     </script>
 </head>
-<body>
+<body style="background-color: #1f2029;">
   <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">PrintEase</a>
+          
 
       
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
@@ -54,80 +55,7 @@
     
          
   </nav>
-  <div class="container-fluid" style="margin-top:80px" >
-    <h3>Top Fixed Navbar</h3>
-    <p>A fixed navigation bar stays visible in a fixed position (top or bottom) independent of the page scroll.</p>
-    <h1>Scroll this page to see the effect</h1>
-  </div>
-
-  <img src="{{load_img}}" id="loading">
-  <div class="content">
-    <div class="section">
-      <div class="container">
-        <div class="row full-height justify-content-center">
-          <div class="col-12 text-center align-self-center py-5">
-            <img src="{{load_img}}" style="height:80px;width:auto;">
-            <div class="section pb-5 pt-5 pt-sm-2 text-center">
-              <h6 class="mb-0 pb-3"><span>Log In </span><span>Sign Up</span></h6>
-                    <input class="checkbox" type="checkbox" id="reg-log" name="reg-log"/>
-                    <label for="reg-log"></label>
-              <div class="card-3d-wrap mx-auto">
-                <div class="card-3d-wrapper">
-                  <div class="card-front">
-                    <div class="center-wrap">
-                      <div class="section text-center">
-                        <h4 class="mb-4 pb-3">Log In</h4>
-                        <h4 class="mb-4 pb-3">Welcome to PrintEase</h4>
-                        <form action="/login" method="post">
-                          <div class="form-group mt-2">
-                            <input type="email" name="logemail" class="form-style" placeholder="Email" id="logemail" autocomplete="off" required>
-                            <i class="input-icon bi bi-envelope-at"></i>
-                          </div>	
-                          <div class="form-group mt-2">
-                            <input type="password" name="logpass" class="form-style" placeholder="Password" id="logpass" autocomplete="off" required>
-                            <i class="input-icon bi bi-key"></i>
-                          </div>
-                          <input class="btn mt-4" type="submit" value="Log In">
-                                        <p class="mb-0 mt-4 text-center"><a href="/forgot" class="link">Forgot your password?</a></p>
-                            </div>
-                          </div>
-                        </form>
-                      </div>
-                  <div class="card-back">
-                    <div class="center-wrap">
-                      <div class="section text-center">
-                        <h4 class="mb-4 pb-3">Sign Up</h4>
-                        <h4 class="mb-4 pb-3">Welcome to PrintEase</h4>
-                        <form action="/signup" method="post">
-                          <div class="form-group">
-                            <input type="text" name="logname" class="form-style" placeholder="Username" id="logname" autocomplete="off" required>
-                            <i class="input-icon bi bi-person"></i>
-                          </div>
-                          <div class="form-group mt-2">
-                          <input type="tel" name="lognumber" class="form-style" placeholder="Phone Number" id="logname" autocomplete="off" maxlength="10" minlength="0" required>
-                            <i class="input-icon bi bi-telephone"></i>
-                          </div>
-                          <div class="form-group mt-2">
-                            <input type="email" name="logemail" class="form-style" placeholder="Email" id="logemail" autocomplete="off" required>
-                            <i class="input-icon bi bi-envelope-at"></i>
-                          </div>	
-                                                <div class="form-group mt-2">
-                            <input type="password" name="logpass" class="form-style" placeholder="Password" id="logpass" autocomplete="off" required>
-                            <i class="input-icon bi bi-key"></i>
-                          </div>
-                          <input class="btn mt-4" type="submit" value="Sign Up">
-                            </div>
-                          </div>
-                        </form>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-        </div>
-    </div>
-  </div>
+  
   <script>
     setTimeout(function() {
       document.getElementById("loading").style.display = "none";
