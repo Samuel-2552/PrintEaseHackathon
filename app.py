@@ -9,6 +9,16 @@ app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 app.config['icons'] = images
 fav_icon = os.path.join(app.config['icons'], 'logo.png')
 load_img = os.path.join(app.config['icons'], 'printease.gif')
+sam = os.path.join(app.config['icons'], 'samuel.jpg')
+sandy = os.path.join(app.config['icons'], 'sandy.jpg')
+vejay = os.path.join(app.config['icons'], 'vejayy.jpg')
+meena =  os.path.join(app.config['icons'], 'meena1.jpg')
+sl1 = os.path.join(app.config['icons'], 'Slide1.PNG')
+sl2 = os.path.join(app.config['icons'], 'Slide2.PNG')
+sl3 = os.path.join(app.config['icons'], 'Slide3.PNG')
+sl4 = os.path.join(app.config['icons'], 'Slide4.PNG')
+sl5 = os.path.join(app.config['icons'], 'Slide5.PNG')
+sl6 = os.path.join(app.config['icons'], 'Slide6.PNG')
 
 def connect_db():
     connection = sqlite3.connect('users.db')
@@ -18,7 +28,7 @@ def connect_db():
 def landing():
     if 'username' in session:
         return redirect(url_for('dashboard'))
-    return render_template("landing.html", fav_icon=fav_icon, load_img=load_img)
+    return render_template("landing.html", fav_icon=fav_icon, load_img=load_img,sl1=sl1,sl2=sl2,sl3=sl3,sl4=sl4,sl5=sl5,sl6=sl6)
    
 
 @app.route('/signup', methods=['GET', 'POST'])
@@ -106,6 +116,13 @@ def contact():
     if 'username' in session:
         return redirect(url_for('dashboard'))
     return render_template('contact.html', fav_icon=fav_icon, load_img=load_img)
+
+
+@app.route('/team', methods=['GET', 'POST'])
+def team():
+    if 'username' in session:
+        return redirect(url_for('dashboard'))
+    return render_template('team.html', fav_icon=fav_icon, load_img=load_img, sam=sam, sandy=sandy, vejay=vejay, meena=meena)
 
 
 @app.route('/logout')
