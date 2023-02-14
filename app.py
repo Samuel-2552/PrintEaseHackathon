@@ -1,6 +1,13 @@
 from flask import Flask, render_template, request, redirect, session, url_for
 import sqlite3
 import os
+import datetime
+
+today = datetime.date.today()
+tod_date = today.strftime("%d-%m-%Y")
+
+
+order_no=1
 
 images=os.path.join('static','images')
 
@@ -55,6 +62,7 @@ def signup():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if 'username' in session:
+        order_no+=1
         return redirect(url_for('dashboard'))
     if request.method == 'POST':
         useremail = request.form['logemail']
@@ -100,7 +108,7 @@ def dashboard():
     
 
     # Render the dashboard template with the username and message
-    return render_template('dashboard.html', username=username[0], fav_icon=fav_icon, load_img=load_img)
+    return render_template('dashboard.html', username=username[0], fav_icon=fav_icon, load_img=load_img, order_no=order_no, tod_date=tod_date)
 
 @app.route("/upload-file", methods=["POST"])
 def upload_file():

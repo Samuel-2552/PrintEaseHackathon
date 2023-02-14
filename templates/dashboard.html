@@ -66,7 +66,7 @@
                           <div id="indicatorContainerWrap">
                             <div class="rad-prg" id="indicatorContainer"></div>
                             <div class="rad-cntnt">Click here to<br> select a file.</div>
-                            <input type="file" id="prgFileSelector" />
+                            <input type="file" id="prgFileSelector" accept="pdf/*" />
                           </div>
                           <div class="form-group mt-2">
                             <div id="feedback" class="indict">
@@ -91,8 +91,8 @@
                       <div class="section" id="ques2" hidden>
                         <label>
                           <h2>How do you want to print?</h2><br>
-                          <h4><input type="radio" name="color" value=0 checked>Black and White&emsp;
-                            <input type="radio" name="color" value=1>Colour
+                          <h4><input type="radio" name="color" value=0 checked> Black and White&emsp;
+                            <input type="radio" name="color" value=1> Colour
                           </h4>
                           <div>
                             <button onclick="back2()" class="btn mt-4" id="back2">Back</button>
@@ -104,8 +104,8 @@
                       <div class="section" id="ques3" hidden>
                         <label>
                           <h2>How do you want to print?</h2><br>
-                          <h4><input type="radio" name="side" value=0 checked>Front And Back&emsp;
-                            <input type="radio" name="side" value=1>Single Side
+                          <h4><input type="radio" name="side" value=0 checked> Front And Back&emsp;
+                            <input type="radio" name="side" value=1> Single Side
                           </h4>
                           <div>
                             <button onclick="back3()" class="btn mt-4" id="back3">Back</button>
@@ -118,8 +118,8 @@
                         <label>
                           <h1 style="text-align:left">ORDER SUMMARY</h1>
                           <br>
-                          <h4 style="text-align:left">OrderNo:</h4>
-                          <h4 style="text-align:left">Date:</h4>
+                          <h4 style="text-align:left">OrderNo: &nbsp{{order_no}}</h4>
+                          <h4 style="text-align:left">Date: &nbsp{{tod_date}}</h4>
                           <hr>
                           <h4 style="text-align:left">No of pages:</h4>
                           <h4 style="text-align:left">Colour of the print:</h4>
