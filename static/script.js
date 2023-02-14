@@ -39,7 +39,7 @@ $(document).ready(function () {
 
 
         $.ajax({
-            url: 'service/upload.php',
+            url: '/upload-file',
             type: 'POST',
             data: fd,
             processData: false,
