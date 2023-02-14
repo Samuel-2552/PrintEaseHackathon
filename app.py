@@ -87,7 +87,14 @@ def forgot():
         return "Email Sent"
     return render_template('forgot.html', fav_icon=fav_icon, load_img=load_img)
 
-
+@app.route("/upload-file", methods=["POST"])
+def upload_file():
+    file = request.files["file"]
+    if file and file.content_type == "application/pdf":
+        file.save(os.path.join("files", file.filename))
+        
+        return "File uploaded successfully!"
+    return "No file was provided."
 
 
 @app.route('/dashboard',methods=['GET', 'POST'])
@@ -109,14 +116,6 @@ def dashboard():
 
     # Render the dashboard template with the username and message
     return render_template('dashboard.html', username=username[0], fav_icon=fav_icon, load_img=load_img, order_no=order_no, tod_date=tod_date)
-
-@app.route("/upload-file", methods=["POST"])
-def upload_file():
-    file = request.files["file"]
-    if file and file.content_type == "application/pdf":
-        file.save(os.path.join("files", file.filename))
-        return "File uploaded successfully!"
-    return "No file was provided."
 
 # contact page has been added-Meena
 @app.route('/contact', methods=['GET', 'POST'])
