@@ -2,11 +2,11 @@ from flask import Flask, render_template, request, redirect, session, url_for
 import sqlite3
 import os
 import datetime
+import PyPDF2
 
 today = datetime.date.today()
 tod_date = today.strftime("%d-%m-%Y")
-
-
+filepath=''
 order_no=1
 
 images=os.path.join('static','images')
@@ -25,6 +25,11 @@ meena =  os.path.join(app.config['icons'], 'meena1.jpg')
 def connect_db():
     connection = sqlite3.connect('users.db')
     return connection
+
+def get_num_pages(file_path):
+    pdf_file = open(file_path, 'rb')
+    pdf_reader = PyPDF2.PdfReader(pdf_file)
+    return len(pdf_reader.pages)
 
 @app.route('/')
 def landing():
@@ -89,16 +94,20 @@ def forgot():
 
 @app.route("/upload-file", methods=["POST"])
 def upload_file():
+    global filepath
     file = request.files["file"]
     if file and file.content_type == "application/pdf":
         file.save(os.path.join("files", file.filename))
-        
+        filepath=os.path.join("files", file.filename)
+        pages=get_num_pages(filepath)
+        get_pages(pages)
         return "File uploaded successfully!"
     return "No file was provided."
 
 
 @app.route('/dashboard',methods=['GET', 'POST'])
 def dashboard():
+    global pages
     if 'username' not in session:
         return redirect('/login')
     # Get the username from the session
@@ -113,9 +122,8 @@ def dashboard():
     conn.close()
     # Connect to the database
     
-
     # Render the dashboard template with the username and message
-    return render_template('dashboard.html', username=username[0], fav_icon=fav_icon, load_img=load_img, order_no=order_no, tod_date=tod_date)
+    return render_template('dashboard.html', username=username[0], fav_icon=fav_icon, load_img=load_img, order_no=order_no, tod_date=tod_date,pages=pages)
 
 # contact page has been added-Meena
 @app.route('/contact', methods=['GET', 'POST'])
