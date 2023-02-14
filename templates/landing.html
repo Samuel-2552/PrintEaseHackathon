@@ -14,7 +14,17 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
-    <link rel="stylesheet" href="static\index_style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <!-- CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+
+    <!--typed jquerry-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
+
+
+
 
     <title>PrintEase</title>
     <link rel="icon" type="image/x-icon" href="{{fav_icon}}">
@@ -32,7 +42,10 @@
           position: relative;
           margin: auto;
         }
-  
+        
+        .abt{
+          text-align:justify;
+        }
         /* Hide all slides by default */
         .mySlides {
           display: none;
@@ -109,18 +122,92 @@
           }
         }
       </style>
+      <link rel="stylesheet" href="static\index_style.css">
+
+
 </head>
 
 <body>
     <img src="{{load_img}}" id="loading">    
     <div class="content">
-        
+      <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/"><img src="{{fav_icon}}" height="50px"> PrintEase</a>
+  
+  
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+  
+          </button>
+          <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="/login">GET STARTED</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#aboutus">ABOUT US</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/contact">CONTACT US</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/team">TEAM</a>
+            </li>
+            </ul>
+          </div>
+  
+        </div>
+      </nav>
+      <br><br><br><br><br><br><br><br><br><br><br>
+      <section id="hero" class="d-flex flex-column justify-content-center">
+        <div style="text-align:center">
+          <h1 style="color: #FFEBA7; font-size: 65px;">PrintEase</h1>
+          <p><span style="color: #fff;font-size: 20px;" id="typed-text"></span></p>
+          <div class="social-links">
+            <button style="font-size:26px;background-color: #FFEBA7; color: black;font-weight: bold;border-radius: 9px;" onclick="location.href='/login'">Get Started <i class="fa fa-rocket"></i></button>
+          </div>
+        </div>
+      </section>
+       <!-- ======= About Section ======= -->
+       <br><br><br><br><br><br><br><br><br><br><br><br><br id="aboutus"><br><br><br><br><br>
+    <section id="about" class="about">
+      <div class="container" data-aos="fade-up">
+        <div class="section-title">
+          <h1 style="font-weight: bold;text-align: center;" >About Us</h1>
+          <br>
+          <h4 style="color:#FFEBA7;text-align: center;">PrintEase: Streamlined Printing Services for Local Shops and Customers</h4>
+        </div>
+        <br><br>
+        <div class="abt">
+          <div>
+            
+            <p class="fst-italic" style="color:wheat;font-size: large;line-height:40px;">
+              Our aim is to streamline the process of searching for and ordering printing services from local printer shops. Progress updates are shared with the customer, and upon completion, the customer is notified to come and collect their printouts. This application aims to make the process of ordering and receiving printing services more efficient and convenient for both customers and printer shops.
+            </p>
+            
+            <p class="fst-italic" style="color:wheat;font-size: large;line-height:40px;">
+              The application allows users to send documents to a connected printer and make payments for the printing service directly from their mobile devices. The system is designed to streamline the printing process, making it more convenient and efficient for users. The application uses a secure connection to communicate with the printer, ensuring that the user's sensitive information is protected.
+            </p>
+            <br><br><br><br><br><br><br><br><br><br><br><br>
+          </div>
+        </div>
+      </div>
+    </section><!-- End About Section -->
+
+    
     </div>
     <script>
         setTimeout(function () {
             document.getElementById("loading").style.display = "none";
             document.querySelector(".content").style.display = "block";
+            var typed = new Typed('#typed-text', {
+            strings: ["Welcome to the Streamlined process for Printing.","Helps customers and local shops to provide seamless printing"],
+            typeSpeed: 50,
+            backSpeed: 50,
+            loop: true
+  }); 
         }, 3000);
+      
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
