@@ -14,7 +14,8 @@ CREATE TABLE IF NOT EXISTS user (
   password TEXT NOT NULL,
   email TEXT UNIQUE NOT NULL,
   message TEXT,
-  phoneno INTEGER
+  phoneno INTEGER,
+  EV INTEGER DEFAULT '0'
 )
 ''')
 

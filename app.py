@@ -60,7 +60,7 @@ def signup():
         if user:
             return "User already exists"
         try:
-            cursor.execute("INSERT INTO user (username, password, email,phoneno) VALUES (?, ?, ?,?)", (username, password, email,phoneno))
+            cursor.execute("INSERT INTO user (username, password, email) VALUES (?, ?, ?)", (username, password, email))
             connection.commit()
             connection.close()
         except:
