@@ -8,6 +8,7 @@ today = datetime.date.today()
 tod_date = today.strftime("%d-%m-%Y")
 filepath=''
 order_no=1
+page=0
 
 images=os.path.join('static','images')
 
@@ -100,14 +101,15 @@ def upload_file():
         file.save(os.path.join("files", file.filename))
         filepath=os.path.join("files", file.filename)
         pages=get_num_pages(filepath)
-        get_pages(pages)
+        global page
+        page=pages
+        print("pages = ", page)
         return "File uploaded successfully!"
     return "No file was provided."
 
 
 @app.route('/dashboard',methods=['GET', 'POST'])
 def dashboard():
-    global pages
     if 'username' not in session:
         return redirect('/login')
     # Get the username from the session
@@ -123,7 +125,11 @@ def dashboard():
     # Connect to the database
     
     # Render the dashboard template with the username and message
-    return render_template('dashboard.html', username=username[0], fav_icon=fav_icon, load_img=load_img, order_no=order_no, tod_date=tod_date,pages=pages)
+    return render_template('dashboard.html', username=username[0], fav_icon=fav_icon, load_img=load_img)
+
+@app.route('/payment',methods=['GET', 'POST'])
+def payment():
+    return render_template('payment.html', fav_icon=fav_icon, load_img=load_img, order_no=order_no, tod_date=tod_date,pages=page)
 
 # contact page has been added-Meena
 @app.route('/contact', methods=['GET', 'POST'])
