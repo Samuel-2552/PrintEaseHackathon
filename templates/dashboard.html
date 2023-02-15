@@ -12,39 +12,39 @@
   <title>PrintEase</title>
   <script>
 
-    function next1() {
+    function a1(){
       document.getElementById("ques1").hidden = false;
       document.getElementById("ques2").hidden = true;
       document.getElementById("upload").hidden = true;
       document.getElementById("ques3").hidden = true;
     }
-    function next2() {
+    function a2() {
       document.getElementById("ques1").hidden = true;
       document.getElementById("ques2").hidden = false;
       document.getElementById("upload").hidden = true;
       document.getElementById("ques3").hidden = true;
 
     }
-    function next3() {
+    function a3() {
       console.log("next3 is working")
       document.getElementById("ques1").hidden = true;
       document.getElementById("ques2").hidden = true;
       document.getElementById("upload").hidden = true;
       document.getElementById("ques3").hidden = false;
     }
-    function back1() {
+    function b1() {
       document.getElementById("ques1").hidden = true;
       document.getElementById("ques2").hidden = true;
       document.getElementById("upload").hidden = false;
       document.getElementById("ques3").hidden = true;
     }
-    function back2() {
+    function b2() {
       document.getElementById("ques1").hidden = false;
       document.getElementById("ques2").hidden = true;
       document.getElementById("upload").hidden = true;
       document.getElementById("ques3").hidden = true;
     }
-    function back3() {
+    function b3() {
       document.getElementById("ques1").hidden = true;
       document.getElementById("ques2").hidden = false;
       document.getElementById("upload").hidden = true;
@@ -116,7 +116,7 @@
                             <div class="form-group mt-2">
                               <div id="feedback" class="indict">
                               </div>
-                              <button onclick="next1()" class="btn mt-4" id="next1" hidden>next</button>
+                              <button type="button" onclick="a1()" class="btn mt-4" id="next1" hidden>next</button>
                             </div>
                           </div>
                         </div>
@@ -127,8 +127,8 @@
                             <h1><input type="number" name="quantity" min="1" max="10" required value="1">
                             </h1><br>
                             <div>
-                              <button onclick="back1()" class="btn mt-4" id="back1">Back</button>
-                              <button onclick="next2()" class="btn mt-4" id="next2">Next</button>
+                              <button type="button" onclick="b1()" class="btn mt-4" id="back1">Back</button>
+                              <button type="button" onclick="a2()" class="btn mt-4" id="next2">Next</button>
                             </div>
                           </label>
                         </div>
@@ -140,8 +140,8 @@
                               <input type="radio" name="color" value=1> Colour
                             </h4>
                             <div>
-                              <button onclick="back2()" class="btn mt-4" id="back2">Back</button>
-                              <button onclick="next3()" class="btn mt-4" id="next3">Next</button>
+                              <button type="button" onclick="b2()" class="btn mt-4" id="back2">Back</button>
+                              <button type="button" onclick="a3()" class="btn mt-4" id="next3">Next</button>
                             </div>
                           </label>
                         </div>
@@ -153,8 +153,8 @@
                               <input type="radio" name="side" value=1> Single Side
                             </h4>
                             <div>
-                              <button onclick="back3()" class="btn mt-4" id="back3">Back</button>
-                              <input type="submit" class="btn mt-4" id="next4">Proceed</input>
+                              <button type="button" onclick="b3()" class="btn mt-4" id="back3">Back</button>
+                              <input type="submit" class="btn mt-4" id="next4"></input>
                             </div>
                           </label>
                         </div>
