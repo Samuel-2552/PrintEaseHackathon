@@ -52,7 +52,7 @@ def signup():
         username = request.form['logname']
         password = request.form['logpass']
         email = request.form['logemail']
-        phoneno=request.form['lognumber']
+        
         connection = connect_db()
         cursor = connection.cursor()
         cursor.execute("SELECT * FROM user WHERE username=?", (username,))

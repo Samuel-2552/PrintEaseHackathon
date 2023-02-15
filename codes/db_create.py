@@ -13,9 +13,8 @@ CREATE TABLE IF NOT EXISTS user (
   username TEXT NOT NULL,
   password TEXT NOT NULL,
   email TEXT UNIQUE NOT NULL,
-  message TEXT,
-  phoneno INTEGER,
-  EV INTEGER DEFAULT '0'
+  wallet DECIMAL(1000,2) DEFAULT 100.00,
+  EV INTEGER DEFAULT 0
 )
 ''')
 
