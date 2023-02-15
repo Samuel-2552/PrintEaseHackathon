@@ -59,9 +59,13 @@ def signup():
         user = cursor.fetchone()
         if user:
             return "User already exists"
-        cursor.execute("INSERT INTO user (username, password, email,phoneno) VALUES (?, ?, ?,?)", (username, password, email,phoneno))
-        connection.commit()
-        connection.close()
+        try:
+            cursor.execute("INSERT INTO user (username, password, email,phoneno) VALUES (?, ?, ?,?)", (username, password, email,phoneno))
+            connection.commit()
+            connection.close()
+        except:
+            return "Email-Id already registered!"
+        
         return redirect('/login')
     return render_template('index.html', fav_icon=fav_icon, load_img=load_img)
 
