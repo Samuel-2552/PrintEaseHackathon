@@ -81,10 +81,10 @@
                           <h4 style="text-align:left">Date: &nbsp &nbsp{{tod_date}}</h4>
                           <hr>
                           <h4 style="text-align:left">No of pages: &nbsp{{pages}}</h4>
-                          <h4 style="text-align:left">Colour of the print:</h4>
-                          <h4 style="text-align:left">Type of print:</h4>
+                          <h4 style="text-align:left">{{color}}: &nbsp₹ {{col_cost}} / page</h4>
+                          <h4 style="text-align:left">{{side}}: &nbsp₹ {{sid_cost}} / page</h4>
                           <hr>
-                          <h4 style="text-align:left">Grand Total:</h4>
+                          <h4 style="text-align:left">Grand Total: &nbsp₹ {{total}}</h4>
                           <button onclick="location.href='/dashboard'" class="btn mt-4" id="back3">Back</button>
                           <button onclick="checkout()" class="btn mt-4" id="next4"
                             style="position: relative;left:10%;">Checkout</button>
@@ -94,7 +94,7 @@
                       <div class="section" id="scan" hidden>
                         <label>
                           <h1>SCAN TO PAY</h1>
-                          <h3>₹ AMOUNT</h3><br>
+                          <h3>₹ {{total}}</h3><br>
                           <img src="qr.png" class="image" alt="QR Code">
 
                         </label>

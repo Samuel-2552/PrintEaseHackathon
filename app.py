@@ -71,6 +71,7 @@ def signup():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    global order_no
     if 'username' in session:
         order_no+=1
         return redirect(url_for('dashboard'))
@@ -127,13 +128,37 @@ def dashboard():
     # Close the connection
     conn.close()
     # Connect to the database
+    if request.method == 'POST':
+        global color,side,quantity
+        color = request.form.get('color')
+        print(color)
+        side = request.form.get('side')
+        print(side)
+        quantity = request.form.get('quantity')
+        print(quantity)
     
     # Render the dashboard template with the username and message
     return render_template('dashboard.html', username=username[0], fav_icon=fav_icon, load_img=load_img)
 
 @app.route('/payment',methods=['GET', 'POST'])
 def payment():
-    return render_template('payment.html', fav_icon=fav_icon, load_img=load_img, order_no=order_no, tod_date=tod_date,pages=page)
+    global color,side,quantity,page
+    if color == '0':
+        col="Black & White"
+        col_cost=2
+    else:
+        print(color)
+        col="Colour"
+        col_cost=10
+    if side == '0':
+        sid = "Front and Back"
+        sid_cost=0.8
+    else:
+        print(side)
+        sid = "Single Side"
+        sid_cost=1
+    total=page*col_cost*sid_cost*quantity
+    return render_template('payment.html', fav_icon=fav_icon, load_img=load_img, order_no=order_no, tod_date=tod_date,pages=page,color=col,side=sid,quantity=quantity,total=total,sid_cost=sid_cost,col_cost=col_cost)
 
 # contact page has been added-Meena
 @app.route('/contact', methods=['GET', 'POST'])
