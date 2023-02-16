@@ -124,6 +124,9 @@ h6 span{
   transform-style: preserve-3d;
   transition: all 600ms ease-out; 
 }
+.navbar-nav{
+  color:#FFEBA7;
+}
 .card-front, .card-back {
   width: 100%;
   height: 130%;

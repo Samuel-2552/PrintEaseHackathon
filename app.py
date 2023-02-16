@@ -52,13 +52,22 @@ def get_num_pages(file_path):
 @app.route('/')
 def landing():
     if 'username' in session:
-        return redirect(url_for('dashboard'))
-    return render_template("landing.html", fav_icon=fav_icon, load_img=load_img)
+        logout=1
+        email=session['username']
+        connection = connect_db()
+        cursor = connection.cursor()
+        cursor.execute("SELECT * FROM user WHERE email=?", (email,))
+        user = cursor.fetchone()
+        user=user[1][0]
+    else:
+        logout=0
+        user="-1"
+        #return redirect(url_for('dashboard'))
+    return render_template("landing.html", fav_icon=fav_icon, load_img=load_img,logout=logout,user=user.upper())
 
 @app.route('/aboutus')
 def aboutus():
-    if 'username' in session:
-        return redirect(url_for('dashboard'))
+    #return redirect(url_for('dashboard'))
     return redirect("/#aboutus")   
 
 @app.route('/signup', methods=['GET', 'POST'])
@@ -214,15 +223,34 @@ def scan_qr_code(qr_code_id):
 @app.route('/contact', methods=['GET', 'POST'])
 def contact():
     if 'username' in session:
-        return redirect(url_for('dashboard'))
-    return render_template('contact.html', fav_icon=fav_icon, load_img=load_img)
+        logout=1
+        email=session['username']
+        connection = connect_db()
+        cursor = connection.cursor()
+        cursor.execute("SELECT * FROM user WHERE email=?", (email,))
+        user = cursor.fetchone()
+        user=user[1][0]
+    else:
+        logout=0
+        user="-1"    #return redirect(url_for('dashboard'))
+    return render_template('contact.html', fav_icon=fav_icon, load_img=load_img,logout=logout,user=user.upper())
 
 
 @app.route('/team', methods=['GET', 'POST'])
 def team():
     if 'username' in session:
-        return redirect(url_for('dashboard'))
-    return render_template('team.html', fav_icon=fav_icon, load_img=load_img, sam=sam, sandy=sandy, vejay=vejay, meena=meena)
+        logout=1
+        email=session['username']
+        connection = connect_db()
+        cursor = connection.cursor()
+        cursor.execute("SELECT * FROM user WHERE email=?", (email,))
+        user = cursor.fetchone()
+        user=user[1][0]
+    else:
+        logout=0
+        user="-1"        
+        #return redirect(url_for('dashboard'))
+    return render_template('team.html', fav_icon=fav_icon, load_img=load_img, sam=sam, sandy=sandy, vejay=vejay, meena=meena,logout=logout,user=user.upper())
 
 
 
