@@ -5,6 +5,12 @@ import datetime
 import PyPDF2
 import qrcode
 import uuid
+import math
+import random
+import smtplib
+
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 
 qr_codes={}
 
@@ -27,6 +33,12 @@ vejay = os.path.join(app.config['icons'], 'vejayy.jpg')
 meena =  os.path.join(app.config['icons'], 'meena1.jpg')
 qr_img=os.path.join(app.config['icons'], 'qr.png')
 
+def OTP():
+    digits = "0123456789"
+    OTP = ""
+    for i in range(6):
+        OTP += digits[math.floor(random.random() * 10)]
+    return OTP
 
 def connect_db():
     connection = sqlite3.connect('users.db')
@@ -218,6 +230,12 @@ def team():
 def logout():
     session.pop('username', None)
     return redirect('/')
+
+@app.route('/verification')
+def verify():
+    OTP=OTP
+    
+
 
 if __name__ == '__main__':
     app.run(debug=True,host="0.0.0.0")
