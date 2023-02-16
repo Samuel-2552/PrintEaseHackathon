@@ -127,22 +127,19 @@ def dashboard():
     print(username)
     # Close the connection
     conn.close()
-    # Connect to the database
-    if request.method == 'POST':
-        global color,side,quantity
-        color = request.form.get('color')
-        print(color)
-        side = request.form.get('side')
-        print(side)
-        quantity = request.form.get('quantity')
-        print(quantity)
     
     # Render the dashboard template with the username and message
     return render_template('dashboard.html', username=username[0], fav_icon=fav_icon, load_img=load_img)
 
 @app.route('/payment',methods=['GET', 'POST'])
 def payment():
-    global color,side,quantity,page
+    if request.method == 'POST':
+        color = request.form.get('color')
+        print(color)
+        side = request.form.get('side')
+        print(side)
+        quantity = request.form.get('quantity')
+        print(quantity)
     if color == '0':
         col="Black & White"
         col_cost=2
@@ -157,7 +154,7 @@ def payment():
         print(side)
         sid = "Single Side"
         sid_cost=1
-    total=page*col_cost*sid_cost*quantity
+    total=page*col_cost*sid_cost*int(quantity)
     return render_template('payment.html', fav_icon=fav_icon, load_img=load_img, order_no=order_no, tod_date=tod_date,pages=page,color=col,side=sid,quantity=quantity,total=total,sid_cost=sid_cost,col_cost=col_cost)
 
 # contact page has been added-Meena
