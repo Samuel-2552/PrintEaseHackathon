@@ -110,7 +110,7 @@ def upload_file():
         page=pages
         print("pages = ", page)
         return "File uploaded successfully!"
-    return "No file was provided."
+    return "It is not a pdf file"
 
 
 @app.route('/dashboard',methods=['GET', 'POST'])

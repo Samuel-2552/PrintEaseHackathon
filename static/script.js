@@ -44,31 +44,12 @@ $(document).ready(function () {
             data: fd,
             processData: false,
             contentType: false,
-            success: function () {
+            success: function (res) {
                 containerProg.option('displayNumber', false);
                 msgHolder.show().html('File upload done.');
-            },
-            xhr: function () {
-                var xhr = new window.XMLHttpRequest();
-                //Upload progress
-                xhr.upload.addEventListener("progress", function (e) {
-
-                    if (e.lengthComputable) {
-                        var percentComplete = (e.loaded || e.position) * 100 / e.total;
-                        containerProg.animate(percentComplete);
-                        setTimeout(succupload, 2000);
-
-
-                    }
-                }, false);
-                function succupload() {
-                    let msg = `<span style="color:whitesmoke;">File <u><b>${file.name}</b></u> has been uploaded successfully.</span>`;
-                    feedback.innerHTML = msg;
-                    document.getElementById("next1").hidden = false;
-
-                }
-                return xhr;
+                console.log(res);
             }
+            
         });
 
     }
