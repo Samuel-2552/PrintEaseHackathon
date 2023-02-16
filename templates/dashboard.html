@@ -81,22 +81,23 @@
             <li class="nav-item">
               <a class="nav-link" href="/team">TEAM</a>
             </li>
-            &nbsp&nbsp&nbsp&nbsp<button class="btn btn-primary" onclick="location.href='/logout';" type="dro">LOGOUT</button>
-
+            <!-- &nbsp&nbsp&nbsp&nbsp<button class="btn btn-primary" onclick="location.href='/logout';" type="button">LOGOUT</button> -->
             <!-- dropdown testing -->
-            <div class="dropdown">
-              <button onclick="myFunction()" class="dropbtn">Dropdown</button>
-              <div id="myDropdown" class="dropdown-content">
-                <a href="#home">Home</a>
-                <a href="#about">Logout</a>
-              </div>
-            </div>
             
           </ul>
         </div>
-
+        <div class="dropdown">
+          <button onclick="myFunction()" class="dropbtn">{{user}}</button>
+          <div id="myDropdown" class="dropdown-content" >
+            <a href="#home" type="button" class="bi bi-wallet btn btn-primary" style="color: #000">&nbsp&nbsp&nbspWallet</a>
+            <a href="/logout" type="button" class="btn btn-primary bi bi-box-arrow-right" style="color: #000;">&nbsp&nbsp&nbspLogout</a>
+          </div>
+        </div>
+        
       </div>
+
     </nav>
+
     <br><br><br><br>
     <!--upload card-->
     <center>

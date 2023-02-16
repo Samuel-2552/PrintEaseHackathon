@@ -136,7 +136,7 @@ def dashboard():
     
     
     # Render the dashboard template with the username and message
-    return render_template('dashboard.html', username=username[0], fav_icon=fav_icon, load_img=load_img)
+    return render_template('dashboard.html', username=username[0],user=username[0][0].upper(), fav_icon=fav_icon, load_img=load_img)
 
 @app.route('/payment',methods=['GET', 'POST'])
 def payment():
