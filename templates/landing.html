@@ -28,102 +28,18 @@
 
     <title>PrintEase</title>
     <link rel="icon" type="image/x-icon" href="{{fav_icon}}">
+    <script src="static\script.js"></script>
 
 
     <script>
         if (window.performance && window.performance.navigation.type === window.performance.navigation.TYPE_BACK_FORWARD) {
             window.location = "http://127.0.0.1:5000";
         }
-    </script>
-    <style>
-        /* Style the slideshow container */
-        .slideshow-container {
-          max-width: 1000px;
-          position: relative;
-          margin: auto;
-        }
-        
-        .abt{
-          text-align:justify;
-        }
-        /* Hide all slides by default */
-        .mySlides {
-          display: none;
-        }
-  
-        /* Next & previous buttons */
-        .prev, .next {
-          cursor: pointer;
-          position: absolute;
-          top: 50%;
-          width: auto;
-          padding: 16px;
-          margin-top: -22px;
-          color: white;
-          font-weight: bold;
-          font-size: 18px;
-          transition: 0.6s ease;
-          border-radius: 0 3px 3px 0;
-          user-select: none;
-        }
-  
-        /* Position the "next button" to the right */
-        .next {
-          right: 0;
-          border-radius: 3px 0 0 3px;
-        }
-  
-        /* On hover, add a black background color with a little bit see-through */
-        .prev:hover, .next:hover {
-          background-color: rgba(0, 0, 0, 0.8);
-        }
-  
-        /* The dots/bullets/indicators */
-        .dot {
-          cursor: pointer;
-          height: 15px;
-          width: 15px;
-          margin: 0 2px;
-          background-color: #bbb;
-          border-radius: 50%;
-          display: inline-block;
-          transition: background-color 0.6s ease;
-        }
-  
-        .active, .dot:hover {
-          background-color: #717171;
-        }
-  
-        /* Fading animation */
-        .fade {
-          -webkit-animation-name: fade;
-          -webkit-animation-duration: 1.5s;
-          animation-name: fade;
-          animation-duration: 1.5s;
-        }
-  
-        @-webkit-keyframes fade {
-          from {
-            opacity: .4
-          }
-  
-          to {
-            opacity: 1
-          }
-        }
-  
-        @keyframes fade {
-          from {
-            opacity: .4
-          }
-  
-          to {
-            opacity: 1
-          }
-        }
-      </style>
-      <link rel="stylesheet" href="static\index_style.css">
 
+        
+    </script>
+      <link rel="stylesheet" href="static\index_style.css">
+  <link rel="stylesheet" href="static\dash_style.css">
 
 </head>
 
@@ -132,7 +48,7 @@
     <div class="content">
       <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
         <div class="container-fluid">
-          <a class="navbar-brand" href="/"><img src="{{fav_icon}}" height="50px"> PrintEase</a>
+          <a class="navbar-brand" id="logotext" href="/" style="color:#FFEBA7"><img src="{{fav_icon}}" height="50px"> PrintEase</a>
   
   
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
@@ -140,22 +56,28 @@
   
           </button>
           <div class="collapse navbar-collapse" id="collapsibleNavbar">
-            <ul class="navbar-nav">
+            <ul class="navbar-nav" >
               <li class="nav-item">
-                <a class="nav-link" href="/login">GET STARTED</a>
+                <a class="nav-link" href="/login" style="color:#FFEBA7">GET STARTED</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#aboutus">ABOUT US</a>
+                <a class="nav-link" href="/aboutus" style="color:#FFEBA7">ABOUT US</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/contact">CONTACT US</a>
+                <a class="nav-link" href="/contact" style="color:#FFEBA7">CONTACT US</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/team">TEAM</a>
-            </li>
+                <a class="nav-link" href="/team" style="color:#FFEBA7">TEAM</a>
+              </li>
             </ul>
           </div>
-  
+          <div class="dropdown" id="dropdown">
+            <button onclick="myFunction()" class="dropbtn">{{user}}</button>
+            <div id="myDropdown" class="dropdown-content" >
+              <a href="#home" type="button" class="bi bi-wallet btn btn-primary" style="color: #000">&nbsp&nbsp&nbspWallet</a>
+              <a href="/logout" type="button" class="btn btn-primary bi bi-box-arrow-right" style="color: #000;">&nbsp&nbsp&nbspLogout</a>
+            </div>
+          </div>
         </div>
       </nav>
       <br><br><br><br><br><br><br><br><br><br><br>
@@ -208,6 +130,14 @@
   }); 
         }, 3000);
       
+
+        if("{{user}}"=="-1"){
+          // console.log("hi p")
+          document.getElementById("dropdown").style.display="none";
+        }
+        else{
+          document.getElementById("dropdown").style.display="block";
+        }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

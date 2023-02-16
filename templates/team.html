@@ -15,6 +15,8 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
   <link rel="stylesheet" href="static/index_style.css">
+  <link rel="stylesheet" href="static\dash_style.css">
+  <script src="static\script.js"></script>
 
   <title>PrintEase</title>
   <link rel="icon" type="image/x-icon" href="{{fav_icon}}">
@@ -31,31 +33,37 @@
   <img src="{{load_img}}" id="loading">
   <div class="content">
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="/"><img src="{{fav_icon}}" height="50px"> PrintEase</a>
-  
-  
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
-            <span class="navbar-toggler-icon"></span>
-  
-          </button>
-          <div class="collapse navbar-collapse" id="collapsibleNavbar">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link" href="/login">GET STARTED</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/aboutus">ABOUT US</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/contact">CONTACT US</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/team">TEAM</a>
+      <div class="container-fluid">
+        <a class="navbar-brand" id="logotext" href="/" style="color:#FFEBA7"><img src="{{fav_icon}}" height="50px"> PrintEase</a>
+
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+          <span class="navbar-toggler-icon"></span>
+
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+          <ul class="navbar-nav" >
+            <li class="nav-item">
+              <a class="nav-link" href="/login" style="color:#FFEBA7">GET STARTED</a>
             </li>
-            </ul>
+            <li class="nav-item">
+              <a class="nav-link" href="/aboutus" style="color:#FFEBA7">ABOUT US</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/contact" style="color:#FFEBA7">CONTACT US</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/team" style="color:#FFEBA7">TEAM</a>
+            </li>
+          </ul>
+        </div>
+        <div class="dropdown">
+          <button onclick="myFunction()" class="dropbtn">{{user}}</button>
+          <div id="myDropdown" class="dropdown-content" >
+            <a href="#home" type="button" class="bi bi-wallet btn btn-primary" style="color: #000">&nbsp&nbsp&nbspWallet</a>
+            <a href="/logout" type="button" class="btn btn-primary bi bi-box-arrow-right" style="color: #000;">&nbsp&nbsp&nbspLogout</a>
           </div>
-  
+        </div>
         </div>
       </nav><br><br>
     <div class="section">
@@ -97,6 +105,14 @@
         document.getElementById("loading").style.display = "none";
         document.querySelector(".content").style.display = "block";
       }, 3000);
+
+      if("{{user}}"=="-1"){
+          // console.log("hi p")
+          document.getElementById("dropdown").style.display="none";
+        }
+        else{
+          document.getElementById("dropdown").style.display="block";
+        }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
