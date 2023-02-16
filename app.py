@@ -3,6 +3,10 @@ import sqlite3
 import os
 import datetime
 import PyPDF2
+import qrcode
+import uuid
+
+qr_codes={}
 
 today = datetime.date.today()
 tod_date = today.strftime("%d-%m-%Y")
@@ -21,6 +25,7 @@ sam = os.path.join(app.config['icons'], 'samuel.jpg')
 sandy = os.path.join(app.config['icons'], 'sandy.jpg')
 vejay = os.path.join(app.config['icons'], 'vejayy.jpg')
 meena =  os.path.join(app.config['icons'], 'meena1.jpg')
+qr_img=os.path.join(app.config['icons'], 'qr.png')
 
 
 def connect_db():
@@ -73,7 +78,6 @@ def signup():
 def login():
     global order_no
     if 'username' in session:
-        order_no+=1
         return redirect(url_for('dashboard'))
     if request.method == 'POST':
         useremail = request.form['logemail']
@@ -82,6 +86,7 @@ def login():
         cursor = connection.cursor()
         cursor.execute("SELECT * FROM user WHERE email=? AND password=?", (useremail, password))
         user = cursor.fetchone()
+        order_no+=1
         
         if user:
             session['username'] = useremail
@@ -127,6 +132,8 @@ def dashboard():
     print(username)
     # Close the connection
     conn.close()
+
+    
     
     # Render the dashboard template with the username and message
     return render_template('dashboard.html', username=username[0], fav_icon=fav_icon, load_img=load_img)
@@ -155,7 +162,41 @@ def payment():
         sid = "Single Side"
         sid_cost=1
     total=page*col_cost*sid_cost*int(quantity)
-    return render_template('payment.html', fav_icon=fav_icon, load_img=load_img, order_no=order_no, tod_date=tod_date,pages=page,color=col,side=sid,quantity=quantity,total=total,sid_cost=sid_cost,col_cost=col_cost)
+
+    # Create a unique identifier
+    unique_id = str(uuid.uuid4())
+
+    # Create the data to be encoded in the QR code, including the unique identifier
+    # Create the QR code instance
+    qr = qrcode.QRCode(version=1, box_size=10, border=5)
+    data="http://192.168.1.16:5000/scan/" + unique_id
+    # Add the data to the QR code
+    qr.add_data(data)
+    qr.make(fit=True)
+
+    # Create an image from the QR code instance
+    img = qr.make_image(fill_color="black", back_color="white")
+
+    # Save the image
+    img.save("static/images/qr.png")   
+    # Add the identifier to the qr_codes dictionary
+    qr_codes[unique_id] = True
+
+    
+
+    return render_template('payment.html', fav_icon=fav_icon, load_img=load_img, order_no=order_no, tod_date=tod_date,pages=page,
+                           color=col,side=sid,quantity=quantity,total=total,sid_cost=sid_cost,col_cost=col_cost,qr_code_id=unique_id, data=data,qr_img=qr_img)
+
+@app.route("/scan/<qr_code_id>")
+def scan_qr_code(qr_code_id):
+    # Check if the scanned QR code's identifier exists in the qr_codes dictionary
+    if qr_codes.get(qr_code_id):
+        # remove the scanned qr code from the dictionary
+        qr_codes.pop(qr_code_id)
+        data="http://192.168.1.16:5000/completed.html"
+        return "Payment Completed"#render_template("completed.html", url=data)
+    else:
+        return "Already Scanned!"#render_template("scanned.html")
 
 # contact page has been added-Meena
 @app.route('/contact', methods=['GET', 'POST'])
@@ -170,6 +211,7 @@ def team():
     if 'username' in session:
         return redirect(url_for('dashboard'))
     return render_template('team.html', fav_icon=fav_icon, load_img=load_img, sam=sam, sandy=sandy, vejay=vejay, meena=meena)
+
 
 
 @app.route('/logout')
