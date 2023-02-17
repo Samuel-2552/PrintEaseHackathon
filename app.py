@@ -85,6 +85,7 @@ def signup():
         cursor = connection.cursor()
         cursor.execute("SELECT * FROM user WHERE username=?", (username,))
         user = cursor.fetchone()
+        print(user)
         if user:
             return "User already exists"
         try:
@@ -103,18 +104,22 @@ def login():
     if 'username' in session:
         return redirect(url_for('dashboard'))
     if request.method == 'POST':
-        useremail = request.form['logemail']
-        password = request.form['logpass']
-        connection = connect_db()
-        cursor = connection.cursor()
-        cursor.execute("SELECT * FROM user WHERE email=? AND password=?", (useremail, password))
-        user = cursor.fetchone()
-        if user[5]==0:
-            render_template('verification.html',fav_icon=fav_icon, load_img=load_img)
-        order_no+=1
-        
+        try:
+            useremail = request.form['logemail']
+            password = request.form['logpass']
+            connection = connect_db()
+            cursor = connection.cursor()
+            cursor.execute("SELECT * FROM user WHERE email=? AND password=?", (useremail, password))
+            user = cursor.fetchone()
+            print(user[5])
+        except:
+            return "Invalid username or password"
         if user:
             session['username'] = useremail
+            if user[5]==0:
+                print("going")
+                return redirect('/verification')
+            order_no+=1
             return redirect('/dashboard')
         return "Invalid username or password"
     return render_template('index.html', fav_icon=fav_icon, load_img=load_img,ip=ip)
@@ -277,19 +282,40 @@ def logout():
 
 @app.route('/verification', methods=['POST', 'GET'])
 def verify():
+    if 'username' in session:
+        logout=1
+        email=session['username']
+        connection = connect_db()
+        cursor = connection.cursor()
+        cursor.execute("SELECT * FROM user WHERE email=?", (email,))
+        user = cursor.fetchone()
+        useremail = user[3]
+        print(useremail)
+        user=user[1][0]
+        try:
+            otp = OTP() + " is your OTP"
+            msg = MIMEMultipart()
+            msg['From'] = 'PrintEase Verification'
+            msg['To'] = useremail
+            msg['Subject'] = 'PrintEase OTP Verification'
+            msg.attach(MIMEText(otp, 'plain'))
+            s = smtplib.SMTP('smtp.gmail.com', 587)
+            s.starttls()
+            s.login("201501503@rajalakshmi.edu.in", "RECLE@2021")
+            s.sendmail(msg['From'], msg['To'], msg.as_string())
+        except:
+            return "<h1><a href='/dashboard'>Try Agin Later</a></h1>"
+    else:
+        logout=0
+        user="-1"
+        return redirect(url_for('dashboard'))
     if request.method == 'POST':
-        useremail = request.form['logemail']
-        OTP=OTP
-        otp = OTP + " is your OTP"
-        msg = MIMEMultipart()
-        msg['From'] = 'PrintEase Verification'
-        msg['To'] = useremail
-        msg['Subject'] = 'PrintEase OTP Verification'
-        msg.attach(MIMEText(otp, 'plain'))
-        s = smtplib.SMTP('smtp.gmail.com', 587)
-        s.starttls()
-        s.login("201501503@rajalakshmi.edu.in", "RECLE@2021")
-        s.sendmail(msg['From'], msg['To'], msg.as_string())
+        ver=request.form['logpass']
+        if ver==OTP:
+            return "Verified"
+        else:
+            return "Try Again"
+    return render_template('verification.html',fav_icon=fav_icon, load_img=load_img,user=user)
 
 if __name__ == '__main__':
     app.run(debug=True,host="0.0.0.0")
