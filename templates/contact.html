@@ -21,7 +21,11 @@
   
   <link rel="stylesheet" href="static\index_style.css">
   <link rel="stylesheet" href="static\dash_style.css">
-
+  <script>
+    if (window.performance && window.performance.navigation.type === window.performance.navigation.TYPE_BACK_FORWARD) {
+      window.location = "{{ip}}";
+    }
+  </script>
 </head>
 <style>
   .contact-parent {
@@ -155,7 +159,7 @@
             </li>
           </ul>
         </div>
-        <div class="dropdown">
+        <div class="dropdown" id="dropdown">
           <button onclick="myFunction()" class="dropbtn">{{user}}</button>
           <div id="myDropdown" class="dropdown-content" >
             <a href="#home" type="button" class="bi bi-wallet btn btn-primary" style="color: #000">&nbsp&nbsp&nbspWallet</a>

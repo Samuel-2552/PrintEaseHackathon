@@ -32,9 +32,9 @@
 
     <script>
         if (window.performance && window.performance.navigation.type === window.performance.navigation.TYPE_BACK_FORWARD) {
-            window.location = "http://127.0.0.1:5000";
+          window.location = "{{ip}}";
         }
-    </script>
+      </script>
     
       <link rel="stylesheet" href="static\index_style.css">
 
@@ -48,9 +48,7 @@
 			<div class="row full-height justify-content-center">
 				<div class="col-12 text-center align-self-center py-5">
 					<div class="section pb-5 pt-5 pt-sm-2 text-center">
-						<h6 class="mb-0 pb-3"><span>Verify Email</span><span>Verify Phone</span></h6>
-			          	<input class="checkbox" type="checkbox" id="reg-log" name="reg-log"/>
-			          	<label for="reg-log"></label>
+						<h6 class="mb-0 pb-3"><span>Verify Email</span></h6>
 						<div class="card-3d-wrap mx-auto">
 							<div class="card-3d-wrapper">
 								<div class="card-front">
@@ -58,7 +56,7 @@
 										<div class="section text-center">
                                             <h4 class="mb-4 pb-3">Account Verification</h4>
 											<h6 class="mb-4 pb-3">Enter your email address and we'll send you an OTP to verify your Account</h6>
-                                           
+                                           <form action="/verification" method="POST">
 											<div class="form-group mt-2">
 												<input type="email" name="logemail" class="form-style" placeholder="Email" id="logemail" autocomplete="off">
 												<i class="input-icon bi bi-envelope-at"></i>
@@ -67,27 +65,9 @@
 												<input type="password" name="logpass" class="form-style" placeholder="OTP" id="logpass" autocomplete="off">
 												<i class="input-icon bi bi-key"></i>
 											</div>
-											<a href="mailverification.html" class="btn mt-4">Verify Now !!</a>
+											<input type="submit" value="Verify Now !!" class="btn mt-4">
+                                           </form>
                             				
-				      					</div>
-			      					</div>
-			      				</div>
-								<div class="card-back">
-									<div class="center-wrap">
-										<div class="section text-center">
-											
-                                            <h4 class="mb-4 pb-3">Account Verification</h4>
-                                            <h6 class="mb-4 pb-3">Enter your Mobile number to verify your Account</h6>
-											<div class="form-group">
-												<input type="tel" name="lognumber" class="form-style" placeholder="Phone Number" id="logphone" autocomplete="off">
-												<i class="input-icon bi bi-telephone"></i>
-                                            </div>
-
-                                            <div class="form-group mt-2">
-												<input type="password" name="logpass" class="form-style" placeholder="OTP" id="logpass" autocomplete="off">
-												<i class="input-icon bi bi-key"></i>
-											</div>
-											<a href="mailverification.html" class="btn mt-4">Verify Now !!</a>
 				      					</div>
 			      					</div>
 			      				</div>

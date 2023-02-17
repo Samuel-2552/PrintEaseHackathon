@@ -50,7 +50,11 @@
       document.getElementById("ques3").hidden = true;
     }
   </script>
-  
+  <script>
+    if (window.performance && window.performance.navigation.type === window.performance.navigation.TYPE_BACK_FORWARD) {
+      window.location = "{{ip}}";
+    }
+  </script>
   <link rel="stylesheet" href="static\dash_style.css">
 </head>
 

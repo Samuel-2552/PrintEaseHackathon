@@ -12,6 +12,8 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
+ip="http://192.168.1.16:5000"
+
 qr_codes={}
 
 today = datetime.date.today()
@@ -63,7 +65,7 @@ def landing():
         logout=0
         user="-1"
         #return redirect(url_for('dashboard'))
-    return render_template("landing.html", fav_icon=fav_icon, load_img=load_img,logout=logout,user=user.upper())
+    return render_template("landing.html", fav_icon=fav_icon, load_img=load_img,logout=logout,user=user.upper(),ip=ip)
 
 @app.route('/aboutus')
 def aboutus():
@@ -93,7 +95,7 @@ def signup():
             return "Email-Id already registered!"
         
         return redirect('/login')
-    return render_template('index.html', fav_icon=fav_icon, load_img=load_img)
+    return render_template('index.html', fav_icon=fav_icon, load_img=load_img,ip=ip)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -107,13 +109,15 @@ def login():
         cursor = connection.cursor()
         cursor.execute("SELECT * FROM user WHERE email=? AND password=?", (useremail, password))
         user = cursor.fetchone()
+        if user[5]==0:
+            render_template('verification.html',fav_icon=fav_icon, load_img=load_img)
         order_no+=1
         
         if user:
             session['username'] = useremail
             return redirect('/dashboard')
         return "Invalid username or password"
-    return render_template('index.html', fav_icon=fav_icon, load_img=load_img)
+    return render_template('index.html', fav_icon=fav_icon, load_img=load_img,ip=ip)
 
 @app.route('/forgot', methods=['GET', 'POST'])
 def forgot():
@@ -122,7 +126,7 @@ def forgot():
     if request.method == 'POST':
         useremail = request.form['logemail']
         return "Email Sent"
-    return render_template('forgot.html', fav_icon=fav_icon, load_img=load_img)
+    return render_template('forgot.html', fav_icon=fav_icon, load_img=load_img, ip=ip)
 
 @app.route("/upload-file", methods=["POST"])
 def upload_file():
@@ -157,10 +161,22 @@ def dashboard():
     
     
     # Render the dashboard template with the username and message
-    return render_template('dashboard.html', username=username[0],user=username[0][0].upper(), fav_icon=fav_icon, load_img=load_img)
+    return render_template('dashboard.html', username=username[0],user=username[0][0].upper(), fav_icon=fav_icon, load_img=load_img,ip=ip)
 
 @app.route('/payment',methods=['GET', 'POST'])
 def payment():
+    if 'username' in session:
+        logout=1
+        email=session['username']
+        connection = connect_db()
+        cursor = connection.cursor()
+        cursor.execute("SELECT * FROM user WHERE email=?", (email,))
+        user = cursor.fetchone()
+        user=user[1][0]
+    else:
+        logout=0
+        user="-1"
+        return redirect(url_for('dashboard'))
     if request.method == 'POST':
         color = request.form.get('color')
         print(color)
@@ -190,7 +206,7 @@ def payment():
     # Create the data to be encoded in the QR code, including the unique identifier
     # Create the QR code instance
     qr = qrcode.QRCode(version=1, box_size=10, border=5)
-    data="http://192.168.1.16:5000/scan/" + unique_id
+    data=ip+"/scan/" + unique_id
     # Add the data to the QR code
     qr.add_data(data)
     qr.make(fit=True)
@@ -206,7 +222,7 @@ def payment():
     
 
     return render_template('payment.html', fav_icon=fav_icon, load_img=load_img, order_no=order_no, tod_date=tod_date,pages=page,
-                           color=col,side=sid,quantity=quantity,total=total,sid_cost=sid_cost,col_cost=col_cost,qr_code_id=unique_id, data=data,qr_img=qr_img)
+                           color=col,side=sid,quantity=quantity,total=total,sid_cost=sid_cost,col_cost=col_cost,qr_code_id=unique_id, data=data,qr_img=qr_img,user=user,ip=ip)
 
 @app.route("/scan/<qr_code_id>")
 def scan_qr_code(qr_code_id):
@@ -214,7 +230,7 @@ def scan_qr_code(qr_code_id):
     if qr_codes.get(qr_code_id):
         # remove the scanned qr code from the dictionary
         qr_codes.pop(qr_code_id)
-        data="http://192.168.1.16:5000/completed.html"
+        data=ip+"/completed.html"
         return "Payment Completed"#render_template("completed.html", url=data)
     else:
         return "Already Scanned!"#render_template("scanned.html")
@@ -233,7 +249,7 @@ def contact():
     else:
         logout=0
         user="-1"    #return redirect(url_for('dashboard'))
-    return render_template('contact.html', fav_icon=fav_icon, load_img=load_img,logout=logout,user=user.upper())
+    return render_template('contact.html', fav_icon=fav_icon, load_img=load_img,logout=logout,user=user.upper(),ip=ip)
 
 
 @app.route('/team', methods=['GET', 'POST'])
@@ -250,7 +266,7 @@ def team():
         logout=0
         user="-1"        
         #return redirect(url_for('dashboard'))
-    return render_template('team.html', fav_icon=fav_icon, load_img=load_img, sam=sam, sandy=sandy, vejay=vejay, meena=meena,logout=logout,user=user.upper())
+    return render_template('team.html', fav_icon=fav_icon, load_img=load_img, sam=sam, sandy=sandy, vejay=vejay, meena=meena,logout=logout,user=user.upper(),ip=ip)
 
 
 
@@ -259,11 +275,21 @@ def logout():
     session.pop('username', None)
     return redirect('/')
 
-@app.route('/verification')
+@app.route('/verification', methods=['POST', 'GET'])
 def verify():
-    OTP=OTP
-    
-
+    if request.method == 'POST':
+        useremail = request.form['logemail']
+        OTP=OTP
+        otp = OTP + " is your OTP"
+        msg = MIMEMultipart()
+        msg['From'] = 'PrintEase Verification'
+        msg['To'] = useremail
+        msg['Subject'] = 'PrintEase OTP Verification'
+        msg.attach(MIMEText(otp, 'plain'))
+        s = smtplib.SMTP('smtp.gmail.com', 587)
+        s.starttls()
+        s.login("201501503@rajalakshmi.edu.in", "RECLE@2021")
+        s.sendmail(msg['From'], msg['To'], msg.as_string())
 
 if __name__ == '__main__':
     app.run(debug=True,host="0.0.0.0")
