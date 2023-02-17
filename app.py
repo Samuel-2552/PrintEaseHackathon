@@ -15,7 +15,7 @@ from email.mime.multipart import MIMEMultipart
 ip="http://192.168.1.16:5000"
 
 qr_codes={}
-
+navbar_name=['GET STARTED','ORDER NOW']
 today = datetime.date.today()
 tod_date = today.strftime("%d-%m-%Y")
 filepath=''
@@ -61,11 +61,13 @@ def landing():
         cursor.execute("SELECT * FROM user WHERE email=?", (email,))
         user = cursor.fetchone()
         user=user[1][0]
+        name=navbar_name[1]
     else:
         logout=0
         user="-1"
+        name=navbar_name[0]
         #return redirect(url_for('dashboard'))
-    return render_template("landing.html", fav_icon=fav_icon, load_img=load_img,logout=logout,user=user.upper(),ip=ip)
+    return render_template("landing.html", fav_icon=fav_icon, load_img=load_img,logout=logout,user=user.upper(),ip=ip,name=name)
 
 @app.route('/aboutus')
 def aboutus():
@@ -151,22 +153,23 @@ def upload_file():
 @app.route('/dashboard',methods=['GET', 'POST'])
 def dashboard():
     if 'username' not in session:
+        name=navbar_name[0]
         return redirect('/login')
     # Get the username from the session
     useremail = session['username']
     conn = sqlite3.connect('users.db')
-    
     cursor = conn.cursor()
     cursor.execute("SELECT username FROM user WHERE email=?",(useremail,))
     username=cursor.fetchone()
     print(username)
     # Close the connection
     conn.close()
-
+    name=navbar_name[1]
+    
     
     
     # Render the dashboard template with the username and message
-    return render_template('dashboard.html', username=username[0],user=username[0][0].upper(), fav_icon=fav_icon, load_img=load_img,ip=ip)
+    return render_template('dashboard.html', username=username[0],user=username[0][0].upper(), fav_icon=fav_icon, load_img=load_img,ip=ip,name=name)
 
 @app.route('/payment',methods=['GET', 'POST'])
 def payment():
@@ -251,10 +254,12 @@ def contact():
         cursor.execute("SELECT * FROM user WHERE email=?", (email,))
         user = cursor.fetchone()
         user=user[1][0]
+        name=navbar_name[1]
     else:
         logout=0
-        user="-1"    #return redirect(url_for('dashboard'))
-    return render_template('contact.html', fav_icon=fav_icon, load_img=load_img,logout=logout,user=user.upper(),ip=ip)
+        user="-1"
+        name=navbar_name[0]    #return redirect(url_for('dashboard'))
+    return render_template('contact.html', fav_icon=fav_icon, load_img=load_img,logout=logout,user=user.upper(),ip=ip,name=name)
 
 
 @app.route('/team', methods=['GET', 'POST'])
@@ -267,11 +272,13 @@ def team():
         cursor.execute("SELECT * FROM user WHERE email=?", (email,))
         user = cursor.fetchone()
         user=user[1][0]
+        name=navbar_name[1]
     else:
         logout=0
         user="-1"        
+        name=navbar_name[0] 
         #return redirect(url_for('dashboard'))
-    return render_template('team.html', fav_icon=fav_icon, load_img=load_img, sam=sam, sandy=sandy, vejay=vejay, meena=meena,logout=logout,user=user.upper(),ip=ip)
+    return render_template('team.html', fav_icon=fav_icon, load_img=load_img, sam=sam, sandy=sandy, vejay=vejay, meena=meena,logout=logout,user=user.upper(),ip=ip,name=name)
 
 
 
