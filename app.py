@@ -255,11 +255,15 @@ def contact():
         user = cursor.fetchone()
         user=user[1][0]
         name=navbar_name[1]
+        cursor.execute("SELECT wallet FROM user WHERE email=?", (email,))
+        wallet_money=cursor.fetchone()
+        
+        #print(wallet_money)
     else:
         logout=0
         user="-1"
         name=navbar_name[0]    #return redirect(url_for('dashboard'))
-    return render_template('contact.html', fav_icon=fav_icon, load_img=load_img,logout=logout,user=user.upper(),ip=ip,name=name)
+    return render_template('contact.html', fav_icon=fav_icon, load_img=load_img,logout=logout,user=user.upper(),ip=ip,name=name,wallet=wallet_money[0])
 
 
 @app.route('/team', methods=['GET', 'POST'])
