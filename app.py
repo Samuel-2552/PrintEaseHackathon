@@ -333,7 +333,7 @@ def verify():
         print(ver,otp)
         ver= ver+" is your OTP"
         if ver==otp:
-            return "Verified"
+            return redirect('/dashboard')
         else:
             return "Try Again"
     return render_template('verification.html',fav_icon=fav_icon, load_img=load_img,user=user)
