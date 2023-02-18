@@ -12,7 +12,7 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
-ip="http://192.168.1.16:5000"
+ip="http://192.168.1.10:5000"
 
 qr_codes={}
 
@@ -280,8 +280,14 @@ def logout():
     session.pop('username', None)
     return redirect('/')
 
+
+counter=0
+otp=-1
+
 @app.route('/verification', methods=['POST', 'GET'])
 def verify():
+    global counter
+    global otp
     if 'username' in session:
         logout=1
         email=session['username']
@@ -292,26 +298,30 @@ def verify():
         useremail = user[3]
         print(useremail)
         user=user[1][0]
-        try:
-            otp = OTP() + " is your OTP"
-            msg = MIMEMultipart()
-            msg['From'] = 'PrintEase Verification'
-            msg['To'] = useremail
-            msg['Subject'] = 'PrintEase OTP Verification'
-            msg.attach(MIMEText(otp, 'plain'))
-            s = smtplib.SMTP('smtp.gmail.com', 587)
-            s.starttls()
-            s.login("201501503@rajalakshmi.edu.in", "RECLE@2021")
-            s.sendmail(msg['From'], msg['To'], msg.as_string())
-        except:
-            return "<h1><a href='/dashboard'>Try Agin Later</a></h1>"
+        if counter==0:
+            try:
+                otp = OTP() + " is your OTP"
+                msg = MIMEMultipart()
+                msg['From'] = 'PrintEase Verification'
+                msg['To'] = useremail
+                msg['Subject'] = 'PrintEase OTP Verification'
+                msg.attach(MIMEText(otp, 'plain'))
+                s = smtplib.SMTP('smtp.gmail.com', 587)
+                s.starttls()
+                s.login("201501503@rajalakshmi.edu.in", "#")
+                s.sendmail(msg['From'], msg['To'], msg.as_string())
+            except:
+                return "<h1><a href='/dashboard'>Try Agin Later</a></h1>"
+        counter+=1
     else:
         logout=0
         user="-1"
         return redirect(url_for('dashboard'))
     if request.method == 'POST':
         ver=request.form['logpass']
-        if ver==OTP:
+        print(ver,otp)
+        ver= ver+" is your OTP"
+        if ver==otp:
             return "Verified"
         else:
             return "Try Again"
