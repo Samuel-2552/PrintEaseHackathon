@@ -12,7 +12,7 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
-ip="http://192.168.1.10:5000"
+ip="http://192.168.15.59:5000"
 
 qr_codes={}
 navbar_name=['GET STARTED','ORDER NOW']
@@ -62,12 +62,15 @@ def landing():
         user = cursor.fetchone()
         user=user[1][0]
         name=navbar_name[1]
+        cursor.execute("SELECT wallet FROM user WHERE email=?", (email,))
+        wallet_money=cursor.fetchone()
     else:
+        wallet_money=[0]
         logout=0
         user="-1"
         name=navbar_name[0]
         #return redirect(url_for('dashboard'))
-    return render_template("landing.html", fav_icon=fav_icon, load_img=load_img,logout=logout,user=user.upper(),ip=ip,name=name)
+    return render_template("landing.html", fav_icon=fav_icon, load_img=load_img,logout=logout,user=user.upper(),ip=ip,name=name,wallet=wallet_money[0])
 
 @app.route('/aboutus')
 def aboutus():
@@ -162,14 +165,17 @@ def dashboard():
     cursor.execute("SELECT username FROM user WHERE email=?",(useremail,))
     username=cursor.fetchone()
     print(username)
+    cursor.execute("SELECT wallet FROM user WHERE email=?", (useremail,))
+    wallet_money=cursor.fetchone()
     # Close the connection
     conn.close()
     name=navbar_name[1]
     
     
     
+    
     # Render the dashboard template with the username and message
-    return render_template('dashboard.html', username=username[0],user=username[0][0].upper(), fav_icon=fav_icon, load_img=load_img,ip=ip,name=name)
+    return render_template('dashboard.html', username=username[0],user=username[0][0].upper(), fav_icon=fav_icon, load_img=load_img,ip=ip,name=name,wallet=wallet_money[0])
 
 @app.route('/payment',methods=['GET', 'POST'])
 def payment():
@@ -181,7 +187,10 @@ def payment():
         cursor.execute("SELECT * FROM user WHERE email=?", (email,))
         user = cursor.fetchone()
         user=user[1][0]
+        cursor.execute("SELECT wallet FROM user WHERE email=?", (email,))
+        wallet_money=cursor.fetchone()
     else:
+        wallet_money=[0]
         logout=0
         user="-1"
         return redirect(url_for('dashboard'))
@@ -230,7 +239,7 @@ def payment():
     
 
     return render_template('payment.html', fav_icon=fav_icon, load_img=load_img, order_no=order_no, tod_date=tod_date,pages=page,
-                           color=col,side=sid,quantity=quantity,total=total,sid_cost=sid_cost,col_cost=col_cost,qr_code_id=unique_id, data=data,qr_img=qr_img,user=user,ip=ip)
+                           color=col,side=sid,quantity=quantity,total=total,sid_cost=sid_cost,col_cost=col_cost,qr_code_id=unique_id, data=data,qr_img=qr_img,user=user,ip=ip,wallet=wallet_money[0])
 
 @app.route("/scan/<qr_code_id>")
 def scan_qr_code(qr_code_id):
@@ -260,6 +269,7 @@ def contact():
         
         #print(wallet_money)
     else:
+        wallet_money=[0]
         logout=0
         user="-1"
         name=navbar_name[0]    #return redirect(url_for('dashboard'))
@@ -277,12 +287,15 @@ def team():
         user = cursor.fetchone()
         user=user[1][0]
         name=navbar_name[1]
+        cursor.execute("SELECT wallet FROM user WHERE email=?", (email,))
+        wallet_money=cursor.fetchone()
     else:
+        wallet_money=[0]
         logout=0
         user="-1"        
         name=navbar_name[0] 
         #return redirect(url_for('dashboard'))
-    return render_template('team.html', fav_icon=fav_icon, load_img=load_img, sam=sam, sandy=sandy, vejay=vejay, meena=meena,logout=logout,user=user.upper(),ip=ip,name=name)
+    return render_template('team.html', fav_icon=fav_icon, load_img=load_img, sam=sam, sandy=sandy, vejay=vejay, meena=meena,logout=logout,user=user.upper(),ip=ip,name=name,wallet=wallet_money[0])
 
 
 
@@ -309,6 +322,8 @@ def verify():
         useremail = user[3]
         print(useremail)
         user=user[1][0]
+        cursor.execute("SELECT wallet FROM user WHERE email=?", (email,))
+        wallet_money=cursor.fetchone()
         if counter==0:
             try:
                 otp = OTP() + " is your OTP"
@@ -325,6 +340,7 @@ def verify():
                 return "<h1><a href='/dashboard'>Try Agin Later</a></h1>"
         counter+=1
     else:
+        wallet_money=[0]
         logout=0
         user="-1"
         return redirect(url_for('dashboard'))
@@ -336,7 +352,7 @@ def verify():
             return redirect('/dashboard')
         else:
             return "Try Again"
-    return render_template('verification.html',fav_icon=fav_icon, load_img=load_img,user=user)
+    return render_template('verification.html',fav_icon=fav_icon, load_img=load_img,user=user,wallet=wallet_money[0])
 
 if __name__ == '__main__':
     app.run(debug=True,host="0.0.0.0")
