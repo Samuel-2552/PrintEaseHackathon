@@ -17,13 +17,13 @@ def capture():
 
     # Save the image locally
     cv2.imwrite('scanned_document.jpg', image)
-    # Open the image file
-    image = Image.open("scanned_document.jpg")
-    # Convert the image to black and white
-    image = image.convert('L')
+    # # Open the image file
+    # image = Image.open("scanned_document.jpg")
+    # # Convert the image to black and white
+    # image = image.convert('L')
 
-    # Save the black and white image
-    image.save("scanned_document.jpg")
+    # # Save the black and white image
+    # image.save("scanned_document.jpg")
     camera.release()
 
     return render_template('index.html')
