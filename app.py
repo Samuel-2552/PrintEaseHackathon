@@ -10,26 +10,16 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-@app.route('/capture', methods=['POST'])
-def capture():
-    # Get the image from the camera
-    # camera = cv2.VideoCapture(0)
-    # ret, image = camera.read()
-    image = request.files['image']
-    img = np.array(image)
-    # print(img)
-    # Save the image locally
-    cv2.imwrite('scanned_document.jpg', image)
-    # # Open the image file
-    # image = Image.open("scanned_document.jpg")
-    # # Convert the image to black and white
-    # image = image.convert('L')
+@app.route('/upload', methods=['POST'])
+def upload():
+    if 'image' in request.files:
+        image_file = request.files['image']
+        # Save the image file to disk
+        image_file.save('image.jpg')
+        return 'Image uploaded successfully'
+    else:
+        return 'No image uploaded'
 
-    # # Save the black and white image
-    # image.save("scanned_document.jpg")
-    # camera.release()
-
-    return render_template('index.html')
 
 
 if __name__ == '__main__':

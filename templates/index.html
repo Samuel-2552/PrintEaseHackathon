@@ -25,10 +25,9 @@
           const formData = new FormData();
           formData.append('image', blob, 'scanned_document.jpg');
 
-          fetch('/capture', {
-            method: 'POST',
-            body: formData
-          });
+          const xhr = new XMLHttpRequest();
+          xhr.open('POST', '/upload');
+          xhr.send(formData);
         });
       });
     </script>
