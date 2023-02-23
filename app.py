@@ -12,8 +12,9 @@ def index():
 @app.route('/capture', methods=['POST'])
 def capture():
     # Get the image from the camera
-    camera = cv2.VideoCapture(0)
-    ret, image = camera.read()
+    # camera = cv2.VideoCapture(0)
+    # ret, image = camera.read()
+    image = request.form
 
     # Save the image locally
     cv2.imwrite('scanned_document.jpg', image)
