@@ -2,6 +2,7 @@ from flask import Flask, render_template, request
 import cv2
 import os
 from PIL import Image
+import numpy as np
 
 app = Flask(__name__)
 
@@ -14,8 +15,9 @@ def capture():
     # Get the image from the camera
     # camera = cv2.VideoCapture(0)
     # ret, image = camera.read()
-    image = request.form
-
+    image = request.files['image']
+    img = np.array(image)
+    # print(img)
     # Save the image locally
     cv2.imwrite('scanned_document.jpg', image)
     # # Open the image file
@@ -25,7 +27,7 @@ def capture():
 
     # # Save the black and white image
     # image.save("scanned_document.jpg")
-    camera.release()
+    # camera.release()
 
     return render_template('index.html')
 
