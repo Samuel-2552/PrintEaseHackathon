@@ -354,5 +354,26 @@ def verify():
             return "Try Again"
     return render_template('verification.html',fav_icon=fav_icon, load_img=load_img,user=user,wallet=wallet_money[0])
 
+@app.route('/scandocs', methods=['POST', 'GET'])
+def scandocs():
+    if 'username' in session:
+        logout=1
+        email=session['username']
+        connection = connect_db()
+        cursor = connection.cursor()
+        cursor.execute("SELECT * FROM user WHERE email=?", (email,))
+        user = cursor.fetchone()
+        useremail = user[3]
+        print(useremail)
+        user=user[1][0]
+        cursor.execute("SELECT wallet FROM user WHERE email=?", (email,))
+        wallet_money=cursor.fetchone()
+    else:
+        wallet_money=[0]
+        logout=0
+        user="-1"
+        return redirect(url_for('dashboard'))
+    return render_template('docscan.html',fav_icon=fav_icon, load_img=load_img,user=user,wallet=wallet_money[0])
+
 if __name__ == '__main__':
     app.run(debug=True,host="0.0.0.0")

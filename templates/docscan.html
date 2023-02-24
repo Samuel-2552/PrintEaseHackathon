@@ -79,6 +79,55 @@
           </div>
         </div>
       </nav>
+      <h1>Scan Documents</h1>
+    <video id="video" width="640" height="480" autoplay></video>
+    <button id="capture">Capture</button>
+    <canvas id="canvas" width="640" height="480"></canvas>
+    </div>
+    <script>
+      const video = document.getElementById('video');
+      const canvas = document.getElementById('canvas');
+      const captureButton = document.getElementById('capture');
+      const constraints = { video: true };
+
+      navigator.mediaDevices.getUserMedia(constraints)
+        .then((stream) => {
+          video.srcObject = stream;
+        });
+
+      captureButton.addEventListener('click', () => {
+        canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+        canvas.toBlob((blob) => {
+          const formData = new FormData();
+          formData.append('image', blob, 'scanned_document.jpg');
+
+          const xhr = new XMLHttpRequest();
+          xhr.open('POST', '/upload');
+          xhr.send(formData);
+        });
+      });
+    </script>
+    <script>
+        setTimeout(function () {
+            document.getElementById("loading").style.display = "none";
+            document.querySelector(".content").style.display = "block";
+            var typed = new Typed('#typed-text', {
+            strings: ["Welcome to the Streamlined process for Printing.","Helps customers and local shops to provide seamless printing"],
+            typeSpeed: 50,
+            backSpeed: 50,
+            loop: true
+  }); 
+        }, 3000);
+        if("{{user}}"=="-1"){
+          // console.log("hi p")
+          document.getElementById("dropdown").style.display="none";
+        }
+        else{
+          document.getElementById("dropdown").style.display="block";
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
     
 </body>
 </html>
