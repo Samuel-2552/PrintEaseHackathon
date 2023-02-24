@@ -9,11 +9,13 @@ import math
 import random
 import smtplib
 import imghdr
+from PIL import Image
+from PIL import ImageOps
 
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
-ip="http://192.168.1.10:5000"
+ip="http://192.168.15.59:5000"
 counter=0
 otp=-1
 qr_codes={}
@@ -146,8 +148,16 @@ def upload_file():
     global page
     global counter
     file = request.files["file"]
+
+    # Specify the directory name to create
+    directory = "files/"+session['username']+'/'
+
+    # Create the directory if it doesn't already exist
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+
     if file and file.content_type == "application/pdf":
-        filename = "files/"+str(counter)+".pdf"
+        filename = directory+str(counter)+".pdf"
         counter+=1
         file.save(filename)
         print(filename) 
@@ -157,9 +167,20 @@ def upload_file():
         print("pages = ", page)
         return "File uploaded successfully!"
     if imghdr.what(file) is not None:
-        filename = "files/"+str(counter)+".jpg"
-        counter+=1
+        filename = directory+str(counter)+".jpg"
         file.save(filename)
+        counter+=1
+        # Load the image
+        image = Image.open(filename)
+
+        # Convert the image to grayscale
+        grayscale_image = image.convert('L')
+
+        # Convert the inverted image to a color document
+        color_document = ImageOps.colorize(grayscale_image, (0, 0, 0), (255, 255, 255))
+
+        # Save the color document
+        color_document.save(filename)
         print(filename)   
         page=1
         return "File uploaded successfully!"
