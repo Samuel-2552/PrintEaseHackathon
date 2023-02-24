@@ -12,9 +12,6 @@
   <script src="static\script.js"></script>
   <title>PrintEase</title>
   <script>
-    function scanhide(){
-      document.getElementById("scandoc").hidden=true;
-    }
     function a1(){
       document.getElementById("ques1").hidden = false;
       document.getElementById("ques2").hidden = true;
@@ -130,10 +127,7 @@
                             <div id="indicatorContainerWrap">
                               <div class="rad-prg" id="indicatorContainer"></div>
                               <div class="rad-cntnt">Click here to<br> select a file.</div>
-                              <input type="file" id="prgFileSelector" onclick="scanhide()" accept="pdf/*" />
-                            </div>
-                            <div class="form-group mt-2">
-                              <button type="button" onclick="location.href='/scandoc'" class="btn mt-4" id="scandoc" >Scan and Upload</button>
+                              <input type="file" id="prgFileSelector" onclick="scanhide()" accept="image/*, application/pdf" capture />
                             </div>
                             <div class="form-group mt-2">
                               <div id="feedback" class="indict">

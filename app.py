@@ -8,11 +8,12 @@ import uuid
 import math
 import random
 import smtplib
+import imghdr
 
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
-ip="http://192.168.15.59:5000"
+ip="http://192.168.1.10:5000"
 
 qr_codes={}
 navbar_name=['GET STARTED','ORDER NOW']
@@ -141,14 +142,21 @@ def forgot():
 @app.route("/upload-file", methods=["POST"])
 def upload_file():
     global filepath
+    global page
     file = request.files["file"]
     if file and file.content_type == "application/pdf":
         file.save(os.path.join("files", file.filename))
         filepath=os.path.join("files", file.filename)
         pages=get_num_pages(filepath)
-        global page
+        
         page=pages
         print("pages = ", page)
+        return "File uploaded successfully!"
+    if imghdr.what(file) is not None:
+        file.save(os.path.join("files", file.filename))
+        filepath=os.path.join("files", file.filename)
+        
+        page=1
         return "File uploaded successfully!"
     return "It is not a pdf file"
 
@@ -354,33 +362,6 @@ def verify():
             return "Try Again"
     return render_template('verification.html',fav_icon=fav_icon, load_img=load_img,user=user,wallet=wallet_money[0])
 
-@app.route('/scandoc', methods=['POST', 'GET'])
-def scandocs():
-    if 'username' in session:
-        logout=1
-        email=session['username']
-        connection = connect_db()
-        cursor = connection.cursor()
-        cursor.execute("SELECT * FROM user WHERE email=?", (email,))
-        user = cursor.fetchone()
-        useremail = user[3]
-        print(useremail)
-        user=user[1][0]
-        cursor.execute("SELECT wallet FROM user WHERE email=?", (email,))
-        wallet_money=cursor.fetchone()
-    else:
-        wallet_money=[0]
-        logout=0
-        user="-1"
-        return redirect(url_for('dashboard'))
-    # if 'image' in request.files:
-    #     image_file = request.files['image']
-    #     # Save the image file to disk
-    #     image_file.save('image.jpg')
-    # else:
-    #     return 'Try Again'
-    
-    return render_template('docscan.html',fav_icon=fav_icon, load_img=load_img,user=user,wallet=wallet_money[0])
 
 if __name__ == '__main__':
     app.run(debug=True,host="0.0.0.0")
