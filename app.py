@@ -14,7 +14,8 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
 ip="http://192.168.1.10:5000"
-
+counter=0
+otp=-1
 qr_codes={}
 navbar_name=['GET STARTED','ORDER NOW']
 today = datetime.date.today()
@@ -143,19 +144,23 @@ def forgot():
 def upload_file():
     global filepath
     global page
+    global counter
     file = request.files["file"]
     if file and file.content_type == "application/pdf":
-        file.save(os.path.join("files", file.filename))
-        filepath=os.path.join("files", file.filename)
-        pages=get_num_pages(filepath)
+        filename = "files/"+str(counter)+".pdf"
+        counter+=1
+        file.save(filename)
+        print(filename) 
+        pages=get_num_pages(filename)
         
         page=pages
         print("pages = ", page)
         return "File uploaded successfully!"
     if imghdr.what(file) is not None:
-        file.save(os.path.join("files", file.filename))
-        filepath=os.path.join("files", file.filename)
-        
+        filename = "files/"+str(counter)+".jpg"
+        counter+=1
+        file.save(filename)
+        print(filename)   
         page=1
         return "File uploaded successfully!"
     return "It is not a pdf file"
@@ -178,6 +183,8 @@ def dashboard():
     # Close the connection
     conn.close()
     name=navbar_name[1]
+
+    image_url=url_for('static', filename='image.jpg')
     
     
     
@@ -312,9 +319,6 @@ def logout():
     session.pop('username', None)
     return redirect('/')
 
-
-counter=0
-otp=-1
 
 @app.route('/verification', methods=['POST', 'GET'])
 def verify():
