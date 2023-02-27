@@ -449,7 +449,7 @@ def verification():
         ver= ver+" is your OTP"
         if ver==otp:
             EV=1
-            wallet=20
+            wallet=wallet_money+20
             cursor.execute('UPDATE user SET EV=?, wallet=? WHERE email=?', (EV,wallet, email))
             connection.commit()
             cursor.close()

@@ -26,20 +26,23 @@
     function checkout() {
       document.getElementById("bill").hidden = true;
       document.getElementById("scan").hidden = false;
-    }
-  </script>
-  <script>
-    if (window.performance && window.performance.navigation.type === window.performance.navigation.TYPE_BACK_FORWARD) {
-      window.location = "{{ip}}";
-    }
+      var button = document.getElementById("myButton");
     if ("{{wallet}}" < "{{total}}")
     {
-      document.getElementById('wallet').disabled=true;
+      button.disabled = true;
     }
     else
     {
-      document.getElementById('wallet').disabled=false;
+      button.disabled =false;
     }
+    }
+  </script>
+  <script>
+    
+    if (window.performance && window.performance.navigation.type === window.performance.navigation.TYPE_BACK_FORWARD) {
+      window.location = "{{ip}}";
+    }
+    
   </script>
 </head>
 
