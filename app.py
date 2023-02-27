@@ -28,7 +28,7 @@ tod_date = today.strftime("%d-%m-%Y")
 filepath=''
 order_no=1
 page=0
-
+total=0
 images=os.path.join('static','images')
 
 app = Flask(__name__)
@@ -287,6 +287,7 @@ def dashboard():
 
 @app.route('/payment',methods=['GET', 'POST'])
 def payment():
+    global total
     if 'username' in session:
         logout=1
         email=session['username']
@@ -351,11 +352,25 @@ def payment():
 
 @app.route("/scan/<qr_code_id>")
 def scan_qr_code(qr_code_id):
+    global total
+    if 'username' in session:
+        email=session['username']
+        connection = connect_db()
+        cursor = connection.cursor()
+        cursor.execute("SELECT * FROM user WHERE email=?", (email,))
+        user = cursor.fetchone()
+        user=user[1][0]
+        cursor.execute("SELECT wallet FROM user WHERE email=?", (email,))
+        wallet_money=cursor.fetchone()
     # Check if the scanned QR code's identifier exists in the qr_codes dictionary
     if qr_codes.get(qr_code_id):
         # remove the scanned qr code from the dictionary
         qr_codes.pop(qr_code_id)
-        data=ip+"/completed.html"
+        balance=wallet_money[0]-total
+        print(balance)
+        cursor.execute('UPDATE user SET wallet=? WHERE email=?', (balance, email))
+        connection.commit()
+        cursor.close()
         return "Payment Completed"#render_template("completed.html", url=data)
     else:
         return "Already Scanned!"#render_template("scanned.html")

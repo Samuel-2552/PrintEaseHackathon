@@ -32,6 +32,14 @@
     if (window.performance && window.performance.navigation.type === window.performance.navigation.TYPE_BACK_FORWARD) {
       window.location = "{{ip}}";
     }
+    if ("{{wallet}}" < "{{total}}")
+    {
+      document.getElementById('wallet').disabled=true;
+    }
+    else
+    {
+      document.getElementById('wallet').disabled=false;
+    }
   </script>
 </head>
 
@@ -109,7 +117,7 @@
                           <h1><i class="fa-brands fa-google-pay fa-2xl"></i> ₹ {{total}}</h1><br>
                           <a href="/scan/{{qr_code_id}}"><img src="{{qr_img}}" class="image" alt="QR Code"></a>
                           <br>
-                          <button onclick="wallet()" class="btn mt-4" id="wallet">Pay using Wallet</button>
+                          <button onclick="location.href='/scan/{{qr_code_id}}'" class="btn mt-4" id="wallet">Pay using Wallet</button>
                           </label>
                       </div>
                     </div>
