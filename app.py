@@ -17,6 +17,7 @@ from email.mime.multipart import MIMEMultipart
 
 ip="http://192.168.15.59:5000"
 counter=0
+file_counter=0
 otp=-1
 qr_codes={}
 navbar_name=['GET STARTED','ORDER NOW']
@@ -146,7 +147,7 @@ def forgot():
 def upload_file():
     global filepath
     global page
-    global counter
+    global file_counter
     file = request.files["file"]
 
     # Specify the directory name to create
@@ -157,8 +158,8 @@ def upload_file():
         os.makedirs(directory)
 
     if file and file.content_type == "application/pdf":
-        filename = directory+str(counter)+".pdf"
-        counter+=1
+        filename = directory+str(file_counter)+".pdf"
+        file_counter+=1
         file.save(filename)
         print(filename) 
         pages=get_num_pages(filename)
@@ -167,9 +168,9 @@ def upload_file():
         print("pages = ", page)
         return "File uploaded successfully!"
     if imghdr.what(file) is not None:
-        filename = directory+str(counter)+".jpg"
+        filename = directory+str(file_counter)+".jpg"
         file.save(filename)
-        counter+=1
+        file_counter+=1
         # Load the image
         image = Image.open(filename)
 
