@@ -6,17 +6,18 @@ import PyPDF2
 import qrcode
 import uuid
 import math
-import random
-import smtplib
 import imghdr
 from PIL import Image
 from PIL import ImageOps
 import hashlib
+import random
+import smtplib
+import ssl
 
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
-ip="http://192.168.15.59:5000"
+ip="http://192.168.1.14:5000"
 counter=0
 file_counter=0
 otp=-1
@@ -57,6 +58,63 @@ def get_num_pages(file_path):
     pdf_reader = PyPDF2.PdfReader(pdf_file)
     return len(pdf_reader.pages)
 
+def verify():
+    global otp
+    import sqlite3
+
+    # Connect to the database
+    conn_cred = sqlite3.connect('cred.db')
+
+    # Create a cursor
+    cursor_cred = conn_cred.cursor()
+
+    # Execute an SQL command to retrieve the first row from the user table
+    cursor_cred.execute('SELECT * FROM user LIMIT 1')
+
+    # Fetch the first row and print it
+    row = cursor_cred.fetchone()
+    email_from=row[1]
+    decrypted=row[2]
+
+    # Close the connection
+    conn_cred.close()
+
+    if 'username' in session:
+        email=session['username']
+        connection = connect_db()
+        cursor = connection.cursor()
+        cursor.execute("SELECT * FROM user WHERE email=?", (email,))
+        user = cursor.fetchone()
+        username = user[1]
+        verify=user[5]
+        if verify==0:
+            try:
+                otp = OTP() + " is your OTP"
+                subject = f"Welcome to PrintEase {username}!"
+                message = f"{otp}.\nPlease do not share it with anyone."
+                # Create context
+                simple_email_context = ssl.create_default_context()
+                try:
+                    # Connect to the server
+                    print("Connecting to server...")
+                    TIE_server = smtplib.SMTP(smtp_server, smtp_port)
+                    TIE_server.starttls(context=simple_email_context)
+                    TIE_server.login(email_from, decrypted)
+                    print("Connected to server :-)")
+
+                    # Send the actual email
+                    print()
+                    print(f"Sending email to - {email}")
+                    TIE_server.sendmail(email_from, email, f"Subject: {subject}\n\n{message}")
+                    print(f"Email successfully sent to - {email}")
+
+                # If there's an error, print it out
+                except Exception as e:
+                    return e
+            except Exception as e:
+                return e
+
+
 @app.route('/')
 def landing():
     if 'username' in session:
@@ -66,6 +124,7 @@ def landing():
         cursor = connection.cursor()
         cursor.execute("SELECT * FROM user WHERE email=?", (email,))
         user = cursor.fetchone()
+        print(user)
         user=user[1][0]
         name=navbar_name[1]
         cursor.execute("SELECT wallet FROM user WHERE email=?", (email,))
@@ -129,14 +188,15 @@ def login():
             user = cursor.fetchone()
             print(user)
         except:
-            return "Invalid username or password"
+            return "E-mail already Exists"
         if user:
             # Hash the entered password and compare with the stored hash
             password_hash = hashlib.sha256(password.encode()).hexdigest()
             if password_hash == user[2]:
                 session['username'] = useremail
+                if useremail == 'printease2023@gmail.com':
+                    return redirect('/admin')
                 if user[5]==0:
-                    print("going")
                     return redirect('/verification')
                 order_no+=1
                 return redirect('/dashboard')
@@ -213,6 +273,7 @@ def dashboard():
     cursor.execute("SELECT wallet FROM user WHERE email=?", (useremail,))
     wallet_money=cursor.fetchone()
     # Close the connection
+    print(wallet_money)
     conn.close()
     name=navbar_name[1]
 
@@ -345,60 +406,42 @@ def team():
     return render_template('team.html', fav_icon=fav_icon, load_img=load_img, sam=sam, sandy=sandy, vejay=vejay, meena=meena,logout=logout,user=user.upper(),ip=ip,name=name,wallet=wallet_money[0])
 
 
-
 @app.route('/logout')
 def logout():
     session.pop('username', None)
     return redirect('/')
 
+smtp_port = 587                 # Standard secure SMTP port
+smtp_server = "smtp.gmail.com"  # Google SMTP Server
+
 
 @app.route('/verification', methods=['POST', 'GET'])
-def verify():
+def verification():
     global otp
     if 'username' in session:
-        logout=1
         email=session['username']
         connection = connect_db()
         cursor = connection.cursor()
         cursor.execute("SELECT * FROM user WHERE email=?", (email,))
         user = cursor.fetchone()
         useremail = user[3]
-        verify=user[5]
+        wallet_money=user[4]
         print(useremail)
         user=user[1][0]
-        cursor.execute("SELECT wallet FROM user WHERE email=?", (email,))
-        wallet_money=cursor.fetchone()
-        if verify==0:
-            try:
-                otp = OTP() + " is your OTP"
-                msg = MIMEMultipart()
-                msg['From'] = 'PrintEase Verification'
-                msg['To'] = useremail
-                msg['Subject'] = 'PrintEase OTP Verification'
-                msg.attach(MIMEText(otp, 'plain'))
-                s = smtplib.SMTP('smtp.gmail.com', 587)
-                s.starttls()
-                s.login("201501503@rajalakshmi.edu.in", "201501503@rec")
-                s.sendmail(msg['From'], msg['To'], msg.as_string())
-                user = cursor.fetchone()
-                user[5]=1
-            except:
-                return "<h1><a href='/dashboard'>Try Agin Later</a></h1>"
-        counter+=1
-    else:
-        wallet_money=[0]
-        logout=0
-        user="-1"
-        return redirect(url_for('dashboard'))
     if request.method == 'POST':
         ver=request.form['logpass']
         print(ver,otp)
         ver= ver+" is your OTP"
         if ver==otp:
+            EV=1
+            wallet=20
+            cursor.execute('UPDATE user SET EV=?, wallet=? WHERE email=?', (EV,wallet, email))
+            connection.commit()
+            cursor.close()
             return redirect('/dashboard')
         else:
-            return "Try Again"
-    return render_template('verification.html',fav_icon=fav_icon, load_img=load_img,user=user,wallet=wallet_money[0])
+            return "<h1><a href='/dashboard'>Try Again Later</a></h1>"
+    return render_template('verification.html',fav_icon=fav_icon, load_img=load_img,user=user,wallet=wallet_money,ok=verify())
 
 
 @app.route('/admin')
