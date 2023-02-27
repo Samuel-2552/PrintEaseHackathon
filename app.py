@@ -11,6 +11,7 @@ import smtplib
 import imghdr
 from PIL import Image
 from PIL import ImageOps
+import hashlib
 
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -82,6 +83,8 @@ def aboutus():
     #return redirect(url_for('dashboard'))
     return redirect("/#aboutus")   
 
+
+# Signup function
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     if 'username' in session:
@@ -99,7 +102,9 @@ def signup():
         if user:
             return "User already exists"
         try:
-            cursor.execute("INSERT INTO user (username, password, email) VALUES (?, ?, ?)", (username, password, email))
+            # Hash the password
+            password_hash = hashlib.sha256(password.encode()).hexdigest()
+            cursor.execute("INSERT INTO user (username, password, email) VALUES (?, ?, ?)", (username, password_hash, email))
             connection.commit()
             connection.close()
         except:
@@ -108,6 +113,7 @@ def signup():
         return redirect('/login')
     return render_template('index.html', fav_icon=fav_icon, load_img=load_img,ip=ip)
 
+# Login function
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     global order_no
@@ -119,20 +125,24 @@ def login():
             password = request.form['logpass']
             connection = connect_db()
             cursor = connection.cursor()
-            cursor.execute("SELECT * FROM user WHERE email=? AND password=?", (useremail, password))
+            cursor.execute("SELECT * FROM user WHERE email=?", (useremail,))
             user = cursor.fetchone()
-            print(user[5])
+            print(user)
         except:
             return "Invalid username or password"
         if user:
-            session['username'] = useremail
-            if user[5]==0:
-                print("going")
-                return redirect('/verification')
-            order_no+=1
-            return redirect('/dashboard')
+            # Hash the entered password and compare with the stored hash
+            password_hash = hashlib.sha256(password.encode()).hexdigest()
+            if password_hash == user[2]:
+                session['username'] = useremail
+                if user[5]==0:
+                    print("going")
+                    return redirect('/verification')
+                order_no+=1
+                return redirect('/dashboard')
         return "Invalid username or password"
     return render_template('index.html', fav_icon=fav_icon, load_img=load_img,ip=ip)
+
 
 @app.route('/forgot', methods=['GET', 'POST'])
 def forgot():
@@ -344,7 +354,6 @@ def logout():
 
 @app.route('/verification', methods=['POST', 'GET'])
 def verify():
-    global counter
     global otp
     if 'username' in session:
         logout=1
@@ -354,11 +363,12 @@ def verify():
         cursor.execute("SELECT * FROM user WHERE email=?", (email,))
         user = cursor.fetchone()
         useremail = user[3]
+        verify=user[5]
         print(useremail)
         user=user[1][0]
         cursor.execute("SELECT wallet FROM user WHERE email=?", (email,))
         wallet_money=cursor.fetchone()
-        if counter==0:
+        if verify==0:
             try:
                 otp = OTP() + " is your OTP"
                 msg = MIMEMultipart()
@@ -368,8 +378,10 @@ def verify():
                 msg.attach(MIMEText(otp, 'plain'))
                 s = smtplib.SMTP('smtp.gmail.com', 587)
                 s.starttls()
-                s.login("201501503@rajalakshmi.edu.in", "#")
+                s.login("201501503@rajalakshmi.edu.in", "201501503@rec")
                 s.sendmail(msg['From'], msg['To'], msg.as_string())
+                user = cursor.fetchone()
+                user[5]=1
             except:
                 return "<h1><a href='/dashboard'>Try Agin Later</a></h1>"
         counter+=1
