@@ -210,8 +210,14 @@ def forgot():
         return redirect(url_for('dashboard'))
     if request.method == 'POST':
         useremail = request.form['logemail']
-        return "Email Sent"
+        return redirect(url_for('forgotverification'))
     return render_template('forgot.html', fav_icon=fav_icon, load_img=load_img, ip=ip)
+
+@app.route('/forgotverification', methods=['GET', 'POST'])
+def forgotverification():
+    if 'username' in session:
+        return redirect(url_for('dashboard'))
+    return render_template('forgotverification.html', fav_icon=fav_icon, load_img=load_img, ip=ip)
 
 @app.route("/upload-file", methods=["POST"])
 def upload_file():
