@@ -210,7 +210,18 @@ def forgot():
         return redirect(url_for('dashboard'))
     if request.method == 'POST':
         useremail = request.form['logemail']
-        return redirect(url_for('forgotverification'))
+        if request.method == 'POST':
+            useremail = request.form['logemail']
+        #print(useremail)
+            connection = connect_db()
+            cursor = connection.cursor()
+            cursor.execute("SELECT email FROM user WHERE email=?", (useremail,))
+            user = cursor.fetchone()
+            if user:
+                return redirect(url_for('forgotverification'))
+            else:
+                print("Noo")
+                return render_template('index.html', fav_icon=fav_icon, load_img=load_img, ip=ip)
     return render_template('forgot.html', fav_icon=fav_icon, load_img=load_img, ip=ip)
 
 @app.route('/forgotverification', methods=['GET', 'POST'])
