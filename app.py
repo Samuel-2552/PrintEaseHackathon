@@ -220,8 +220,8 @@ def forgot():
             if user:
                 return redirect(url_for('forgotverification'))
             else:
-                print("Noo")
-                return render_template('index.html', fav_icon=fav_icon, load_img=load_img, ip=ip)
+                error="usernotfound"
+                return render_template('forgot.html', fav_icon=fav_icon, load_img=load_img, ip=ip,error=error)
     return render_template('forgot.html', fav_icon=fav_icon, load_img=load_img, ip=ip)
 
 @app.route('/forgotverification', methods=['GET', 'POST'])
