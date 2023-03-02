@@ -217,7 +217,16 @@ def forgot():
 def forgotverification():
     if 'username' in session:
         return redirect(url_for('dashboard'))
+    if request.method == 'POST':
+        return redirect(url_for('resetpassword'))
     return render_template('forgotverification.html', fav_icon=fav_icon, load_img=load_img, ip=ip)
+
+@app.route('/resetpassword', methods=['GET', 'POST'])
+def resetpassword():
+    if 'username' in session:
+        return redirect(url_for('dashboard'))
+    return render_template('resetpassword.html', fav_icon=fav_icon, load_img=load_img, ip=ip)
+
 
 @app.route("/upload-file", methods=["POST"])
 def upload_file():
