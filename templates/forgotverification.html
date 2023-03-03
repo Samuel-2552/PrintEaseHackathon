@@ -30,6 +30,21 @@
     function alertfunc() {
   alert("Verify your email first!..");
 }
+
+  // Reset otp timer
+  var timer = 14;
+  var intervalId = setInterval(function(){
+    timer--;
+    // Update the timer element with the current time
+    document.getElementById("timer").innerHTML = timer;
+    if(timer === 0){
+        // Stop the interval when the timer reaches 0
+        clearInterval(intervalId);
+        document.getElementById("resendotp").hidden=false;
+    }
+    
+  }, 1000);
+
   </script>
 </head>
 
@@ -78,13 +93,17 @@
                         <h6 class="mb-4 pb-3">Enter the one time password sent to your registered E-mail
                         </h6>
                         <form action="/forgot" method="post">
-                          <div class="form-group mt-2">
+                          <div class="form-group mt-1">
                             <input type="password" name="logemail" class="form-style" placeholder="OTP" id="logemail"
                               autocomplete="off" required>
                               <i class="input-icon bi bi-key"></i>
                           </div>
                           <input class="btn mt-4" type="submit" value="Verify OTP">
-                          
+                          <br>
+                          <br>
+                          <p >Didn't receive an OTP ? Receive in <span id="timer"></span>
+                        <a href='https://www.hotstar.com/in' id="resendotp" hidden>Resend OTP</button></a>
+                          </p>
                       </div>
                     </div>
                     </form>
