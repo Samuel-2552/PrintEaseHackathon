@@ -295,21 +295,23 @@ def resetpassword():
         return redirect(url_for('dashboard'))
     if request.method == 'POST':
         new=request.form['newpass']
-        confirm=request.form['confirmpasss']
+        confirm=request.form['confirmpass']
         if new==confirm:
             try:
                 newpass=hashlib.sha256(new.encode()).hexdigest()
                 connection = connect_db()
                 cursor = connection.cursor()
 
-                cursor.execute("update user set password=? where email=?", (newpass,useremailf,))
+                cursor.execute("UPDATE user SET (password=?) WHERE (email=?)", (newpass,useremailf,))
         
                 connection.commit()
                 connection.close()
+                return redirect('/login')
             except:
                   return "Database error"
         else:
-            
+            matching_check="New password & confirm password doesn't match"
+            return render_template('resetpassword.html', fav_icon=fav_icon, load_img=load_img, ip=ip,checking=matching_check)
 
     return render_template('resetpassword.html', fav_icon=fav_icon, load_img=load_img, ip=ip)
 
