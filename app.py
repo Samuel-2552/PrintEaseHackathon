@@ -293,6 +293,24 @@ def forgotverification():
 def resetpassword():
     if 'username' in session:
         return redirect(url_for('dashboard'))
+    if request.method == 'POST':
+        new=request.form['newpass']
+        confirm=request.form['confirmpasss']
+        if new==confirm:
+            try:
+                newpass=hashlib.sha256(new.encode()).hexdigest()
+                connection = connect_db()
+                cursor = connection.cursor()
+
+                cursor.execute("update user set password=? where email=?", (newpass,useremailf,))
+        
+                connection.commit()
+                connection.close()
+            except:
+                  return "Database error"
+        else:
+            
+
     return render_template('resetpassword.html', fav_icon=fav_icon, load_img=load_img, ip=ip)
 
 
