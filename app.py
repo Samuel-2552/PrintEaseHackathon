@@ -298,11 +298,12 @@ def resetpassword():
         confirm=request.form['confirmpass']
         if new==confirm:
             try:
-                newpass=hashlib.sha256(new.encode()).hexdigest()
+                
                 connection = connect_db()
                 cursor = connection.cursor()
-
-                cursor.execute("UPDATE user SET (password=?) WHERE (email=?)", (newpass,useremailf,))
+                #newpass=hashlib.sha256(new.encode()).hexdigest()
+                newpass=321
+                cursor.execute("UPDATE user SET (otp=?) WHERE (email=?)", (newpass,useremailf,))
         
                 connection.commit()
                 connection.close()
