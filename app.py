@@ -42,6 +42,9 @@ vejay = os.path.join(app.config['icons'], 'vejayy.jpg')
 meena =  os.path.join(app.config['icons'], 'meena1.jpg')
 qr_img=os.path.join(app.config['icons'], 'qr.png')
 
+useremailf=""
+rv=0
+
 def OTP():
     digits = "0123456789"
     OTP = ""
@@ -206,36 +209,111 @@ def login():
 
 @app.route('/forgot', methods=['GET', 'POST'])
 def forgot():
+    global rv
     if 'username' in session:
         return redirect(url_for('dashboard'))
     if request.method == 'POST':
-        useremail = request.form['logemail']
-        if request.method == 'POST':
-            useremail = request.form['logemail']
+        useremailf = request.form['logemail']
         #print(useremail)
-            connection = connect_db()
-            cursor = connection.cursor()
-            cursor.execute("SELECT email FROM user WHERE email=?", (useremail,))
-            user = cursor.fetchone()
-            if user:
-                return redirect(url_for('forgotverification'))
-            else:
+        connection = connect_db()
+        cursor = connection.cursor()
+        cursor.execute("SELECT email FROM user WHERE email=?", (useremailf,))
+        user = cursor.fetchone()
+        if user:
+            rv=1
+            global otp    
+
+            # Connect to the database
+            conn_cred = sqlite3.connect('cred.db')
+
+            # Create a cursor
+            cursor_cred = conn_cred.cursor()
+
+            # Execute an SQL command to retrieve the first row from the user table
+            cursor_cred.execute('SELECT * FROM user LIMIT 1')
+
+            # Fetch the first row and print it
+            row = cursor_cred.fetchone()
+            email_from=row[1]
+            decrypted=row[2]
+
+            # Close the connection
+            conn_cred.close()
+
+
+            if(rv==1):        
+                try:
+                    otp = OTP() + " is your OTP"
+                    subject = f"RESET YOUR PASSWORD!"
+                    message = f"{otp}.\nUse this one time password for resetting your password.\n Please do not share it with anyone."
+                    # Create context
+                    simple_email_context = ssl.create_default_context()
+                    try:
+                        # Connect to the server
+                        print("Connecting to server...")
+                        TIE_server = smtplib.SMTP(smtp_server, smtp_port)
+                        TIE_server.starttls(context=simple_email_context)
+                        TIE_server.login(email_from, decrypted)
+                        print("Connected to server :-)")
+
+                        # Send the actual email
+                        print()
+                        print(f"Sending email to - {useremailf}")
+                        TIE_server.sendmail(email_from, useremailf, f"Subject: {subject}\n\n{message}")
+                        print(f"Email successfully sent to - {useremailf}")
+
+                    # If there's an error, print it out
+                    except Exception as e:
+                        return e
+                except Exception as e:
+                    return e
+            return redirect(url_for('forgotverification'))
+        else:
                 error="usernotfound"
                 return render_template('forgot.html', fav_icon=fav_icon, load_img=load_img, ip=ip,error=error)
     return render_template('forgot.html', fav_icon=fav_icon, load_img=load_img, ip=ip)
 
 @app.route('/forgotverification', methods=['GET', 'POST'])
 def forgotverification():
+    global useremailf
+    print(useremailf)
     if 'username' in session:
         return redirect(url_for('dashboard'))
     if request.method == 'POST':
-        return redirect(url_for('resetpassword'))
+        ver=request.form['logpass']
+        print(ver,otp)
+        ver= ver+" is your OTP"
+        if ver==otp:
+            return redirect('/resetpassword')
+        else:
+            return "<h1><a href='/dashboard'>Incorrect OTP!</a></h1>"
     return render_template('forgotverification.html', fav_icon=fav_icon, load_img=load_img, ip=ip)
 
 @app.route('/resetpassword', methods=['GET', 'POST'])
 def resetpassword():
     if 'username' in session:
         return redirect(url_for('dashboard'))
+    if request.method == 'POST':
+        new=request.form['newpass']
+        confirm=request.form['confirmpass']
+        if new==confirm:
+            try:
+                
+                connection = connect_db()
+                cursor = connection.cursor()
+                #newpass=hashlib.sha256(new.encode()).hexdigest()
+                newpass=321
+                cursor.execute("UPDATE user SET (otp=?) WHERE (email=?)", (newpass,useremailf,))
+        
+                connection.commit()
+                connection.close()
+                return redirect('/login')
+            except:
+                  return "Database error"
+        else:
+            matching_check="New password & confirm password doesn't match"
+            return render_template('resetpassword.html', fav_icon=fav_icon, load_img=load_img, ip=ip,checking=matching_check)
+
     return render_template('resetpassword.html', fav_icon=fav_icon, load_img=load_img, ip=ip)
 
 
