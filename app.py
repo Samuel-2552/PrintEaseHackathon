@@ -44,6 +44,7 @@ qr_img=os.path.join(app.config['icons'], 'qr.png')
 
 useremailf=""
 rv=0
+ll=0
 
 def OTP():
     digits = "0123456789"
@@ -179,6 +180,7 @@ def signup():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     global order_no
+    global ll
     if 'username' in session:
         return redirect(url_for('dashboard'))
     if request.method == 'POST':
@@ -193,6 +195,7 @@ def login():
         except:
             return "E-mail already Exists"
         if user:
+            ll=1
             # Hash the entered password and compare with the stored hash
             password_hash = hashlib.sha256(password.encode()).hexdigest()
             if password_hash == user[2]:
@@ -203,7 +206,9 @@ def login():
                     return redirect('/verification')
                 order_no+=1
                 return redirect('/dashboard')
-        return "Invalid username or password"
+        else:
+            err_message="Invalid mail or password!!"
+            return render_template('index.html',mess=err_message, fav_icon=fav_icon, load_img=load_img,ip=ip)
     return render_template('index.html', fav_icon=fav_icon, load_img=load_img,ip=ip)
 
 
@@ -312,7 +317,8 @@ def resetpassword():
                   return "Database error"
         else:
             matching_check="New password & confirm password doesn't match"
-            return render_template('resetpassword.html', fav_icon=fav_icon, load_img=load_img, ip=ip,checking=matching_check)
+            check=True
+            return render_template('resetpassword.html', fav_icon=fav_icon, load_img=load_img, ip=ip,checking=matching_check,flag=check)
 
     return render_template('resetpassword.html', fav_icon=fav_icon, load_img=load_img, ip=ip)
 
