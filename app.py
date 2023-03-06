@@ -571,12 +571,21 @@ def verification():
 
 @app.route('/admin')
 def index():
-    conn = sqlite3.connect('users.db')
-    cursor = conn.cursor()
-    cursor.execute('SELECT * FROM user')
-    users = cursor.fetchall()
-    cursor.close()
-    return render_template('admin.html', users=users)
+    try:
+        if session['username'] == 'printease2023@gmail.com':
+            conn = sqlite3.connect('users.db')
+            cursor = conn.cursor()
+            cursor.execute('SELECT * FROM user')
+            users = cursor.fetchall()
+            cursor.close()
+            return render_template('admin.html', users=users)
+        else:
+            return "Login as Admin"
+    except:
+        
+            return "Login as Admin"
+    
+        
 
 @app.route('/edit/<int:user_id>', methods=['GET', 'POST'])
 def edit(user_id):
