@@ -172,9 +172,9 @@ def signup():
             connection.close()
         except:
             err_message="E-mail already registered!"
-            return render_template('index.html',message=err_message, fav_icon=fav_icon, load_img=load_img,ip=ip)
+            return render_template('index.html',text="checked",message=err_message, fav_icon=fav_icon, load_img=load_img,ip=ip,no_load=0)
         return redirect('/login')
-    return render_template('index.html', text="checked" ,fav_icon=fav_icon, load_img=load_img,ip=ip)
+    return render_template('index.html', text="checked" ,fav_icon=fav_icon, load_img=load_img,ip=ip,no_load=1)
 
 # Login function
 @app.route('/login', methods=['GET', 'POST'])
@@ -208,8 +208,8 @@ def login():
                 return redirect('/dashboard')
         else:
             err_message="Invalid mail or password!!"
-            return render_template('index.html',mess=err_message, fav_icon=fav_icon, load_img=load_img,ip=ip)
-    return render_template('index.html', fav_icon=fav_icon, load_img=load_img,ip=ip)
+            return render_template('index.html',mess=err_message, fav_icon=fav_icon, load_img=load_img,ip=ip,no_load=0)
+    return render_template('index.html', fav_icon=fav_icon, load_img=load_img,ip=ip,no_load=1)
 
 
 @app.route('/forgot', methods=['GET', 'POST'])
