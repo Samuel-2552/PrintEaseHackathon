@@ -174,7 +174,7 @@ def signup():
             err_message="E-mail already registered!"
             return render_template('index.html',message=err_message, fav_icon=fav_icon, load_img=load_img,ip=ip)
         return redirect('/login')
-    return render_template('index.html', fav_icon=fav_icon, load_img=load_img,ip=ip)
+    return render_template('index.html', text="checked" ,fav_icon=fav_icon, load_img=load_img,ip=ip)
 
 # Login function
 @app.route('/login', methods=['GET', 'POST'])
