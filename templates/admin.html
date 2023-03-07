@@ -14,6 +14,7 @@
                 <th>Wallet</th>
                 <th>EV</th>
                 <th>Edit</th>
+
             </tr>
         </thead>
         <tbody>
@@ -30,5 +31,19 @@
             {% endfor %}
         </tbody>
     </table>
+    <br><br><br><br><br><br><br><br><br>
+    <h1>Delete the user</h1>
+    <form action="/delete" method="post">
+        <div class="form-group mt-2">
+          <input type="number" name="dbid" class="form-style" placeholder="Enter User ID to Delete" id="dbid"
+            autocomplete="off" required>
+          
+        </div>
+        <br><br>
+        <input class="btn mt-4" type="submit" value="Delete">
+      
+    </div>
+  </div>
+  </form>
 </body>
 </html>

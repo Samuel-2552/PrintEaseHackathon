@@ -587,7 +587,19 @@ def index():
     except:
         
             return "Login as Admin"
-    
+@app.route('/delete',methods=['GET', 'POST'])
+def delete():
+    if request.method == 'POST':
+        dbid=request.form['dbid']       
+        conn = sqlite3.connect('users.db')
+        cursor = conn.cursor()
+        cursor.execute('delete from user where id=?',(dbid))
+        conn.commit()
+        cursor.close()
+        return redirect('/admin')
+    else:
+        return "User doesn't Exist"
+       
         
 
 @app.route('/edit/<int:user_id>', methods=['GET', 'POST'])
