@@ -81,9 +81,10 @@
           </div>
         </div>
       </nav>
-      <br><br><br><br><br>
-      <marquee class="css1"  Scrollamount=15 ><span style="color: #fff;font-size: 50px;" id="notification"></span>
-      </marquee>
+      <br><br><br><br><br><div style="display: flex;justify-content: center;align-items: center;">
+      <div style="display:flex; flex-wrap: wrap;">
+      <h2  Scrollamount=15 style="text-align:center"><span style="color: #FFEBA7;font-size:35px;" id="notification"></span>
+      </h2></div></div>
       <br><br><br><br><br><br>
       <section id="hero" class="d-flex flex-column justify-content-center">
         <div style="text-align:center">
@@ -128,7 +129,9 @@
             document.querySelector(".content").style.display = "block";
             if("{{logout}}"==0){ 
             var typed = new Typed('#notification', {
-            strings: ["Sign-in and Get an 20 Rupees Wallet Bonus"],
+
+            strings: ["Sign-in and Get ₹20 as Bonus"],
+
             typeSpeed: 50,
             backSpeed: 50,
             loop: true
