@@ -206,6 +206,9 @@ def login():
                     return redirect('/verification')
                 order_no+=1
                 return redirect('/dashboard')
+            else:
+                err_message="Invalid mail or password!!"
+                return render_template('index.html',mess=err_message, fav_icon=fav_icon, load_img=load_img,ip=ip,no_load=0)
         else:
             err_message="Invalid mail or password!!"
             return render_template('index.html',mess=err_message, fav_icon=fav_icon, load_img=load_img,ip=ip,no_load=0)
