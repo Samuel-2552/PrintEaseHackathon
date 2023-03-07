@@ -566,7 +566,7 @@ def verification():
             cursor.execute('UPDATE user SET EV=?, wallet=? WHERE email=?', (EV,wallet, email))
             connection.commit()
             cursor.close()
-            return render_template('dashboard.html',fav_icon=fav_icon, load_img=load_img,ip=ip,wallet=wallet_money,verifed=1)
+            return redirect('/dashboard')
         else:
             return "<h1><a href='/dashboard'>Try Again Later</a></h1>"
     return render_template('verification.html',fav_icon=fav_icon, load_img=load_img,user=user,wallet=wallet_money,ok=verify())
