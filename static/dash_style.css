@@ -365,7 +365,14 @@ h6 span{
   border: none;
   cursor: pointer;
 }
-
+.css1{
+  font-size:50px;
+  font-family: georgia;
+  font-style:italic;
+  font-weight:bold;
+  color:#FFEBA7;
+  text-shadow: 2px 2px 8px black;
+}
 .dropbtn:hover, .dropbtn:focus {
   background-color: #fff;
 }

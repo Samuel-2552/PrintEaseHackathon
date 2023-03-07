@@ -35,6 +35,7 @@
       if (window.performance && window.performance.navigation.type === window.performance.navigation.TYPE_BACK_FORWARD) {
         window.location = "{{ip}}";
       }
+
     </script>
     <script src="static\script.js"></script>
       <link rel="stylesheet" href="static\index_style.css">
@@ -49,7 +50,7 @@
       <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
         <div class="container-fluid">
           <a class="navbar-brand" href="/" style="color:#FFEBA7"><img src="{{fav_icon}}" height="50px"> PrintEase</a>
-  
+
   
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
             <span class="navbar-toggler-icon"></span>
@@ -80,7 +81,10 @@
           </div>
         </div>
       </nav>
-      <br><br><br><br><br><br><br><br><br><br><br>
+      <br><br><br><br><br>
+      <marquee class="css1"  Scrollamount=15 ><span style="color: #fff;font-size: 50px;" id="notification"></span>
+      </marquee>
+      <br><br><br><br><br><br>
       <section id="hero" class="d-flex flex-column justify-content-center">
         <div style="text-align:center">
           <h1 style="color: #FFEBA7; font-size: 65px;">PrintEase</h1>
@@ -122,13 +126,25 @@
         setTimeout(function () {
             document.getElementById("loading").style.display = "none";
             document.querySelector(".content").style.display = "block";
+            if("{{logout}}"==0){ 
+            var typed = new Typed('#notification', {
+            strings: ["**Sign-in and Get an 20 Rupees Wallet Bonus**"],
+            typeSpeed: 50,
+            backSpeed: 50,
+            loop: true
+            });
+          }
             var typed = new Typed('#typed-text', {
             strings: ["Welcome to the Streamlined process for Printing.","Helps customers and local shops to provide seamless printing"],
             typeSpeed: 50,
             backSpeed: 50,
             loop: true
+      
   }); 
-        }, 3000);
+        },3000 );
+        
+        
+ 
         if("{{user}}"=="-1"){
           // console.log("hi p")
           document.getElementById("dropdown").style.display="none";
