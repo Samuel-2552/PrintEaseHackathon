@@ -581,7 +581,7 @@ def index():
             cursor.execute('SELECT * FROM user')
             users = cursor.fetchall()
             cursor.close()
-            return render_template('admin.html', users=users)
+            return render_template('admin.html', users=users,fav_icon=fav_icon, load_img=load_img)
         else:
             return "Login as Admin"
     except:
