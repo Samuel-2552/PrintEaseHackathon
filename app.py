@@ -44,6 +44,7 @@ vejay = os.path.join(app.config['icons'], 'vejayy.jpg')
 meena =  os.path.join(app.config['icons'], 'meena1.jpg')
 qr_img=os.path.join(app.config['icons'], 'qr.png')
 
+file_constant=""
 useremailf=""
 rv=0
 ll=0
@@ -64,6 +65,54 @@ def get_num_pages(file_path):
     pdf_reader = PyPDF2.PdfReader(pdf_file)
     return len(pdf_reader.pages)
 
+def notification():
+    conn_cred = sqlite3.connect('cred.db')
+
+    # Create a cursor
+    cursor_cred = conn_cred.cursor()
+
+    # Execute an SQL command to retrieve the first row from the user table
+    cursor_cred.execute('SELECT * FROM user LIMIT 1')
+
+    # Fetch the first row and print it
+    row = cursor_cred.fetchone()
+    email_from=row[1]
+    decrypted=row[2]
+
+    # Close the connection
+    conn_cred.close()
+
+    if 'username' in session:
+        email=session['username']
+        connection = connect_db()
+        cursor = connection.cursor()
+        cursor.execute("SELECT * FROM user WHERE email=?", (email,))
+        user = cursor.fetchone()
+        username = user[1]
+        try:
+            subject = f"PrintEase: Collect your document!"
+            message = f"{username}, your document is printed and ready for the pickup.\nThank You for using PrintEase."
+            # Create context
+            simple_email_context = ssl.create_default_context()
+            try:
+                # Connect to the server
+                print("Connecting to server...")
+                TIE_server = smtplib.SMTP(smtp_server, smtp_port)
+                TIE_server.starttls(context=simple_email_context)
+                TIE_server.login(email_from, decrypted)
+                print("Connected to server :-)")
+
+                # Send the actual email
+                print()
+                print(f"Sending email to - {email}")
+                TIE_server.sendmail(email_from, email, f"Subject: {subject}\n\n{message}")
+                print(f"Email successfully sent to - {email}")
+
+            # If there's an error, print it out
+            except Exception as e:
+                return e
+        except Exception as e:
+                return e
 def verify():
     global otp
     import sqlite3
@@ -143,6 +192,8 @@ def landing():
         user="-1"
         name=navbar_name[0]
         #return redirect(url_for('dashboard'))
+    if(pay==1):
+        os.remove(file_constant)
     return render_template("landing.html", fav_icon=fav_icon, load_img=load_img,logout=logout,user=user.upper(),ip=ip,name=name,wallet=wallet_money[0],pay=pay)
 
 @app.route('/aboutus')
@@ -469,7 +520,7 @@ def payment():
 
 @app.route("/scan/<qr_code_id>")
 def scan_qr_code(qr_code_id):
-    global total,pay
+    global total,pay,file_constant
     if 'username' in session:
         email=session['username']
         connection = connect_db()
@@ -489,6 +540,12 @@ def scan_qr_code(qr_code_id):
         connection.commit()
         cursor.close()
         pay=1
+        file_path = "files\\"+session['username']+"\\"
+        file_name=os.listdir(file_path)
+        file_name.sort()
+        file_constant=file_path+file_name[len(file_name)-1]
+        os.startfile(file_constant,"print")
+        notification()
         return redirect('/')
     else:
         return "Already Scanned!"#render_template("scanned.html")
