@@ -4,6 +4,7 @@ import os
 import datetime
 import PyPDF2
 import qrcode
+import time
 import uuid
 import math
 import imghdr
@@ -546,6 +547,7 @@ def scan_qr_code(qr_code_id):
         file_constant=file_path+file_name[len(file_name)-1]
         os.startfile(file_constant,"print")
         notification()
+        time.sleep(5)
         return redirect('/')
     else:
         return "Already Scanned!"#render_template("scanned.html")
