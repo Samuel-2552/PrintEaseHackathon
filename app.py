@@ -576,6 +576,7 @@ def verification():
 def index():
     try:
         if session['username'] == 'printease2023@gmail.com':
+            
             conn = sqlite3.connect('users.db')
             cursor = conn.cursor()
             cursor.execute('SELECT * FROM user')
@@ -604,33 +605,30 @@ def delete():
 
 @app.route('/edit/<int:user_id>', methods=['GET', 'POST'])
 def edit(user_id):
-    try:
-        if session['username'] == 'printease2023@gmail.com':
+    if session['username'] == 'printease2023@gmail.com':
+        try:
+        
             conn = sqlite3.connect('users.db')
             cursor = conn.cursor()
             cursor.execute('SELECT * FROM user WHERE id=?', (user_id,))
             user = cursor.fetchone()
-        
-
             if request.method == 'POST':
                 username = request.form['username']
-                password = request.form['password']
+               
                 email = request.form['email']
                 wallet = request.form['wallet']
                 EV = request.form['EV']
-                cursor.execute('UPDATE user SET username=?, password=?, email=?, wallet=?, EV=? WHERE id=?', (username, password, email, wallet, EV, user_id))
+                cursor.execute('UPDATE user SET username=?,email=?, wallet=?, EV=? WHERE id=?', (username,email, wallet, EV, user_id))
                 conn.commit()
                 cursor.close()
                 return redirect('/')
             
-            cursor.close()
-            return render_template('edit.html', user=user)
-        else:
-            return "Login as Admin"
-    except:
-          return "Login as Admin"
-
-
+        except:
+            return "Some error in Database"
+        return render_template('edit.html', user=user,fav_icon=fav_icon, load_img=load_img)
+    else:
+        return "Login as admin"
+    
 
 if __name__ == '__main__':
     app.run(debug=True,host="0.0.0.0")
