@@ -17,6 +17,8 @@ import ssl
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
+
+pay=0
 ip="http://192.168.215.59:5000"
 counter=0
 file_counter=0
@@ -121,6 +123,7 @@ def verify():
 
 @app.route('/')
 def landing():
+    global pay
     if 'username' in session:
         logout=1
         email=session['username']
@@ -135,11 +138,12 @@ def landing():
         wallet_money=cursor.fetchone()
     else:
         wallet_money=[0]
+
         logout=0
         user="-1"
         name=navbar_name[0]
         #return redirect(url_for('dashboard'))
-    return render_template("landing.html", fav_icon=fav_icon, load_img=load_img,logout=logout,user=user.upper(),ip=ip,name=name,wallet=wallet_money[0])
+    return render_template("landing.html", fav_icon=fav_icon, load_img=load_img,logout=logout,user=user.upper(),ip=ip,name=name,wallet=wallet_money[0],pay=pay)
 
 @app.route('/aboutus')
 def aboutus():
@@ -465,7 +469,7 @@ def payment():
 
 @app.route("/scan/<qr_code_id>")
 def scan_qr_code(qr_code_id):
-    global total
+    global total,pay
     if 'username' in session:
         email=session['username']
         connection = connect_db()
@@ -484,7 +488,8 @@ def scan_qr_code(qr_code_id):
         cursor.execute('UPDATE user SET wallet=? WHERE email=?', (balance, email))
         connection.commit()
         cursor.close()
-        return "Payment Completed"#render_template("completed.html", url=data)
+        pay=1
+        return redirect('/')
     else:
         return "Already Scanned!"#render_template("scanned.html")
 
@@ -536,6 +541,8 @@ def team():
 
 @app.route('/logout')
 def logout():
+    global pay
+    pay=0
     session.pop('username', None)
     return redirect('/')
 
