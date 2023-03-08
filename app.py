@@ -17,7 +17,7 @@ import ssl
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
-ip="http://192.168.1.14:5000"
+ip="http://192.168.215.59:5000"
 counter=0
 file_counter=0
 otp=-1
