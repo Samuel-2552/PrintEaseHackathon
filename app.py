@@ -20,7 +20,7 @@ from email.mime.multipart import MIMEMultipart
 
 
 pay=0
-ip="http://192.168.215.59:5000"
+ip="http://192.168.1.6:5000"
 counter=0
 file_counter=0
 otp=-1
