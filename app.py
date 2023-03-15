@@ -218,8 +218,6 @@ def signup():
         cursor.execute("SELECT * FROM user WHERE username=?", (username,))
         user = cursor.fetchone()
         print(user)
-        if user:
-            return "User already exists"
         try:
             # Hash the password
             password_hash = hashlib.sha256(password.encode()).hexdigest()
