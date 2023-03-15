@@ -2,296 +2,399 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
 
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.3.1/css/fontawesome.min.css" integrity="sha384-QYIZto+st3yW+o8+5OHfT6S482Zsvz2WfOzpFSXMF9zqeLcFV0/wlZpMtyFcZALm" crossorigin="anonymous"> -->
-    <!-- navbar -->
-    <!-- FIXED TOP -->
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.3.1/css/fontawesome.min.css" integrity="sha384-QYIZto+st3yW+o8+5OHfT6S482Zsvz2WfOzpFSXMF9zqeLcFV0/wlZpMtyFcZALm" crossorigin="anonymous"> -->
+  <!-- navbar -->
+  <!-- FIXED TOP -->
+  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
   <!-- CSS File 
   <link href="assets/css/style.css" rel="stylesheet">
   -->
-    <!--typed jquerry-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
+  <!--typed jquerry-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
 
 
 
 
-    <title>PrintEase</title>
-    <link rel="icon" type="image/x-icon" href="{{fav_icon}}">
+  <title>PrintEase</title>
+  <link rel="icon" type="image/x-icon" href="{{fav_icon}}">
 
-    <script>
-      if (window.performance && window.performance.navigation.type === window.performance.navigation.TYPE_BACK_FORWARD) {
-        window.location = "{{ip}}";
-      }
-      function closePopup() {
-        // Hide the pop-up window and overlay
-        document.getElementById("popup").style.display = "none";
-        document.getElementById("overlay").style.display = "none";
-      }
-  
-    </script>
-    <script src="static\script.js"></script>
-      <link rel="stylesheet" href="static\index_style.css">
-      <link rel="stylesheet" href="static\dash_style.css">
-      <style>
-        /* cards css */
-        * {
-    box-sizing: border-box;
-  }
-  
-  
-  /* Float four columns side by side */
-  .column {
-    float: left;
-    width: 25%;
-    padding: 0 10px;
-  }
-  
-  /* Remove extra left and right margins, due to padding */
-  .row {margin: 0 -5px;}
-  
-  /* Clear floats after the columns */
-  .row:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
-  
-  /* Responsive columns */
-  @media screen and (max-width: 600px) {
-    .column {
-      width: 100%;
-      display: block;
-      margin-bottom: 20px;
+  <script>
+    if (window.performance && window.performance.navigation.type === window.performance.navigation.TYPE_BACK_FORWARD) {
+      window.location = "{{ip}}";
     }
-  }
-  
-  /* Style the counter cards */
-  .card {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.9);
-    padding: 16px;
-    text-align: center;
-    background-color:#FFEBA7 ;
-  }
-  #cardtext{
-    color:black;
-    font-weight: bold;
-  }
+    function closePopup() {
+      // Hide the pop-up window and overlay
+      document.getElementById("popup").style.display = "none";
+      document.getElementById("overlay").style.display = "none";
+    }
 
-        /* Styling for the pop-up window */
-        .popup {
-          position: fixed;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          color:black;
-          background-color: #FFEBA7;
-          padding: 20px;
-          box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-          z-index: 999;
-          border-radius: 5%;
-        }
-    
-        /* Styling for the overlay */
-        .overlay {
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background-color: rgba(0, 0, 0, 0.5);
-          z-index: 998;
-        }
-      </style>
-      
+  </script>
+  <script src="static\script.js"></script>
+  <link rel="stylesheet" href="static\index_style.css">
+  <link rel="stylesheet" href="static\dash_style.css">
+  <style>
+    /* cards css */
+    * {
+      box-sizing: border-box;
+    }
+
+
+    /* Float four columns side by side */
+    .column {
+      float: left;
+      width: 25%;
+      padding: 0 10px;
+    }
+
+    /* Remove extra left and right margins, due to padding */
+    .row {
+      margin: 0 -5px;
+    }
+
+    /* Clear floats after the columns */
+    .row:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+
+    /* Responsive columns */
+    @media screen and (max-width: 600px) {
+      .column {
+        width: 100%;
+        display: block;
+        margin-bottom: 20px;
+      }
+    }
+
+    /* Style the counter cards */
+    .card {
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.9);
+      padding: 16px;
+      text-align: center;
+      background-color: #FFEBA7;
+    }
+
+    #cardtext {
+      color: black;
+      font-weight: bold;
+    }
+
+    /* hover cards */
+    .ag-courses-item_link {
+      display: block;
+      padding: 30px 20px;
+      background-color: #121212;
+
+      overflow: hidden;
+
+      position: relative;
+    }
+
+    .ag-courses-item_link:hover,
+    .ag-courses-item_link:hover .ag-courses-item_date {
+      text-decoration: none;
+      color: #FFF;
+    }
+
+    .ag-courses-item_link:hover .ag-courses-item_bg {
+      -webkit-transform: scale(10);
+      -ms-transform: scale(10);
+      transform: scale(10);
+    }
+
+    .ag-courses-item_bg {
+      height: 128px;
+      width: 128px;
+      background-color: #f9b234;
+
+      z-index: 1;
+      position: absolute;
+      top: -75px;
+      right: -75px;
+
+      border-radius: 50%;
+
+      -webkit-transition: all .5s ease;
+      -o-transition: all .5s ease;
+      transition: all .5s ease;
+    }
+
+    .ag-courses_item:nth-child(2n) .ag-courses-item_bg {
+      background-color: #3ecd5e;
+    }
+
+    .ag-courses_item:nth-child(3n) .ag-courses-item_bg {
+      background-color: #e44002;
+    }
+
+    .ag-courses_item:nth-child(4n) .ag-courses-item_bg {
+      background-color: #952aff;
+    }
+
+    .ag-courses_item:nth-child(5n) .ag-courses-item_bg {
+      background-color: #cd3e94;
+    }
+    .ag-courses-item_title {
+  min-height: 87px;
+  margin: 0 0 25px;
+
+  overflow: hidden;
+
+  font-weight: bold;
+  font-size: 30px;
+  color: #FFF;
+
+  z-index: 2;
+  position: relative;
+}
+    .ag-courses_item:nth-child(6n) .ag-courses-item_bg {
+      background-color: #4c49ea;
+    }
+
+    /* Styling for the pop-up window */
+    .popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: black;
+      background-color: #FFEBA7;
+      padding: 20px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+      z-index: 999;
+      border-radius: 5%;
+    }
+
+    /* Styling for the overlay */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 998;
+    }
+  </style>
+
 
 </head>
 
 <body>
-    <img src="{{load_img}}" id="loading">    
-    <div class="content">
-      <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="/" style="color:#FFEBA7"><img src="{{fav_icon}}" height="50px"> PrintEase</a>
+  <img src="{{load_img}}" id="loading">
+  <div class="content">
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/" style="color:#FFEBA7"><img src="{{fav_icon}}" height="50px"> PrintEase</a>
 
-  
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
-            <span class="navbar-toggler-icon"></span>
-  
-          </button>
-          <div class="collapse navbar-collapse" id="collapsibleNavbar">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link" href="/login" style="color:#FFEBA7">{{name}}</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#aboutus" style="color:#FFEBA7">ABOUT US</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/contact" style="color:#FFEBA7">CONTACT US</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/team" style="color:#FFEBA7">TEAM</a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+          <span class="navbar-toggler-icon"></span>
+
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="/login" style="color:#FFEBA7">{{name}}</a>
             </li>
-            </ul>
-          </div>
-          <div class="dropdown" id="dropdown">
-            <button onclick="myFunction()" class="dropbtn">{{user}}</button>
-            <div  id="myDropdown" class="dropdown-content" >
-              <a  href="#home" type="button" class="btn btn-primary" style="color: #000"><i style="float: left;" class="fas fa-wallet fa-lg"></i><span style="float: right;">₹{{wallet}}</span></a>
-              <a  href="/logout" type="button" class="btn btn-primary " style="color: #000;"><i style="float: left;" class="fas fa-sign-out-alt fa-lg"></i><span style="float: right;">Logout</span></a>
-            </div>
+            <li class="nav-item">
+              <a class="nav-link" href="#aboutus" style="color:#FFEBA7">ABOUT US</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/contact" style="color:#FFEBA7">CONTACT US</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/team" style="color:#FFEBA7">TEAM</a>
+            </li>
+          </ul>
+        </div>
+        <div class="dropdown" id="dropdown">
+          <button onclick="myFunction()" class="dropbtn">{{user}}</button>
+          <div id="myDropdown" class="dropdown-content">
+            <a href="#home" type="button" class="btn btn-primary" style="color: #000"><i style="float: left;"
+                class="fas fa-wallet fa-lg"></i><span style="float: right;">₹{{wallet}}</span></a>
+            <a href="/logout" type="button" class="btn btn-primary " style="color: #000;"><i style="float: left;"
+                class="fas fa-sign-out-alt fa-lg"></i><span style="float: right;">Logout</span></a>
           </div>
         </div>
-      </nav>
-      <div id="popup" class="popup" style="display:none;">
-        <h2>Payment Successfull!</h2>
-        <p>Once your document is printed you will be notified via your registered E-mail.</p>
-        <button onclick="closePopup()">ok</button>
       </div>
-      <div id="overlay" class="overlay" style="display:none;"></div>
-      <br><br><br><br><br><div style="display: flex;justify-content: center;align-items: center;">
+    </nav>
+    <div id="popup" class="popup" style="display:none;">
+      <h2>Payment Successfull!</h2>
+      <p>Once your document is printed you will be notified via your registered E-mail.</p>
+      <button onclick="closePopup()">ok</button>
+    </div>
+    <div id="overlay" class="overlay" style="display:none;"></div>
+    <br><br><br><br><br>
+    <div style="display: flex;justify-content: center;align-items: center;">
       <div style="display:flex; flex-wrap: wrap;">
-      <h2  Scrollamount=15 style="text-align:center"><span style="color: #FFEBA7;font-size:35px;" id="notification"></span>
-      </h2></div></div>
-      <br><br><br><br><br><br>
-      <section id="hero" class="d-flex flex-column justify-content-center">
-        <div style="text-align:center">
-          <h1 style="color: #FFEBA7; font-size: 65px;">PrintEase</h1>
-          <p><span style="color: #fff;font-size: 20px;" id="typed-text"></span></p>
-          <div class="social-links">
-            <button style="font-size:26px;background-color: #FFEBA7; color: black;font-weight: bold;border-radius: 9px;" onclick="location.href='#services'">{{name}} <i class="fa fa-rocket"></i></button>
-          </div>
+        <h2 Scrollamount=15 style="text-align:center"><span style="color: #FFEBA7;font-size:35px;"
+            id="notification"></span>
+        </h2>
+      </div>
+    </div>
+    <br><br><br><br><br><br>
+    <section id="hero" class="d-flex flex-column justify-content-center">
+      <div style="text-align:center">
+        <h1 style="color: #FFEBA7; font-size: 65px;">PrintEase</h1>
+        <p><span style="color: #fff;font-size: 20px;" id="typed-text"></span></p>
+        <div class="social-links">
+          <button style="font-size:26px;background-color: #FFEBA7; color: black;font-weight: bold;border-radius: 9px;"
+            onclick="location.href='#services'">{{name}} <i class="fa fa-rocket"></i></button>
         </div>
-      </section>
-       <!-- ======= About Section ======= -->
-       <br><br><br><br><br><br><br><br><br><br><br><br><br id="aboutus"><br><br><br><br><br>
+      </div>
+    </section>
+    <!-- ======= About Section ======= -->
+    <br><br><br><br><br><br><br><br><br><br><br><br><br id="aboutus"><br><br><br><br><br>
     <section id="about" class="about">
       <div class="container" data-aos="fade-up">
         <div class="section-title">
-          <h1 style="font-weight: bold;text-align: center;" >About Us</h1>
+          <h1 style="font-weight: bold;text-align: center;">About Us</h1>
           <br>
-          <h4 style="color:#FFEBA7;text-align: center;">PrintEase: Streamlined Hassle Free Printing service for REC Students!</h4>
+          <h4 style="color:#FFEBA7;text-align: center;">PrintEase: Streamlined Hassle Free Printing service for REC
+            Students!</h4>
         </div>
         <br><br>
         <div class="abt">
           <div>
-            
+
             <p class="fst-italic" style="color:wheat;font-size: large;line-height:40px;">
-              Our aim is to streamline the process of searching for and ordering printing services from local printer shops. Progress updates are shared with the customer, and upon completion, the customer is notified to come and collect their printouts. This application aims to make the process of ordering and receiving printing services more efficient and convenient for both customers and printer shops.
+              Our aim is to streamline the process of searching for and ordering printing services from local printer
+              shops. Progress updates are shared with the customer, and upon completion, the customer is notified to
+              come and collect their printouts. This application aims to make the process of ordering and receiving
+              printing services more efficient and convenient for both customers and printer shops.
             </p>
-            
+
             <p class="fst-italic" style="color:wheat;font-size: large;line-height:40px;">
-              The application allows users to send documents to a connected printer and make payments for the printing service directly from their mobile devices. The system is designed to streamline the printing process, making it more convenient and efficient for users. The application uses a secure connection to communicate with the printer, ensuring that the user's sensitive information is protected.
+              The application allows users to send documents to a connected printer and make payments for the printing
+              service directly from their mobile devices. The system is designed to streamline the printing process,
+              making it more convenient and efficient for users. The application uses a secure connection to communicate
+              with the printer, ensuring that the user's sensitive information is protected.
             </p>
             <br><br><br><br><br><br><br><br><br>
           </div>
         </div>
       </div>
       <!-- Services -->
-      <div id="services"></div>
-      <h1 style="font-weight: bold;text-align: center;" >OUR SERVICES</h1>
-      <br><br>
-      <div class="row">
-        <div class="column">
-          <div class="card">
-            <h3 id="cardtext">Auto. Print It</h3>
-            <p id="cardtext">Some text</p>
-            <p id="cardtext">Some text</p>
+      <div id="services">
+        <br><br><br><br><br><br><br><br >
+        <h1 style="font-weight: bold;text-align: center;">OUR SERVICES</h1>
+        <br><br>
+          <div class="row">
+            <div class="column">
+              <div class="card">
+                <div class="ag-courses-item_link">
+                  <div class="ag-courses-item_bg"></div>
+                  <div class="ag-courses-item_title">
+                    Annual package "Product+UX/UI+Graph designer&#160;2022"
+                  </div>
+                </div>
+              </div>
+            </div>
+          <div class="column">
+            <div class="card">
+              <div class="ag-courses-item_link">
+              <div class="ag-courses-item_bg"></div>
+              <div class="ag-courses-item_title">
+                  UI/Web&amp;Graph design for teenagers 11-17&#160;years old
+              </div>
+            </div>
+            </div>
           </div>
-        </div>
-      
-        <div class="column">
-          <div class="card">
-            <h3 id="cardtext">Card 2</h3>
-            <p id="cardtext">Some text</p>
-            <p id="cardtext">Some text</p>
+        
+          <div class="column">
+            <div class="card">
+              <div class="ag-courses-item_link">
+                <div class="ag-courses-item_bg"></div>
+                <div class="ag-courses-item_title">
+                  UI/Web&amp;Graph design for teenagers 11-17&#160;years old
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
         
         <div class="column">
-          <div class="card">
-            <h3 id="cardtext">Card 3</h3>
-            <p id="cardtext">Some text</p>
-            <p id="cardtext">Some text</p>
+            <div class="card">
+              <div class="ag-courses-item_link">
+                <div class="ag-courses-item_bg"></div>
+                <div class="ag-courses-item_title">
+                  Annual package "Product+UX/UI+Graph designer&#160;2022"
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
         
-        <div class="column">
-          <div class="card">
-            <h3 id="cardtext">Card 4</h3>
-            <p id="cardtext">Some text</p>
-            <p id="cardtext">Some text</p>
-          </div>
-        </div>
       </div>
-      <br><br><br><br><br><br><br><br><br>
-    </section><!-- End About Section -->
-      
-      
-      
-    
-    </div>
-    <script>
-        setTimeout(function () {
-            document.getElementById("loading").style.display = "none";
-            document.querySelector(".content").style.display = "block";
-            if("{{logout}}"==0){ 
-            var typed = new Typed('#notification', {
+  </div>
+  <br><br><br><br><br><br><br><br><br>
+  </section><!-- End About Section -->
 
-            strings: ["Sign-in and Get ₹20 as Bonus"],
 
-            typeSpeed: 50,
-            backSpeed: 50,
-            loop: true
-            });
-          }
-            var typed = new Typed('#typed-text', {
-            strings: ["Welcome RECians","Streamlined Hassle Free Printing service for REC Students!"],
-            typeSpeed: 50,
-            backSpeed: 50,
-            loop: true
-      
-  }); 
-  if("{{pay}}"==1){
-      document.getElementById("popup").style.display = "block";
-			document.getElementById("overlay").style.display = "block";
+
+
+  </div>
+  <script>
+    setTimeout(function () {
+      document.getElementById("loading").style.display = "none";
+      document.querySelector(".content").style.display = "block";
+      if ("{{logout}}" == 0) {
+        var typed = new Typed('#notification', {
+
+          strings: ["Sign-in and Get ₹20 as Bonus"],
+
+          typeSpeed: 50,
+          backSpeed: 50,
+          loop: true
+        });
+      }
+      var typed = new Typed('#typed-text', {
+        strings: ["Welcome RECians", "Streamlined Hassle Free Printing service for REC Students!"],
+        typeSpeed: 50,
+        backSpeed: 50,
+        loop: true
+
+      });
+      if ("{{pay}}" == 1) {
+        document.getElementById("popup").style.display = "block";
+        document.getElementById("overlay").style.display = "block";
+      }
+
+
+    }, 3000);
+
+
+
+    if ("{{user}}" == "-1") {
+      // console.log("hi p")
+      document.getElementById("dropdown").style.display = "none";
     }
-
-
-        },3000 );
-        
-        
- 
-        if("{{user}}"=="-1"){
-          // console.log("hi p")
-          document.getElementById("dropdown").style.display="none";
-        }
-        else{
-          document.getElementById("dropdown").style.display="block";
-        }
+    else {
+      document.getElementById("dropdown").style.display = "block";
+    }
 
         // if("{{name}}"=="GET STARTED"){
           // document.getElementById("onboard").onclick="#services";
         // }
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
 
 <!-- test -->
 <style>
-  
-  </style>
+
+</style>
