@@ -43,6 +43,17 @@ body{
   text-align: center;
   position: relative;
 }
+#loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 30%;
+  width:auto;
+}
+.content {
+  display: none;
+}
 #msform fieldset{
   background: #3c3c49;
   border: 0 none;
@@ -230,6 +241,7 @@ $(".submit").click(function(){
 </script>
 <body>
     <img src="{{load_img}}" id="loading">
+    <div class="content">
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
         <div class="container-fluid">
           <a class="navbar-brand" id="logotext" href="/" style="color:#FFEBA7"><img src="{{fav_icon}}" height="50px"> PrintEase</a>
@@ -300,7 +312,8 @@ $(".submit").click(function(){
         </form>
         </div>
         <br><br><br><br><br><br><br><br><br>
-<script>
+    </div>
+    <script>
 
     setTimeout(function () {
         document.getElementById("loading").style.display = "none";
@@ -309,5 +322,8 @@ $(".submit").click(function(){
 
 
 </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

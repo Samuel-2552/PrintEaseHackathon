@@ -268,7 +268,13 @@ def login():
             return render_template('index.html',mess=err_message, fav_icon=fav_icon, load_img=load_img,ip=ip,no_load=0)
     return render_template('index.html', fav_icon=fav_icon, load_img=load_img,ip=ip,no_load=1)
 
-
+@app.route('/shopsignup',methods=['GET','POST'])
+def shopsignup():
+    if 'username' in session:
+        return redirect(url_for('dashboard'))
+    if request.method == 'POST':
+        useremailf = request.form['logemail']
+    return render_template('shopsignup.html', fav_icon=fav_icon, load_img=load_img, ip=ip)
 @app.route('/forgot', methods=['GET', 'POST'])
 def forgot():
     global rv
