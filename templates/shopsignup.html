@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<!-- for the icons -->
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<!-- resources -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://www.jqueryscript.net/demo/Creating-A-Modern-Multi-Step-Form-with-jQuery-CSS3/js/jquery.easing.min.js"></script>
+</head>
+<style>
+    @import url(https://fonts.googleapis.com/css?family=Ubuntu:400,500);
+@import url(http://fontawesome.io/assets/font-awesome/css/font-awesome.css);
+* {
+  margin: 0;
+  padding: 0;
+}
+html {
+    background: url(http://subtlepatterns2015.subtlepatterns.netdna-cdn.com/patterns/dark_embroidery.png);
+  color:#fff;
+}
+body{
+  font-family: 'Ubuntu', sans-serif !important;
+}
+#msform{
+  width: 80%;
+  margin: 50px auto;
+  text-align: center;
+  position: relative;
+}
+#msform fieldset{
+  background: white;
+  border: 0 none;
+  border-radius: 3px;
+  box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+  padding: 20px 30px;
+  box-sizing: border-box;
+  width: 80%;
+  margin: 0 10%;
+  position: absolute;
+}
+#msform fieldset:not(:first-of-type){
+  display: none;
+}
+#msform input, #msform textarea{
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  margin-bottom: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: 'Ubuntu', sans-serif !important;
+  color: #2C3E50;
+  font-size: 13px;
+}
+#msform .action-button{
+  width: 100px;
+  background: #27AE60;
+  font-weight: 400;
+  color: white;
+  border: 0 none;
+  border-radius: 1px;
+  cursor: pointer;
+  padding: 10px 5px;
+  margin: 10px 5px;
+}
+#msform .action-button:hover, #msform .action-button:focus{
+  box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
+}
+.fs-title{
+  font-size: 15px;
+  text-transform: uppercase;
+  color: #2C3E50;
+  margin-bottom: 10px;
+  font-weight:500;
+}
+.fs-subtitle{
+  font-weight: normal;
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 20px;
+}
+#progressbar {
+  margin-bottom: 30px;
+  overflow: hidden;
+  counter-reset: step;
+}
+#progressbar li {
+    list-style-type: none;
+    color: #D2D2D2;
+    text-transform: capitalize;
+    font-size: 16px;
+    width: 33.33%;
+    float: left;
+    position: relative;
+}
+#progressbar li.active {
+    color: #27AE60;
+}
+#progressbar li:before{
+    content:'' ;/*counter(step)*/
+    counter-increment: step;
+    width: 50px;
+    line-height: 50px;
+    display: block;
+    font-size: 18px;
+    color:#fff ;
+    background: transparent;
+    border-radius: 100%;
+    margin: 0 auto 5px auto;    
+  border: 2px solid #ECECEC;
+}
+#progressbar li:nth-child(1):before{
+  content:"\f129" ;
+  font-family: 'FontAwesome'; 
+}
+#progressbar li:nth-child(2):before{
+  content:"\f013" ;
+  font-family: 'FontAwesome'; 
+}
+#progressbar li:nth-child(3):before{
+  content:"\f00c" ;
+  font-family: 'FontAwesome'; 
+}
+#progressbar li:after {
+    content: '';
+    width: 73%;
+    height: 2px;
+    background: #ECECEC;
+    position: absolute;
+    left: -35%;
+    top: 25px;
+    z-index: -1;
+}
+#progressbar li:first-child:after {
+  content: none;
+}
+#progressbar li.active:before {
+    border: 2px solid #27AE60;
+    color: #27AE60;
+  /* content: "\f164";*/
+}
+#progressbar li.active:after {
+  background: #27AE60;
+  color: white;
+}
+.form_holder {
+    text-align: center;
+    margin: 30px 0 0;
+}
+</style>
+
+
+<script>
+ $(function() {
+
+var current_fs, next_fs, previous_fs; 
+var left, opacity, scale; 
+var animating; 
+$(".next").click(function(){
+  if(animating) return false;
+  animating = true;
+  
+  current_fs = $(this).parent();
+  next_fs = $(this).parent().next();
+  $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+  next_fs.show(); 
+  current_fs.animate({opacity: 0}, {
+    step: function(now, mx) {
+      scale = 1 - (1 - now) * 0.2;
+      left = (now * 50)+"%";
+      opacity = 1 - now;
+      current_fs.css({'transform': 'scale('+scale+')'});
+      next_fs.css({'left': left, 'opacity': opacity});
+    }, 
+    duration: 1000, 
+    complete: function(){
+      current_fs.hide();
+      animating = false;
+    }, 
+    easing: 'easeInOutBack'
+  });
+});
+
+$(".previous").click(function(){
+  if(animating) return false;
+  animating = true;
+  
+  current_fs = $(this).parent();
+  previous_fs = $(this).parent().prev();
+  $("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+  previous_fs.show(); 
+  current_fs.animate({opacity: 0}, {
+    step: function(now, mx) {
+      scale = 0.8 + (1 - now) * 0.2;
+      left = ((1-now) * 50)+"%";
+      opacity = 1 - now;
+      current_fs.css({'left': left});
+      previous_fs.css({'transform': 'scale('+scale+')', 'opacity': opacity});
+    }, 
+    duration: 1000, 
+    complete: function(){
+      current_fs.hide();
+      animating = false;
+    }, 
+    easing: 'easeInOutBack'
+  });
+});
+
+$(".submit").click(function(){
+  return false;
+})
+
+});
+</script>
+<body>
+    <div class="form_holder">
+        <h2 class="fs-title" style="color:#fff;">steps jquery form with Icons</h2>
+        <form id="msform">
+          <ul id="progressbar">
+            <li class="active">1. Personal Details</Details></Details></li>
+            <li>2. Business Details</li>
+            <li>3. Confirmation</li>
+          </ul>
+          <fieldset>
+            <h2 class="fs-title">Create your Business Account</h2>
+            <h3 class="fs-subtitle">Enter your personal details here</h3>
+            <input type="text" name="yname" placeholder="Name" />
+            <input type="email" name="yemail" placeholder="Email" />
+            <input type="tel" name="yphone_no" placeholder="Phone No" />
+            <input type="text" name="yaddress" placeholder="Address" />
+            <input type="password" name="pass" placeholder="Password" />
+            <input type="password" name="cpass" placeholder="Confirm Password" />
+            <input type="button" name="next" class="next action-button" value="Next" />
+          </fieldset>
+          <fieldset>
+            <h2 class="fs-title">Create your Business Account</h2>
+            <h3 class="fs-subtitle">Enter your business details here</h3>
+            <input type="text" name="bname" placeholder="Business Name" />
+            <input type="email" name="bemail" placeholder="Business mail" />
+            <input type="tel" name="bphone_no" placeholder="Business Phone No" />
+            <input type="text" name="baddress1" placeholder="Shop Address line 1" />
+            <input type="text" name="baddress2" placeholder="Shop Address line 1" />
+            <input type="tel" name="baddress1" placeholder="Pincode" />
+    
+            <input type="button" name="previous" class="previous action-button" value="Previous" />
+            <input type="button" name="next" class="next action-button" value="Next" />
+          </fieldset>
+          <fieldset>
+            <h2 class="fs-title">Business Account Verification</h2>
+            <h3 class="fs-subtitle">Verify your Business Account</h3>
+            <input type="password" name="otp" placeholder="Enter your one time password here" />
+            <input type="button" name="previous" class="previous action-button" value="Previous" />
+            <input type="submit" name="submit" class="submit action-button" value="Submit" />
+          </fieldset>
+        </form>
+        </div>
+        <br><br><br>
+</body>
+</html>
