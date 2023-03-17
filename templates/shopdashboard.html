@@ -24,8 +24,111 @@
 <script src="https://www.jqueryscript.net/demo/Creating-A-Modern-Multi-Step-Form-with-jQuery-CSS3/js/jquery.easing.min.js"></script>
 </head>
 <style>
-    @import url(https://fonts.googleapis.com/css?family=Ubuntu:400,500);
+@import url(https://fonts.googleapis.com/css?family=Ubuntu:400,500);
 @import url(http://fontawesome.io/assets/font-awesome/css/font-awesome.css);
+* {
+      box-sizing: border-box;
+    }
+
+
+    /* Float four columns side by side */
+    .column {
+      float: left;
+      width: 25%;
+      padding: 0 10px;
+    }
+
+    /* Remove extra left and right margins, due to padding */
+    .row {
+      margin: 0 -5px;
+    }
+
+    /* Clear floats after the columns */
+    .row:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+
+    /* Responsive columns */
+    @media screen and (max-width: 600px) {
+      .column {
+        width: 100%;
+        display: block;
+        margin-bottom: 20px;
+        margin-top:20px;
+      }
+    }
+
+    /* Style the counter cards */
+    .card {
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.9);
+      padding: 16px;
+      text-align: center;
+      background-color: #FFEBA7;
+    }
+
+    #cardtext {
+      color: black;
+      font-weight: bold;
+    }
+
+    /* hover cards */
+    .ag-courses-item_link {
+      display: block;
+      padding: 30px 20px;
+      background-color: #121212;
+
+      overflow: hidden;
+
+      position: relative;
+    }
+
+    .ag-courses-item_link:hover,
+    .ag-courses-item_link:hover .ag-courses-item_date {
+      text-decoration: none;
+      color: #FFF;
+    }
+
+    .ag-courses-item_link:hover .ag-courses-item_bg {
+      -webkit-transform: scale(10);
+      -ms-transform: scale(10);
+      transform: scale(10);
+    }
+
+    .ag-courses-item_bg {
+      height: 128px;
+      width: 128px;
+      background-color: #10e35a;
+
+      z-index: 1;
+      position: absolute;
+      top: -75px;
+      right: -75px;
+
+      border-radius: 50%;
+
+      -webkit-transition: all .5s ease;
+      -o-transition: all .5s ease;
+      transition: all .5s ease;
+    }
+
+   
+.ag-courses-item_title {
+  min-height: 87px;
+  margin: 0 0 25px;
+
+  overflow: hidden;
+
+  font-weight: bold;
+  font-size: 30px;
+  color: #FFF;
+
+  z-index: 2;
+  position: relative;
+}
+
+
 * {
   margin: 0;
   padding: 0;
@@ -38,8 +141,8 @@ body{
   font-family: 'Ubuntu', sans-serif !important;
 }
 #msform{
-  width: 80%;
-  margin: 50px auto;
+  width: 50%;
+  margin: 90px auto;
   text-align: center;
   position: relative;
 }
@@ -76,7 +179,7 @@ body{
   width: 100%;
   box-sizing: border-box;
   font-family: 'Ubuntu', sans-serif !important;
-  color: #2C3E50;
+  color: #FFEBA7;
   font-size: 13px;
 }
 #msform .action-button{
@@ -94,16 +197,16 @@ body{
   box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
 }
 .fs-title{
-  font-size: 15px;
+  font-size: 20px;
   text-transform: uppercase;
-  color: #FFEBA7;
+  color: white;
   margin-bottom: 10px;
   font-weight:500;
 }
 .fs-subtitle{
   font-weight: normal;
   font-size: 13px;
-  color: #FFEBA7;
+  color: white;
   margin-bottom: 20px;
 }
 #progressbar {
@@ -271,44 +374,58 @@ $(".submit").click(function(){
       </nav>
       <br><br><br><br>
     <div class="form_holder">
-         <form id="msform">
-          <ul id="progressbar">
-            <li class="active">1. Personal Details</Details></Details></li>
-            <li>2. Business Details</li>
-            <li>3. Confirmation</li>
-          </ul>
-          <fieldset>
-            <h2 class="fs-title">Create your Business Account</h2>
-            <h3 class="fs-subtitle">Enter your personal details here</h3>
-            <input type="text" name="yname" placeholder="Name" />
-            <input type="email" name="yemail" placeholder="Email" />
-            <input type="tel" name="yphone_no" placeholder="Phone No" />
-            <input type="text" name="yaddress" placeholder="Address" />
-            <input type="password" name="pass" placeholder="Password" />
-            <input type="password" name="cpass" placeholder="Confirm Password" />
-            <input type="button" name="next" class="next action-button" value="Next" />
-          </fieldset>
-          <fieldset>
-            <h2 class="fs-title">Create your Business Account</h2>
-            <h3 class="fs-subtitle">Enter your business details here</h3>
-            <input type="text" name="bname" placeholder="Business Name" />
-            <input type="email" name="bemail" placeholder="Business mail" />
-            <input type="tel" name="bphone_no" placeholder="Business Phone No" />
-            <input type="text" name="baddress1" placeholder="Shop Address line 1" />
-            <input type="text" name="baddress2" placeholder="Shop Address line 1" />
-            <input type="tel" name="baddress1" placeholder="Pincode" />
-    
-            <input type="button" name="previous" class="previous action-button" value="Previous" />
-            <input type="button" name="next" class="next action-button" value="Next" />
-          </fieldset>
-          <fieldset>
-            <h2 class="fs-title">Business Account Verification</h2>
-            <h3 class="fs-subtitle">Verify your Business Account</h3>
-            <input type="password" name="otp" placeholder="Enter your one time password here" />
-            <input type="button" name="previous" class="previous action-button" value="Previous" />
-            <input type="submit" name="submit" class="submit action-button" value="Submit" />
-          </fieldset>
-          
+        <div id="services">
+            <br><br>
+            <h1 style="font-weight: bold;text-align: center;color:#FFEBA7">DASHBOARD</h1>
+            <br><br>
+              <div class="row">
+                <div class="column">
+                  <div class="card">
+                    <div class="ag-courses-item_link">
+                      <div class="ag-courses-item_bg"></div>
+                      <div class="ag-courses-item_title">
+                        Total no of completed orders<br>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <br><br><br><br>                
+              <div class="column">
+                <div class="card">
+                  <div class="ag-courses-item_link">
+                  <div class="ag-courses-item_bg"></div>
+                  <div class="ag-courses-item_title">
+                    Total no of pages printed<br>
+                  </div>
+                </div>
+                </div>
+              </div>
+              <br><br><br><br>
+              <div class="column">
+                <div class="card">
+                  <div class="ag-courses-item_link">
+                    <div class="ag-courses-item_bg"></div>
+                    <div class="ag-courses-item_title">
+                        Total no of unique customers<br>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <br><br><br><br><br><br>
+            <div class="column">
+                <div class="card">
+                  <div class="ag-courses-item_link">
+                    <div class="ag-courses-item_bg"></div>
+                    <div class="ag-courses-item_title">
+                        Total revenue generated<br>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            
+          </div>
+      </div>
+      <br><br><br><br><br>
         </form>
         </div>
         <br><br><br><br><br><br><br><br><br>
