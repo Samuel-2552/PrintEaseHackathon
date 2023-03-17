@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PrintEase</title>
+    <link rel="icon" type="image/x-icon" href="{{fav_icon}}">
+<!-- FIXED TOP -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<!-- for the icons -->
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<!-- resources -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://www.jqueryscript.net/demo/Creating-A-Modern-Multi-Step-Form-with-jQuery-CSS3/js/jquery.easing.min.js"></script>
+</head>
+<style>
+    @import url(https://fonts.googleapis.com/css?family=Ubuntu:400,500);
+@import url(http://fontawesome.io/assets/font-awesome/css/font-awesome.css);
+* {
+  margin: 0;
+  padding: 0;
+}
+html {
+    background-color: #1f2029;
+}
+body{
+    background-color: #1f2029;
+  font-family: 'Ubuntu', sans-serif !important;
+}
+#msform{
+  width: 50%;
+  margin: 90px auto;
+  text-align: center;
+  position: relative;
+}
+#loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 30%;
+  width:auto;
+}
+.content {
+  display: none;
+}
+#msform fieldset{
+  background: #3c3c49;
+  border: 0 none;
+  border-radius: 3px;
+  box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+  padding: 20px 30px;
+  box-sizing: border-box;
+  width: 80%;
+  margin: 0 10%;
+  position: absolute;
+}
+#msform fieldset:not(:first-of-type){
+  display: none;
+}
+#msform input, #msform textarea{
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  margin-bottom: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: 'Ubuntu', sans-serif !important;
+  color: #2C3E50;
+  font-size: 13px;
+}
+#msform .action-button{
+  width: 100px;
+  background: #27AE60;
+  font-weight: 400;
+  color: white;
+  border: 0 none;
+  border-radius: 1px;
+  cursor: pointer;
+  padding: 10px 5px;
+  margin: 10px 5px;
+}
+#msform .action-button:hover, #msform .action-button:focus{
+  box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
+}
+.fs-title{
+  font-size: 20px;
+  text-transform: uppercase;
+  color: white;
+  margin-bottom: 10px;
+  font-weight:500;
+}
+.fs-subtitle{
+  font-weight: normal;
+  font-size: 13px;
+  color: white;
+  margin-bottom: 20px;
+}
+#progressbar {
+  margin-bottom: 30px;
+  overflow: hidden;
+  counter-reset: step;
+}
+#progressbar li {
+    list-style-type: none;
+    color: #D2D2D2;
+    text-transform: capitalize;
+    font-size: 16px;
+    width: 33.33%;
+    float: left;
+    position: relative;
+}
+#progressbar li.active {
+    color: #27AE60;
+}
+#progressbar li:before{
+    content:'' ;/*counter(step)*/
+    counter-increment: step;
+    width: 50px;
+    line-height: 50px;
+    display: block;
+    font-size: 18px;
+    color:#fff ;
+    background: transparent;
+    border-radius: 100%;
+    margin: 0 auto 5px auto;    
+  border: 2px solid #ECECEC;
+}
+#progressbar li:nth-child(1):before{
+  content:"\f129" ;
+  font-family: 'FontAwesome'; 
+}
+#progressbar li:nth-child(2):before{
+  content:"\f013" ;
+  font-family: 'FontAwesome'; 
+}
+#progressbar li:nth-child(3):before{
+  content:"\f00c" ;
+  font-family: 'FontAwesome'; 
+}
+#progressbar li:after {
+    content: '';
+    width: 73%;
+    height: 2px;
+    background: #ECECEC;
+    position: absolute;
+    left: -35%;
+    top: 25px;
+    z-index: -1;
+}
+#progressbar li:first-child:after {
+  content: none;
+}
+#progressbar li.active:before {
+    border: 2px solid #27AE60;
+    color: #27AE60;
+  /* content: "\f164";*/
+}
+#progressbar li.active:after {
+  background: #27AE60;
+  color: white;
+}
+.form_holder {
+    text-align: center;
+    margin: 30px 0 0;
+}
+</style>
+
+
+<script>
+ $(function() {
+
+var current_fs, next_fs, previous_fs; 
+var left, opacity, scale; 
+var animating; 
+$(".next").click(function(){
+  if(animating) return false;
+  animating = true;
+  
+  current_fs = $(this).parent();
+  next_fs = $(this).parent().next();
+  $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+  next_fs.show(); 
+  current_fs.animate({opacity: 0}, {
+    step: function(now, mx) {
+      scale = 1 - (1 - now) * 0.2;
+      left = (now * 50)+"%";
+      opacity = 1 - now;
+      current_fs.css({'transform': 'scale('+scale+')'});
+      next_fs.css({'left': left, 'opacity': opacity});
+    }, 
+    duration: 1000, 
+    complete: function(){
+      current_fs.hide();
+      animating = false;
+    }, 
+    easing: 'easeInOutBack'
+  });
+});
+
+$(".previous").click(function(){
+  if(animating) return false;
+  animating = true;
+  
+  current_fs = $(this).parent();
+  previous_fs = $(this).parent().prev();
+  $("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+  previous_fs.show(); 
+  current_fs.animate({opacity: 0}, {
+    step: function(now, mx) {
+      scale = 0.8 + (1 - now) * 0.2;
+      left = ((1-now) * 50)+"%";
+      opacity = 1 - now;
+      current_fs.css({'left': left});
+      previous_fs.css({'transform': 'scale('+scale+')', 'opacity': opacity});
+    }, 
+    duration: 1000, 
+    complete: function(){
+      current_fs.hide();
+      animating = false;
+    }, 
+    easing: 'easeInOutBack'
+  });
+});
+
+$(".submit").click(function(){
+  return false;
+})
+
+});
+</script>
+<body>
+    <img src="{{load_img}}" id="loading">
+    <div class="content">
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+        <div class="container-fluid">
+          <a class="navbar-brand" id="logotext" href="/" style="color:#FFEBA7"><img src="{{fav_icon}}" height="50px"> PrintEase</a>
+  
+  
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+  
+          </button>
+          <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav" >
+              <li class="nav-item">
+                <a class="nav-link" href="/login" style="color:#FFEBA7">GET STARTED</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/aboutus" style="color:#FFEBA7">ABOUT US</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/contact" style="color:#FFEBA7">CONTACT US</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/team" style="color:#FFEBA7">TEAM</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <br><br><br><br>
+    <div class="form_holder">
+         <form id="msform">
+          
+          <fieldset>
+            <br>
+            <h6 class="fs-title">Login to your Business Account</h1>
+            <br>
+            <input type="email" name="yemail" placeholder="Email" />
+            <input type="password" name="pass" placeholder="Password" />
+            <input type="button" name="next" style="background-color: wheat;" value="Submit" />
+            <br><br>
+            <h1 class="fs-title">Dont have an account? &nbsp&nbsp<a href="/shopsignup"> Signup now</a></h1>
+            <br>
+        </fieldset>
+          
+        </form>
+        </div>
+        <br><br><br><br><br><br><br><br><br>
+    </div>
+    <script>
+
+    setTimeout(function () {
+        document.getElementById("loading").style.display = "none";
+        document.querySelector(".content").style.display = "block";
+    }, 3000);
+
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

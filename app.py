@@ -275,6 +275,15 @@ def shopsignup():
     if request.method == 'POST':
         useremailf = request.form['logemail']
     return render_template('shopsignup.html', fav_icon=fav_icon, load_img=load_img, ip=ip)
+
+@app.route('/shoplogin',methods=['GET','POST'])
+def shoplogin():
+    if 'username' in session:
+        return redirect(url_for('dashboard'))
+    if request.method == 'POST':
+        useremailf = request.form['logemail']
+    return render_template('shoplogin.html', fav_icon=fav_icon, load_img=load_img, ip=ip)
+
 @app.route('/forgot', methods=['GET', 'POST'])
 def forgot():
     global rv
