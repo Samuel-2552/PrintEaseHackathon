@@ -284,6 +284,14 @@ def shoplogin():
         useremailf = request.form['logemail']
     return render_template('shoplogin.html', fav_icon=fav_icon, load_img=load_img, ip=ip)
 
+@app.route('/shopdashboard',methods=['GET','POST'])
+def shopdashboard():
+    if 'username' in session:
+        return redirect(url_for('dashboard'))
+    if request.method == 'POST':
+        useremailf = request.form['logemail']
+    return render_template('shopdashboard.html', fav_icon=fav_icon, load_img=load_img, ip=ip)
+
 @app.route('/forgot', methods=['GET', 'POST'])
 def forgot():
     global rv
