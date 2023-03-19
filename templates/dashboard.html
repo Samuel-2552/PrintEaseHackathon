@@ -12,6 +12,33 @@
   <script src="static\script.js"></script>
   <title>PrintEase</title>
   <script>
+    function getLocation() {
+            if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+            } else {
+            alert("Geolocation is not supported by this browser.");
+            }
+        }
+        
+        function showPosition(position) {
+            document.getElementById("latitude").innerHTML = position.coords.latitude;
+            document.getElementById("longitude").innerHTML = position.coords.longitude;
+            output();
+
+        }
+        
+        function output() {
+            const latitude = document.getElementById('latitude').textContent;
+            const longitude = document.getElementById('longitude').textContent;
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', '/update-location', true);
+            xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+            xhr.send(JSON.stringify({latitude: latitude, longitude: longitude}));
+            xhr.onload = function() {
+            const responseText = this.responseText;
+            document.getElementById("response").innerHTML = responseText;
+            };
+        }
     function a1(){
       document.getElementById("ques1").hidden = false;
       document.getElementById("ques2").hidden = true;
@@ -145,75 +172,85 @@
     <br><br><br><br>
     <!--upload card-->
     <center>
-      <h1 style="color: #FFEBA7;">Welcome {{username}}!</h1>
+      <div class="before_location">
+        <button type="button" onclick="getLocation()" class="btn mt-4" id="location">Search Shops Near Me!</button>
+        <br><br>
+        <p >Latitude: <span id="latitude"></span></p>
+        <p >Longitude: <span id="longitude"></span></p>
+      </div>
     </center>
-    <div class="section">
-      <div class="container">
-        <div class="row medium-height justify-content-center">
-          <div class="col-12 text-center align-self-center py-5">
-            <div class="section pb-5 pt-5 pt-sm-2 text-center">
-              <div class="card-3d-wrap mx-auto">
-                <div class="card-3d-wrapper">
-                  <div class="card-front">
-                    <div class="center-wrap">
-                      <form action="/payment" method="POST" enctype="multipart/form-data">
-                        <!--upload-->
-                        <div class="section" id="upload">
-                          <h4 class="mb-4 pb-3" style="text-align:center;position:relative;font-size: 25px;"
-                            id="infotext">
-                            Scan or Upload</h4>
-                          <div class="form-group mt-2 justify-center">
-                            <div id="indicatorContainerWrap">
-                              <div class="rad-prg" id="indicatorContainer"></div>
-                              <div class="rad-cntnt">Click here to<br> select a file.</div>
-                              <input type="file" id="prgFileSelector" onclick="scanhide()" accept="image/*, application/pdf" capture />
-                            </div>
-                            <div class="form-group mt-2">
-                              <div id="feedback" class="indict">
+    <div class="after_location" hidden>
+      <center>
+        <h1 style="color: #FFEBA7;">Welcome {{username}}!</h1>
+      </center>
+      <div class="section">
+        <div class="container">
+          <div class="row medium-height justify-content-center">
+            <div class="col-12 text-center align-self-center py-5">
+              <div class="section pb-5 pt-5 pt-sm-2 text-center">
+                <div class="card-3d-wrap mx-auto">
+                  <div class="card-3d-wrapper">
+                    <div class="card-front">
+                      <div class="center-wrap">
+                        <form action="/payment" method="POST" enctype="multipart/form-data">
+                          <!--upload-->
+                          <div class="section" id="upload">
+                            <h4 class="mb-4 pb-3" style="text-align:center;position:relative;font-size: 25px;"
+                              id="infotext">
+                              Scan or Upload</h4>
+                            <div class="form-group mt-2 justify-center">
+                              <div id="indicatorContainerWrap">
+                                <div class="rad-prg" id="indicatorContainer"></div>
+                                <div class="rad-cntnt">Click here to<br> select a file.</div>
+                                <input type="file" id="prgFileSelector" onclick="scanhide()" accept="image/*, application/pdf" capture />
                               </div>
-                              <button type="button" onclick="a1()" class="btn mt-4" id="next1" hidden>Next</button>
+                              <div class="form-group mt-2">
+                                <div id="feedback" class="indict">
+                                </div>
+                                <button type="button" onclick="a1()" class="btn mt-4" id="next1" hidden>Next</button>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                        <!--ques1-->
-                        <div class="section" id="ques1" hidden>
-                          <label>
-                            <h2>How many copies do you want?</h2><br>
-                            <h1><input type="number" name="quantity" min="1" max="10" required value="1">
-                            </h1><br>
-                            <div>
-                              <button type="button" onclick="b1()" class="btn mt-4" id="back1">Back</button>
-                              <button type="button" onclick="a2()" class="btn mt-4" id="next2">Next</button>
-                            </div>
-                          </label>
-                        </div>
-                        <!--ques2-->
-                        <div class="section" id="ques2" hidden>
-                          <label>
-                            <h2>How do you want to print?</h2><br>
-                            <h4><input type="radio" name="color" value="0" checked> Black and White&emsp;
-                              <input type="radio" name="color" value="1"> Colour
-                            </h4>
-                            <div>
-                              <button type="button" onclick="b2()" class="btn mt-4" id="back2">Back</button>
-                              <button type="button" onclick="a3()" class="btn mt-4" id="next3">Next</button>
-                            </div>
-                          </label>
-                        </div>
-                        <!--ques3-->
-                        <div class="section" id="ques3" hidden>
-                          <label>
-                            <h2>How do you want to print?</h2><br>
-                            <h4><input type="radio" name="side" value="0" checked> Front And Back&emsp;
-                              <input type="radio" name="side" value="1"> Single Side
-                            </h4>
-                            <div>
-                              <button type="button" onclick="b3()" class="btn mt-4" id="back3">Back</button>
-                              <input type="submit" class="btn mt-4" id="next4"></input>
-                            </div>
-                          </label>
-                        </div>
-                      </form>
+                          <!--ques1-->
+                          <div class="section" id="ques1" hidden>
+                            <label>
+                              <h2>How many copies do you want?</h2><br>
+                              <h1><input type="number" name="quantity" min="1" max="10" required value="1">
+                              </h1><br>
+                              <div>
+                                <button type="button" onclick="b1()" class="btn mt-4" id="back1">Back</button>
+                                <button type="button" onclick="a2()" class="btn mt-4" id="next2">Next</button>
+                              </div>
+                            </label>
+                          </div>
+                          <!--ques2-->
+                          <div class="section" id="ques2" hidden>
+                            <label>
+                              <h2>How do you want to print?</h2><br>
+                              <h4><input type="radio" name="color" value="0" checked> Black and White&emsp;
+                                <input type="radio" name="color" value="1"> Colour
+                              </h4>
+                              <div>
+                                <button type="button" onclick="b2()" class="btn mt-4" id="back2">Back</button>
+                                <button type="button" onclick="a3()" class="btn mt-4" id="next3">Next</button>
+                              </div>
+                            </label>
+                          </div>
+                          <!--ques3-->
+                          <div class="section" id="ques3" hidden>
+                            <label>
+                              <h2>How do you want to print?</h2><br>
+                              <h4><input type="radio" name="side" value="0" checked> Front And Back&emsp;
+                                <input type="radio" name="side" value="1"> Single Side
+                              </h4>
+                              <div>
+                                <button type="button" onclick="b3()" class="btn mt-4" id="back3">Back</button>
+                                <input type="submit" class="btn mt-4" id="next4"></input>
+                              </div>
+                            </label>
+                          </div>
+                        </form>
+                      </div>
                     </div>
                   </div>
                 </div>

@@ -716,6 +716,17 @@ def edit(user_id):
     else:
         return "Login as admin"
     
+@app.route('/update-location', methods=['POST'])
+def update_location():
+    global latitude,longitude
+    data = request.get_json()
+    latitude = data['latitude']
+    longitude = data['longitude']
+    # Do something with the latitude and longitude values
+    print("lattitude", latitude)
+    print("Longitude", longitude)
+    return "Success"
+    
 
 if __name__ == '__main__':
     app.run(debug=True,host="0.0.0.0")
