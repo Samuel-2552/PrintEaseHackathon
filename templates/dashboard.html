@@ -36,9 +36,20 @@
             xhr.send(JSON.stringify({latitude: latitude, longitude: longitude}));
             xhr.onload = function() {
             const responseText = this.responseText;
-            document.getElementById("response").innerHTML = responseText;
+            // console.log("response from app.py = "+responseText)
+            if(responseText=="Success"){
+                document.getElementById("show_shops").hidden=false;
+            }
+
             };
         }
+
+        function show_upload(){
+          document.getElementById("before_location").hidden=true;
+          document.getElementById("show_shops").hidden=true;
+          document.getElementById("after_location").hidden=false;
+        }
+
     function a1(){
       document.getElementById("ques1").hidden = false;
       document.getElementById("ques2").hidden = true;
@@ -172,14 +183,22 @@
     <br><br><br><br>
     <!--upload card-->
     <center>
-      <div class="before_location">
+      <div class="before_location" id="before_location">
         <button type="button" onclick="getLocation()" class="btn mt-4" id="location">Search Shops Near Me!</button>
         <br><br>
         <p >Latitude: <span id="latitude"></span></p>
         <p >Longitude: <span id="longitude"></span></p>
       </div>
     </center>
-    <div class="after_location" hidden>
+    <br><br>
+    <center>
+      <div class="show_shops" id="show_shops" hidden>
+        <button type="button"  onclick="show_upload()" class="btn mt-4" >Reddy Xerox</button><br><br>
+        <button type="button"  onclick="show_upload()" class="btn mt-4" >College Xerox</button><br><br>
+        <button type="button"  onclick="show_upload()" class="btn mt-4" >Jerry Printers</button><br><br>
+      </div>
+    </center>
+    <div class="after_location" id="after_location" hidden>
       <center>
         <h1 style="color: #FFEBA7;">Welcome {{username}}!</h1>
       </center>
