@@ -174,6 +174,31 @@ body{
     text-align: center;
     margin: 30px 0 0;
 }
+
+/* Styling for the pop-up window */
+.popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: black;
+      background-color: #FFEBA7;
+      padding: 20px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+      z-index: 999;
+      border-radius: 5%;
+    }
+
+    /* Styling for the overlay */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 998;
+    }
 </style>
 
 
@@ -240,7 +265,22 @@ $(".submit").click(function(){
 });
 </script>
 <body>
-    <img src="{{load_img}}" id="loading">
+  <div id="location" class="popup" style="display:none;">
+    <h2>YOUR LOCATION!</h2>
+    <p>Latitude: <span id="latitude"></span></p>
+    <p>Longitude: <span id="longitude"></span></p>
+    <button onclick="closePopup()">Ok</button>
+  </div> 
+  <div id="popup" class="popup" style="display:none;">
+    <h2>CONFIRMATION!</h2>
+    <p>ARE YOU CURENTLY AT YOUR SHOP?</p>
+    <button onclick="locatePopup()">Yes</button>
+    <button onclick="closePopup()">No</button>
+  </div>
+   
+  <div id="overlay" class="overlay" style="display:none;"></div>
+  
+  <img src="{{load_img}}" id="loading">
     <div class="content">
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
         <div class="container-fluid">
@@ -294,7 +334,7 @@ $(".submit").click(function(){
             <input type="text" name="bname" placeholder="Business Name" />
             <input type="email" name="bemail" placeholder="Business mail" />
             <input type="tel" name="bphone_no" placeholder="Business Phone No" />
-            <input type="button" name="baddress" class="address"placeholder="Get Shop Address" />
+            <input type="button" name="baddress" class="address" onclick="openpopup()" value="Get Shop Address" />
     
             <input type="button" name="previous" class="previous action-button" value="Previous" />
             <input type="button" name="next" class="next action-button" value="Next" />
@@ -309,6 +349,7 @@ $(".submit").click(function(){
           
         </form>
         </div>
+        
         <br><br><br><br><br><br><br><br><br>
     </div>
     <script>
@@ -317,6 +358,39 @@ $(".submit").click(function(){
         document.getElementById("loading").style.display = "none";
         document.querySelector(".content").style.display = "block";
     }, 3000);
+
+
+</script>
+<script>
+function openpopup() {
+      document.getElementById("popup").style.display = "block";
+      document.getElementById("overlay").style.display = "block";
+    }
+    function closePopup() {
+      document.getElementById("popup").style.display = "none";
+      document.getElementById("overlay").style.display = "none";
+      document.getElementById("location").style.display = "none";
+      document.getElementById("overlay").style.display = "none";
+    }
+    function locatePopup(){
+      document.getElementById("popup").style.display = "none";
+      document.getElementById("overlay").style.display = "none";
+      document.getElementById("location").style.display = "block";
+      document.getElementById("overlay").style.display = "block";
+      getLocation();
+    }
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+      } else {
+        alert("Geolocation is not supported by this browser.");
+      }
+    }
+    function showPosition(position) {
+      document.getElementById("latitude").innerHTML = position.coords.latitude;
+      document.getElementById("longitude").innerHTML = position.coords.longitude;
+      
+    }
 
 
 </script>
