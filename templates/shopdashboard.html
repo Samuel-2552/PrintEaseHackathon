@@ -421,19 +421,17 @@ $(".submit").click(function(){
             </div>
       </div>
       <br><br><br><br><br>
-      <div style="justify-content:center">
       <button class="open-button" onclick="openForm()" >ADD A NEW PRODUCT</button>
-    </div>
       <div class="form-popup" id="myForm">
         <form action="/newproduct" class="form-container" method="post">
         <h1>New Product</h1>
         <br>
-        <label for="Name of the new product"><b>Name of the new product</b></label>
-        <input type="text" placeholder="Enter Name of the new product" name="Name of the new product" id="pname" required>
+        <label for="pname"><b>Name of the new product</b></label>
+        <input type="text" placeholder="Enter Name of the new product" name="pname"  required>
       
         <label for="Qtytype"><b>Quantity type</b></label>
         <br>
-        <select name="built-insubs" id="Qtytype" style="width:70%;height:40%;justify-items: center;">
+        <select name="Qtytype" style="width:70%;height:40%;justify-items: center;">
         <option value="null">---Select an appropriate Type----</option>
             <option value="Per Kg">Per Kg</option>
             <option value="Per Box">Per Box</option>
@@ -441,8 +439,8 @@ $(".submit").click(function(){
             <option value="others">others</option>
             </select>
             <br><br><br>
-        <label for="Price"><b>Price</b></label>
-        <input type="tel" placeholder="Enter Price" name="Price" id="price" required>
+        <label for="price"><b>Price</b></label>
+        <input type="tel" placeholder="Enter Price" name="price" required>
 
           <button  class="btn">Add</button> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
           <button type="button" class="btn cancel" onclick="closeForm()">Cancel</button>
