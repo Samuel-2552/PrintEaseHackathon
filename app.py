@@ -303,6 +303,8 @@ def newproduct():
             cursor = connection.cursor()
             cursor.execute("INSERT INTO shopkeeper_products values(pname, Qtytype,price) VALUES (?, ?, ?)", (pname,Qtytype,price))
             user = cursor.fetchone()
+            connection.commit()
+            connection.close()
             print(user)
         except:
             return "database error"
