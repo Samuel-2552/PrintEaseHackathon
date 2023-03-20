@@ -301,11 +301,11 @@ def newproduct():
             price = request.form['price']
             connection = connect_db()
             cursor = connection.cursor()
-            cursor.execute("INSERT INTO shopkeeper_products (pname, Qtytype,price) VALUES (?, ?, ?)", (pname,Qtytype,price))
+            cursor.execute("INSERT INTO shopkeeper_products values(pname, Qtytype,price) VALUES (?, ?, ?)", (pname,Qtytype,price))
             user = cursor.fetchone()
             print(user)
         except:
-            return "E-mail already Exists"
+            return "database error"
     
     return render_template('shopdashboard.html', fav_icon=fav_icon, load_img=load_img,ip=ip,no_load=1)
 
