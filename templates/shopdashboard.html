@@ -425,24 +425,24 @@ $(".submit").click(function(){
       <button class="open-button" onclick="openForm()" >ADD A NEW PRODUCT</button>
     </div>
       <div class="form-popup" id="myForm">
-        <form action="/action_page.php" class="form-container">
+        <form action="/newproduct" class="form-container" method="post">
         <h1>New Product</h1>
         <br>
         <label for="Name of the new product"><b>Name of the new product</b></label>
-        <input type="text" placeholder="Enter Name of the new product" name="Name of the new product" required>
+        <input type="text" placeholder="Enter Name of the new product" name="Name of the new product" id="pname" required>
       
-        <label for="quantity"><b>Quantity type</b></label>
+        <label for="Qtytype"><b>Quantity type</b></label>
         <br>
-        <select name="built-insubs" id="quantity" style="width:70%;height:40%;justify-items: center;">
-        <option value=0>---Select an appropriate Type----</option>
-            <option value="general">Per Kg</option>
-            <option value="complaint">Per Box</option>
-            <option value="enquiry">Per piece</option>
-            <option value="enquiry">others</option>
+        <select name="built-insubs" id="Qtytype" style="width:70%;height:40%;justify-items: center;">
+        <option value="null">---Select an appropriate Type----</option>
+            <option value="Per Kg">Per Kg</option>
+            <option value="Per Box">Per Box</option>
+            <option value="Per piece">Per piece</option>
+            <option value="others">others</option>
             </select>
             <br><br><br>
         <label for="Price"><b>Price</b></label>
-        <input type="tel" placeholder="Enter Price" name="Price" required>
+        <input type="tel" placeholder="Enter Price" name="Price" id="price" required>
 
           <button  class="btn">Add</button> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
           <button type="button" class="btn cancel" onclick="closeForm()">Cancel</button>
