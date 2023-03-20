@@ -286,7 +286,12 @@ def shoplogin():
 
 @app.route('/shopdashboard')
 def shopdashboard():
-    return render_template('shopdashboard.html', fav_icon=fav_icon, load_img=load_img, ip=ip)
+    conn = sqlite3.connect('users.db')
+    cursor = conn.cursor()
+    cursor.execute('SELECT * FROM shopkeeper_products')
+    users = cursor.fetchall()
+    cursor.close()
+    return render_template('shopdashboard.html', users=users,fav_icon=fav_icon, load_img=load_img)
 # new product
 @app.route('/newproduct', methods=['GET', 'POST'])
 def newproduct():
@@ -302,8 +307,12 @@ def newproduct():
             connection.close()
         except:
             return "database error"
-    
-    return render_template('shopdashboard.html', fav_icon=fav_icon, load_img=load_img,ip=ip,no_load=1,pname=pname,Qtytype=Qtytype,price=price)
+    conn = sqlite3.connect('users.db')
+    cursor = conn.cursor()
+    cursor.execute('SELECT * FROM shopkeeper_products')
+    users = cursor.fetchall()
+    cursor.close()
+    return render_template('shopdashboard.html', users=users,fav_icon=fav_icon, load_img=load_img)    
 
 
 @app.route('/forgot', methods=['GET', 'POST'])

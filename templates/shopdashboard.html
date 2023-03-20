@@ -476,16 +476,16 @@ $(".submit").click(function(){
               </tr>
           </thead>
           <tbody>
-              {% for shopkeeper_products in users %}
+            {% for shopkeeper_products in users %}
               <tr style="border: 1px solid black;" >
-                  <td style="border: 1px solid black;">{{ shopkeeper_products[0] }}</td>
-                  <td style="border: 1px solid black;">{{ shopkeeper_products[1] }}</td>
-                  <td style="border: 1px solid black;">{{ shopkeeper_products[2] }}</td>
+                  <td style="border: 1px solid black;">{{shopkeeper_products[0]}}</td>
+                  <td style="border: 1px solid black;">{{shopkeeper_products[1]}}</td>
+                  <td style="border: 1px solid black;">{{shopkeeper_products[2]}}</td>
               </tr>
               {% endfor %}
           </tbody>
       </table>
-     
+      <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
       </div>
         
         <br><br><br><br><br>
