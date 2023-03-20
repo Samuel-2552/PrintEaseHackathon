@@ -42,7 +42,7 @@
         width: 100%;
         display: block;
         margin-bottom: 20px;
-        margin-top:20px;
+        margin-top: 20px;
       }
     }
 
@@ -99,61 +99,61 @@
       transition: all .5s ease;
     }
 
-   
-.ag-courses-item_title {
-  min-height: 87px;
-  margin: 0 0 25px;
 
-  overflow: hidden;
+    .ag-courses-item_title {
+      min-height: 87px;
+      margin: 0 0 25px;
 
-  font-weight: bold;
-  font-size: 30px;
-  color: #FFF;
+      overflow: hidden;
 
-  z-index: 2;
-  position: relative;
-}
+      font-weight: bold;
+      font-size: 30px;
+      color: #FFF;
+
+      z-index: 2;
+      position: relative;
+    }
   </style>
   <script>
     function getLocation() {
-            if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition);
-            } else {
-            alert("Geolocation is not supported by this browser.");
-            }
-        }
-        
-        function showPosition(position) {
-            document.getElementById("latitude").innerHTML = position.coords.latitude;
-            document.getElementById("longitude").innerHTML = position.coords.longitude;
-            output();
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+      } else {
+        alert("Geolocation is not supported by this browser.");
+      }
+    }
 
-        }
-        
-        function output() {
-            const latitude = document.getElementById('latitude').textContent;
-            const longitude = document.getElementById('longitude').textContent;
-            const xhr = new XMLHttpRequest();
-            xhr.open('POST', '/update-location', true);
-            xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-            xhr.send(JSON.stringify({latitude: latitude, longitude: longitude}));
-            xhr.onload = function() {
-            const responseText = this.responseText;
-            // console.log("response from app.py = "+responseText)
-            if(responseText=="Success"){
-                document.getElementById("show_shops").hidden=false;
-            }
+    function showPosition(position) {
+      document.getElementById("latitude").innerHTML = position.coords.latitude;
+      document.getElementById("longitude").innerHTML = position.coords.longitude;
+      output();
 
-            };
+    }
+
+    function output() {
+      const latitude = document.getElementById('latitude').textContent;
+      const longitude = document.getElementById('longitude').textContent;
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', '/update-location', true);
+      xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+      xhr.send(JSON.stringify({ latitude: latitude, longitude: longitude }));
+      xhr.onload = function () {
+        const responseText = this.responseText;
+        // console.log("response from app.py = "+responseText)
+        if (responseText == "Success") {
+          document.getElementById("show_shops").hidden = false;
         }
 
-        function show_upload(){
-          document.getElementById("before_location").hidden=true;
-          document.getElementById("show_shops").hidden=true;
-          document.getElementById("after_location").hidden=false;
-        }
+      };
+    }
 
-    function a1(){
+    function show_upload() {
+      document.getElementById("before_location").hidden = true;
+      document.getElementById("show_shops").hidden = true;
+      document.getElementById("after_location").hidden = false;
+    }
+
+    function a1() {
       document.getElementById("ques1").hidden = false;
       document.getElementById("ques2").hidden = true;
       document.getElementById("upload").hidden = true;
@@ -197,54 +197,55 @@
       window.location = "{{ip}}";
     }
     function closePopup() {
-			// Hide the pop-up window and overlay
-			document.getElementById("popup").style.display = "none";
-			document.getElementById("overlay").style.display = "none";
-		}
+      // Hide the pop-up window and overlay
+      document.getElementById("popup").style.display = "none";
+      document.getElementById("overlay").style.display = "none";
+    }
 
   </script>
   <link rel="stylesheet" href="static\dash_style.css">
   <style>
-		/* Styling for the pop-up window */
-		.popup {
-			position: fixed;
-			top: 50%;
-			left: 50%;
-			transform: translate(-50%, -50%);
-      color:black;
-			background-color: #FFEBA7;
-			padding: 20px;
-			box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-			z-index: 999;
+    /* Styling for the pop-up window */
+    .popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: black;
+      background-color: #FFEBA7;
+      padding: 20px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+      z-index: 999;
       border-radius: 5%;
-		}
+    }
 
-		/* Styling for the overlay */
-		.overlay {
-			position: fixed;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			background-color: rgba(0, 0, 0, 0.5);
-			z-index: 998;
-		}
-	</style>
+    /* Styling for the overlay */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 998;
+    }
+  </style>
 </head>
 
 <body>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/radialIndicator/1.4.0/radialIndicator.js"></script>
   <div id="popup" class="popup" style="display:none;">
-		<h2>Congratulations!</h2>
-		<p>Rs.20 have been credited with your wallet .</p>
-		<button onclick="closePopup()">ok</button>
-	</div>
+    <h2>Congratulations!</h2>
+    <p>Rs.20 have been credited with your wallet .</p>
+    <button onclick="closePopup()">ok</button>
+  </div>
   <div id="overlay" class="overlay" style="display:none;"></div>
   <img src="{{load_img}}" id="loading">
   <div class="content">
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
       <div class="container-fluid">
-        <a class="navbar-brand" id="logotext" href="/" style="color:#FFEBA7"><img src="{{fav_icon}}" height="50px"> PrintEase</a>
+        <a class="navbar-brand" id="logotext" href="/" style="color:#FFEBA7"><img src="{{fav_icon}}" height="50px">
+          PrintEase</a>
 
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
@@ -252,7 +253,7 @@
 
         </button>
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
-          <ul class="navbar-nav" >
+          <ul class="navbar-nav">
             <li class="nav-item">
               <a class="nav-link" href="/login" style="color:#FFEBA7">{{name}}</a>
             </li>
@@ -267,18 +268,20 @@
             </li>
             <!-- &nbsp&nbsp&nbsp&nbsp<button class="btn btn-primary" onclick="location.href='/logout';" type="button">LOGOUT</button> -->
             <!-- dropdown testing -->
-            
+
           </ul>
         </div>
         <div class="dropdown" id="dropdown">
-          
+
           <button onclick="myFunction()" class="dropbtn">{{user}}</button>
-          <div  id="myDropdown" class="dropdown-content" >
-            <a  href="#home" type="button" class="btn btn-primary" style="color: #000"><i style="float: left;" class="fas fa-wallet fa-lg"></i><span style="float: right;">₹{{wallet}}</span></a>
-            <a  href="/logout" type="button" class="btn btn-primary " style="color: #000;"><i style="float: left;" class="fas fa-sign-out-alt fa-lg"></i><span style="float: right;">Logout</span></a>
+          <div id="myDropdown" class="dropdown-content">
+            <a href="#home" type="button" class="btn btn-primary" style="color: #000"><i style="float: left;"
+                class="fas fa-wallet fa-lg"></i><span style="float: right;">₹{{wallet}}</span></a>
+            <a href="/logout" type="button" class="btn btn-primary " style="color: #000;"><i style="float: left;"
+                class="fas fa-sign-out-alt fa-lg"></i><span style="float: right;">Logout</span></a>
           </div>
         </div>
-        
+
       </div>
 
     </nav>
@@ -289,46 +292,68 @@
       <div class="before_location" id="before_location">
         <button type="button" onclick="getLocation()" class="btn mt-4" id="location">Search Shops Near Me!</button>
         <br><br>
-        <p >Latitude: <span id="latitude"></span></p>
-        <p >Longitude: <span id="longitude"></span></p>
+        <p>Latitude: <span id="latitude"></span></p>
+        <p>Longitude: <span id="longitude"></span></p>
       </div>
     </center>
     <br><br>
     <center>
       <div class="show_shops" id="show_shops" hidden>
-      <div class="row">                
-      <div class="column">
-          <div class="card">
-            <div class="ag-courses-item_link">
-              <button type="button"  onclick="show_upload()"  style="background-color: transparent;border:none;">
-            <div class="ag-courses-item_bg"></div>
-            <div class="ag-courses-item_title">
-              Jerry Printers</button></div>
-            </div>
-            </div>
-          
-      
-        <br><br><br><br>
-        <div class="column">
-          <div class="card">
-            <div class="ag-courses-item_link">
-              <button type="button"  onclick="show_upload()"  style="background-color: transparent;border:none;" >
-                <div class="ag-courses-item_bg"></div>
-              <div class="ag-courses-item_title">
-                College Xerox</button></div></div></div>
-            
-        <br><br><br><br><br><br>
-      <div class="column">
-          <div class="card">
-            <div class="ag-courses-item_link">
-              <button type="button"  onclick="show_upload()"  style="background-color: transparent;border:none;" >
-              <div class="ag-courses-item_bg"></div>
-               <div class="ag-courses-item_title">
-                Reddy Xerox</button>
-        
+        <div class="row">
+          <div class="column">
+            <div class="card">
+              <div class="ag-courses-item_link">
+                <button type="button" onclick="show_upload()" style="background-color: transparent;border:none;">
+                  <div class="ag-courses-item_bg"></div>
+                  <div class="ag-courses-item_title">
+                    Jerry Printers
+                </button>
               </div>
             </div>
           </div>
+
+
+          <br><br><br><br>
+          <div class="column">
+            <div class="card">
+              <div class="ag-courses-item_link">
+                <button type="button" onclick="show_upload()" style="background-color: transparent;border:none;">
+                  <div class="ag-courses-item_bg"></div>
+                  <div class="ag-courses-item_title">
+                    College Xerox
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <br><br><br><br><br><br>
+          <div class="column">
+            <div class="card">
+              <div class="ag-courses-item_link">
+                <button type="button" onclick="show_upload()" style="background-color: transparent;border:none;">
+                  <div class="ag-courses-item_bg"></div>
+                  <div class="ag-courses-item_title">
+                    Reddy Xerox
+                </button>
+
+              </div>
+            </div>
+          </div>
+
+          <br><br><br><br><br><br>
+          <div class="column">
+            <div class="card">
+              <div class="ag-courses-item_link">
+                <button type="button" onclick="show_upload()" style="background-color: transparent;border:none;">
+                  <div class="ag-courses-item_bg"></div>
+                  <div class="ag-courses-item_title">
+                    Normal Xerox
+                </button>
+
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </center>
@@ -355,7 +380,8 @@
                               <div id="indicatorContainerWrap">
                                 <div class="rad-prg" id="indicatorContainer"></div>
                                 <div class="rad-cntnt">Click here to<br> select a file.</div>
-                                <input type="file" id="prgFileSelector" onclick="scanhide()" accept="image/*, application/pdf" capture />
+                                <input type="file" id="prgFileSelector" onclick="scanhide()"
+                                  accept="image/*, application/pdf" capture />
                               </div>
                               <div class="form-group mt-2">
                                 <div id="feedback" class="indict">
@@ -418,11 +444,11 @@
     setTimeout(function () {
       document.getElementById("loading").style.display = "none";
       document.querySelector(".content").style.display = "block";
-      
-    if("{{wallet}}"==20){
-      document.getElementById("popup").style.display = "block";
-			document.getElementById("overlay").style.display = "block";
-    }
+
+      if ("{{wallet}}" == 20) {
+        document.getElementById("popup").style.display = "block";
+        document.getElementById("overlay").style.display = "block";
+      }
 
 
     }, 3000);
@@ -430,14 +456,8 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-  
-    
+
+
 </body>
 
 </html>
-
-
-
-  
-  
-  
