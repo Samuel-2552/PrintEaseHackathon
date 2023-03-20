@@ -5,6 +5,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://openlayers.org/en/v4.6.5/css/ol.css" type="text/css">
+  <script src="https://openlayers.org/en/v4.6.5/build/ol.js"></script>
   <script src="https://kit.fontawesome.com/a076d05399.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -16,7 +18,11 @@
       box-sizing: border-box;
     }
 
-
+    #map {
+      width: 80%;
+      height: 300px;
+    }
+    
     /* Float four columns side by side */
     .column {
       float: left;
@@ -126,6 +132,39 @@
     function showPosition(position) {
       document.getElementById("latitude").innerHTML = position.coords.latitude;
       document.getElementById("longitude").innerHTML = position.coords.longitude;
+      var myView = new ol.View({
+      center: ol.proj.fromLonLat([position.coords.longitude,  position.coords.latitude]),
+      zoom: 18
+    });
+    
+    var marker = new ol.Feature({
+      geometry: new ol.geom.Point(
+        ol.proj.fromLonLat([position.coords.longitude,  position.coords.latitude])
+      )
+    });
+    
+    var vectorLayer = new ol.layer.Vector({
+      source: new ol.source.Vector({
+        features: [marker]
+      }),
+      style: new ol.style.Style({
+        image: new ol.style.Icon({
+          anchor: [0.5, 1],
+          src: 'https://openlayers.org/en/v4.6.5/examples/data/icon.png'
+        })
+      })
+    });
+    
+    var map = new ol.Map({
+      target: 'map',
+      layers: [
+        new ol.layer.Tile({
+          source: new ol.source.OSM()
+        }),
+        vectorLayer
+      ],
+      view: myView
+    });
       output();
 
     }
@@ -292,8 +331,9 @@
       <div class="before_location" id="before_location">
         <button type="button" onclick="getLocation()" class="btn mt-4" id="location">Search Shops Near Me!</button>
         <br><br>
-        <p>Latitude: <span id="latitude"></span></p>
-        <p>Longitude: <span id="longitude"></span></p>
+        <p hidden>Latitude: <span id="latitude"></span></p>
+        <p hidden>Longitude: <span id="longitude"></span></p>
+        <div id="map"></div>
       </div>
     </center>
     <br><br>
