@@ -174,8 +174,7 @@ body{
   opacity: 0.8;
   border-radius: 0.5em;
   display: flex;
-  justify-content:center;
-  align-items: center;
+  float:left;
 }
 
 /* The popup form - hidden by default */
@@ -228,6 +227,24 @@ body{
 			background-color: rgba(0, 0, 0, 0.5);
 			z-index: 998;
 		}
+
+
+/* products css */
+.view-button {
+  background-color: #48e665;
+  font-weight: bolder;
+  color: black;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  opacity: 0.8;
+  border-radius: 0.5em;
+  display: flex;
+  float: right;
+}
+
+
+
 /* Add styles to the form container */
 .form-container {
   width: fit-content;
@@ -269,7 +286,7 @@ body{
 }
 
 /* Add some hover effects to buttons */
-.form-container .btn:hover, .open-button:hover {
+.form-container .btn:hover, .open-button:hover ,.view-button:hover{
   opacity: 1;
 }
 
@@ -422,6 +439,7 @@ $(".submit").click(function(){
       </div>
       <br><br><br><br><br>
       <button class="open-button" onclick="openForm()" >ADD A NEW PRODUCT</button>
+      <button class="view-button" onclick="viewproducts()" >VIEW MY PRODUCT</button>
       <div class="form-popup" id="myForm">
         <form action="/newproduct" class="form-container" method="post">
         <h1>New Product</h1>
@@ -448,8 +466,32 @@ $(".submit").click(function(){
       </div>
       <div id="overlay" class="overlay" style="display:none;"></div>
         </div>
+      <div class="form-popup" id="viewprod">
+        <table style="border-collapse: collapse; border: 1px solid black;">
+          <thead>
+              <tr>
+                  <th style="border: 1px solid black;padding:10px">Product Name</th>
+                  <th style="border: 1px solid black;padding:10px">Quantity Type</th>
+                  <th style="border: 1px solid black;padding:10px">Price</th>
+              </tr>
+          </thead>
+          <tbody>
+              {% for shopkeeper_products in users %}
+              <tr style="border: 1px solid black;" >
+                  <td style="border: 1px solid black;">{{ shopkeeper_products[0] }}</td>
+                  <td style="border: 1px solid black;">{{ shopkeeper_products[1] }}</td>
+                  <td style="border: 1px solid black;">{{ shopkeeper_products[2] }}</td>
+              </tr>
+              {% endfor %}
+          </tbody>
+      </table>
+      <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+      </div>
+        
         <br><br><br><br><br>
     </div>
+
+
 
     <script>
 
@@ -465,8 +507,12 @@ $(".submit").click(function(){
       document.getElementById("myForm").style.display = "block";
       document.getElementById("overlay").style.display = "block";
     }
-    
+    function viewproducts() {
+      document.getElementById("viewprod").style.display = "block";
+      document.getElementById("overlay").style.display = "block";
+    }
     function closeForm() {
+      document.getElementById("viewprod").style.display = "none";
       document.getElementById("myForm").style.display = "none";
       document.getElementById("overlay").style.display = "none";
     }

@@ -303,7 +303,7 @@ def newproduct():
         except:
             return "database error"
     
-    return render_template('shopdashboard.html', fav_icon=fav_icon, load_img=load_img,ip=ip,no_load=1)
+    return render_template('shopdashboard.html', fav_icon=fav_icon, load_img=load_img,ip=ip,no_load=1,pname=pname,Qtytype=Qtytype,price=price)
 
 
 @app.route('/forgot', methods=['GET', 'POST'])
