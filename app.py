@@ -301,30 +301,13 @@ def newproduct():
             price = request.form['price']
             connection = connect_db()
             cursor = connection.cursor()
-            cursor.execute("SELECT * FROM user WHERE email=?", (useremail,))
+            cursor.execute("INSERT INTO shopkeeper_products (pname, Qtytype,price) VALUES (?, ?, ?)", (pname,Qtytype,price))
             user = cursor.fetchone()
             print(user)
         except:
             return "E-mail already Exists"
-        if user:
-            ll=1
-            # Hash the entered password and compare with the stored hash
-            password_hash = hashlib.sha256(password.encode()).hexdigest()
-            if password_hash == user[2]:
-                session['username'] = useremail
-                if useremail == 'printease2023@gmail.com':
-                    return redirect('/admin')
-                if user[5]==0:
-                    return redirect('/verification')
-                order_no+=1
-                return redirect('/dashboard')
-            else:
-                err_message="Invalid mail or password!!"
-                return render_template('index.html',mess=err_message, fav_icon=fav_icon, load_img=load_img,ip=ip,no_load=0)
-        else:
-            err_message="Invalid mail or password!!"
-            return render_template('index.html',mess=err_message, fav_icon=fav_icon, load_img=load_img,ip=ip,no_load=0)
-    return render_template('index.html', fav_icon=fav_icon, load_img=load_img,ip=ip,no_load=1)
+    
+    return render_template('shopdashboard.html', fav_icon=fav_icon, load_img=load_img,ip=ip,no_load=1)
 
 
 @app.route('/forgot', methods=['GET', 'POST'])
