@@ -301,7 +301,7 @@ def newproduct():
             price = request.form['price']
             connection = connect_db()
             cursor = connection.cursor()
-            cursor.execute("INSERT INTO shopkeeper_products values(pname, Qtytype,price) VALUES (?, ?, ?)", (pname,Qtytype,price))
+            cursor.execute("INSERT INTO shopkeeper_products (pname, Qtytype,price) VALUES (?, ?, ?)", (pname,Qtytype,price))
             user = cursor.fetchone()
             connection.commit()
             connection.close()
