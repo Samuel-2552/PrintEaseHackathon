@@ -173,10 +173,9 @@ body{
   cursor: pointer;
   opacity: 0.8;
   border-radius: 0.5em;
-  position: fixed;
-  bottom: 23px;
-  right: 28px;
-  width: 280px;
+  display: flex;
+  justify-content:center;
+  align-items: center;
 }
 
 /* The popup form - hidden by default */
@@ -193,6 +192,33 @@ body{
     z-index: 999;
     border-radius: 5%;
 }
+@media screen and (max-width: 900px) and (min-width: 730px) {
+    .form-popup {
+      top: 55%;
+      width:60%;
+      height:80%;
+        
+      }
+    }
+    @media screen and (max-width: 729px) and (min-width: 300px) {
+    .form-popup {
+      top: 55%; 
+      width:60%;
+      height:80%;
+        
+      }
+      .form-container{
+      position: relative;
+      height: 10%;
+      width:50%; 
+      margin-top:0px;
+     }
+     .btn{
+      margin-top:0px;
+     }
+    }
+
+
 .overlay {
 			position: fixed;
 			top: 0;
@@ -232,8 +258,7 @@ body{
   padding: 16px 20px;
   border: none;
   cursor: pointer;
-  width: 40%;
-  margin-top:80px;
+  width: 50%;
   margin-bottom:10px;
   opacity: 0.8;
 }
@@ -396,8 +421,9 @@ $(".submit").click(function(){
             </div>
       </div>
       <br><br><br><br><br>
-      <button class="open-button" onclick="openForm()">ADD A NEW PRODUCT</button>
-
+      <div style="justify-content:center">
+      <button class="open-button" onclick="openForm()" >ADD A NEW PRODUCT</button>
+    </div>
       <div class="form-popup" id="myForm">
         <form action="/action_page.php" class="form-container">
         <h1>New Product</h1>
