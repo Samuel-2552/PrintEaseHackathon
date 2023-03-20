@@ -271,7 +271,7 @@ def login():
 @app.route('/shopsignup',methods=['GET','POST'])
 def shopsignup():
     if 'username' in session:
-        return redirect(url_for('dashboard'))
+        return render_template('shopsignup.html', fav_icon=fav_icon, load_img=load_img, ip=ip)
     if request.method == 'POST':
         useremailf = request.form['logemail']
     return render_template('shopsignup.html', fav_icon=fav_icon, load_img=load_img, ip=ip)
