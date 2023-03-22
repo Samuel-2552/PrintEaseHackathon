@@ -115,7 +115,7 @@ $(document).ready(function () {
                 $(this).css("opacity", "1");
               })
               .mouseleave(function () {
-                $(this).css("opacity", "1");
+                $(this).css("opacity", "0");
               });
             if (file.type && file.type.search(/image/) != -1) {
               fReader.onloadend = function (e) {
