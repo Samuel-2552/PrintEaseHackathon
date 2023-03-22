@@ -75,7 +75,7 @@ $(document).ready(function () {
           let totalFiles = [];
           let counter = 0;
           let dragbox = $(
-            `<div class="imageuploadify well"><div class="imageuploadify-overlay"><i class="fa fa-picture-o"></i></div><div class="imageuploadify-images-list text-center"><i class="fa fa-cloud-upload"></i><span class='imageuploadify-message'> Upload Here</span><button type="button"class="btn btn-default">Browse files</button></div></div>`
+            `<div class="imageuploadify well"><div class="imageuploadify-overlay"><i class="fa fa-cloud-upload-alt fa-4x"></i></div><div class="imageuploadify-images-list text-center"><i class="fa fa-cloud-upload"></i><span class='imageuploadify-message'> Upload Here</span><button type="button"class="btn btn-default">Browse files</button></div></div>`
           );
           let overlay = dragbox.find(".imageuploadify-overlay");
           let uploadIcon = dragbox.find(".imageuploadify-overlay i");
