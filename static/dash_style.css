@@ -130,7 +130,7 @@ h6 span{
   transition: all 600ms ease-out; 
 }
 .card-front, .card-back {
-  width: 100%;
+  width: 110%;
   height: 120%;
   background-color: #2a2b38;
   background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat.svg');
@@ -525,7 +525,7 @@ h6 span{
   padding: 0;
   flex-direction: column;
   text-align: center;
-  color: #3aa0ff;
+  color: #FFEBA7;
 }
 /* .imageuploadify .imageuploadify-overlay {
   z-index: 10;
@@ -561,15 +561,15 @@ h6 span{
 } */
 .imageuploadify .imageuploadify-images-list span.imageuploadify-message {
   font-size: 24px;
-  border-top: 1px solid #3aa0ff;
-  border-bottom: 1px solid #3aa0ff;
+  border-top: 1px solid #FFEBA7;
+  border-bottom: 1px solid #FFEBA7;
   padding: 10px;
   display: inline-block;
 }
 .imageuploadify .imageuploadify-images-list button.btn-default {
   display: block;
-  color: #3aa0ff;
-  border-color: #3aa0ff;
+  color: #FFEBA7;
+  border-color: #FFEBA7;
   border-radius: 1em;
   margin: 25px auto;
   width: 50%;
@@ -588,7 +588,7 @@ h6 span{
 .imageuploadify
   .imageuploadify-images-list
   .imageuploadify-container
-  button.btn-danger{
+  button.btn-close{
   position: absolute;
   top: 3px;
   right: 3px;
@@ -621,7 +621,7 @@ h6 span{
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  background: rgb(247, 6, 6);
+  background: rgb(88, 100, 60);
   z-index: 2;
   opacity: 0;
 }

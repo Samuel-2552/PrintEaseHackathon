@@ -105,7 +105,7 @@ $(document).ready(function () {
             const boxesNb = Math.floor(width / 100);
             const marginSize = Math.floor((width - boxesNb * 100) / (boxesNb + 1));
             let container = $(
-              `<div class='imageuploadify-container'><button type='button'class='btn btn-danger glyphicon glyphicon-remove'></button><div class='imageuploadify-details'><span>${file.name}</span><span>${file.type}</span><span>${file.size}</span></div></div>`
+              `<div class='imageuploadify-container'><button type='button'class='btn btn-close glyphicon glyphicon-remove'></button><div class='imageuploadify-details'><span>${file.name}</span><span>${file.type}</span><span>${file.size}</span></div></div>`
             );
             let details = container.find(".imageuploadify-details");
             let deleteBtn = container.find("button");
