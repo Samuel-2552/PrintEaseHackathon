@@ -83,9 +83,10 @@ def notification():
     # Close the connection
     conn_cred.close()
 
-    if 'username' in session:
+if 'username' in session:
+
         email=session['username']
-        connection = connect_db()
+        """connection = connect_db()
         cursor = connection.cursor()
         cursor.execute("SELECT * FROM user WHERE email=?", (email,))
         user = cursor.fetchone()
@@ -113,7 +114,7 @@ def notification():
             except Exception as e:
                 return e
         except Exception as e:
-                return e
+                return e"""
 def verify():
     global otp
     import sqlite3
