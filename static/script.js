@@ -160,6 +160,28 @@ $(document).ready(function () {
               }
             });
             fReader.readAsDataURL(file);
+            // create FormData object
+              const formData = new FormData();
+              formData.append('file', file);
+
+              // send Ajax request to the server
+              $.ajax({
+                url: '/upload-file',
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                  // handle success response
+                  console.log('Upload success:', response);
+                  document.getElementById("next1").hidden = false;
+                },
+                error: function(xhr, status, error) {
+                  // handle error response
+                  console.error('Upload error:', error);
+                }
+              });
+
           };
           const disableMouseEvents = () => {
             overlay.css("display", "flex");
@@ -296,52 +318,52 @@ $(document).ready(function () {
     
 
     
-    function handleFileUpload(files) {
-        msgHolder.hide();
-        containerProg.option('displayNumber', true);
+    // function handleFileUpload(files) {
+    //     msgHolder.hide();
+    //     containerProg.option('displayNumber', true);
 
-        var file = files[0],
-            fd = new FormData();
+    //     var file = files[0],
+    //         fd = new FormData();
 
-        fd.append('file', file);
-
-
-        $.ajax({
-            url: '/upload-file',
-            type: 'POST',
-            data: fd,
-            processData: false,
-            contentType: false,
-            success: function (res) {
-                containerProg.option('displayNumber', false);
-                msgHolder.show().html('File upload done.');
-                console.log(res);
-            },
-            xhr: function () {
-                var xhr = new window.XMLHttpRequest();
-                //Upload progress
-                xhr.upload.addEventListener("progress", function (e) {
-
-                    if (e.lengthComputable) {
-                        var percentComplete = (e.loaded || e.position) * 100 / e.total;
-                        containerProg.animate(percentComplete);
-                        setTimeout(succupload, 2000);
+    //     fd.append('file', file);
 
 
-                    }
-                }, false);
-                function succupload() {
-                    let msg = `<span style="color:whitesmoke;">File <u><b>${file.name}</b></u> has been uploaded successfully.</span>`;
-                    feedback.innerHTML = msg;
-                    document.getElementById("next1").hidden = false;
+    //     $.ajax({
+    //         url: '/upload-file',
+    //         type: 'POST',
+    //         data: fd,
+    //         processData: false,
+    //         contentType: false,
+    //         success: function (res) {
+    //             containerProg.option('displayNumber', false);
+    //             msgHolder.show().html('File upload done.');
+    //             console.log(res);
+    //         },
+    //         xhr: function () {
+    //             var xhr = new window.XMLHttpRequest();
+    //             //Upload progress
+    //             xhr.upload.addEventListener("progress", function (e) {
 
-                }
-                return xhr;
-                console.log(res);
-            }
+    //                 if (e.lengthComputable) {
+    //                     var percentComplete = (e.loaded || e.position) * 100 / e.total;
+    //                     containerProg.animate(percentComplete);
+    //                     setTimeout(succupload, 2000);
 
-        });
-    }
+
+    //                 }
+    //             }, false);
+    //             function succupload() {
+    //                 let msg = `<span style="color:whitesmoke;">File <u><b>${file.name}</b></u> has been uploaded successfully.</span>`;
+    //                 feedback.innerHTML = msg;
+    //                 document.getElementById("next1").hidden = false;
+
+    //             }
+    //             return xhr;
+    //             console.log(res);
+    //         }
+
+    //     });
+    // }
 
 });
 
