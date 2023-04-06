@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Print@Ease</title>
+	<link rel="stylesheet" type="text/css" href="index_style.css">
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
+</head>
+<body>
+	<div class="main">  	
+		<input type="checkbox" id="chk" aria-hidden="true">
+
+			<div class="signup">
+					<label for="chk" aria-hidden="true">Sign up</label>
+					<input type="text" name="txt" placeholder="User name" id="Susername" required="">
+					<input type="email" name="email" placeholder="Email" id="Semail"required="">
+					<input type="password" name="pswd" placeholder="Password" id="Spassword" required="">
+					<input type="submit" value="Sign up" id="signup" />
+			</div>
+
+			<div class="login">
+					<label for="chk" aria-hidden="true">Login</label>
+					<input type="email" name="email" placeholder="Email" id="Lemail" required="">
+					<input type="password" name="pswd" placeholder="Password" id="Lpassword" required="">
+					<input type="submit" value="Login" id="login" />
+			</div>
+	</div>
+</body>
+</html>
+
+
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js";
+    import { getDatabase, set, ref} from "https://www.gstatic.com/firebasejs/9.19.1/firebase-database.js";
+    import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-auth.js";
+
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+  
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyBe1HUnwUTeGJOIJDOq2Zs_nzlo07dWVqI",
+      authDomain: "signup-app-3e9dc.firebaseapp.com",
+      projectId: "signup-app-3e9dc",
+      storageBucket: "signup-app-3e9dc.appspot.com",
+      messagingSenderId: "50794442018",
+      appId: "1:50794442018:web:b5603c5a46d0b7a815c97b"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+
+    const database=getDatabase(app);
+    const auth = getAuth();
+
+    signup.addEventListener('click',(e)=> {
+    
+    var username=document.getElementById('Susername').value;
+    var password=document.getElementById('Spassword').value;
+    var email=document.getElementById('Semail').value;
+
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+      // Signed in 
+      const user = userCredential.user;
+      alert("User created!!");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        alert(errorMessage);
+      });   
+
+    });
+  
+
+    login.addEventListener('click',(e)=>{
+  
+      var email=document.getElementById('Lemail').value;
+      var password=document.getElementById('Lpassword').value;
+    
+        
+      signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+          // Signed in 
+          const user = userCredential.user;
+          alert("User logged in!!");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        alert(errorMessage);
+      });
+
+});
+  </script>
