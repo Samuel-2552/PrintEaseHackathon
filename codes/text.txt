@@ -1,7 +1,0 @@
-apiKey: "AIzaSyCxSX2CwHOh69zWGnBWwywfpK5IrPzh7v4",
-  authDomain: "printeasee.firebaseapp.com",
-  projectId: "printeasee",
-  storageBucket: "printeasee.appspot.com",
-  messagingSenderId: "178785742532",
-  appId: "1:178785742532:web:30ad00fc4946528d456391",
-  measurementId: "G-FE17HY6K4Z"
