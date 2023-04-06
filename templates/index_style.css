@@ -147,7 +147,7 @@ input{
 	outline: none;
 	border-radius: 5px;
 }
-#signup,#login{
+#signup,#login,#forgotpassword{
 	width: 60%;
 	height: 40px;
 	margin: 10px auto;
