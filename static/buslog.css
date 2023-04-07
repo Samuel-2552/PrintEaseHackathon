@@ -13,6 +13,11 @@ body{
     justify-content: center;
     background: #4070f4;
 }
+a{
+  display: flex;
+  justify-content: right;
+  color: #000;
+}
 .container{
     position: relative;
     max-width: 900px;
