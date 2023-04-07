@@ -57,6 +57,11 @@ signup.addEventListener('click', (e) => {
                         setTimeout(() => {
                             popupBox.style.display = "none";
                         }, 5000);
+
+                        set(ref(database,'users/' + username.value),{
+                            username: username,
+                            email_id:email
+                        })
                         //opening the login card
                         const loginCheckbox = document.getElementById('chk');
                         loginCheckbox.checked = true;

@@ -11,5 +11,9 @@ def home():
 def CustLog():
     return render_template('CustLog.html')
 
+@app.route('/buslog')
+def buslog():
+    return render_template('buslog.html')
+
 if __name__ == '__main__':
     app.run(debug=True)
