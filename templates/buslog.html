@@ -6,65 +6,183 @@
     <!---<title> Responsive Registration Form | CodingLab </title>--->
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <link rel="stylesheet" href="{{ url_for('static', filename='buslog.css') }}">
-
+     <script type="module" src="{{ url_for('static', filename='buslog.js') }}"></script>
+     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+   
    </head>
-<body>
-  <div class="container">
-    <div class="title">Business Registration</div>
-    <div class="content">
-      <form >
-        <div class="user-details">
-          <div class="input-box">
-            <span class="details">Full Name</span>
-            <input type="text" placeholder="Enter your name" required>
-          </div>
-          <div class="input-box">
-            <span class="details">Business name</span>
-            <input type="text" placeholder="Enter your Business name" required>
-          </div>
-          <div class="input-box">
-            <span class="details">Email</span>
-            <input type="text" placeholder="Enter your email" required>
-          </div>
-          <div class="input-box">
-            <span class="details">Phone Number</span>
-            <input type="text" placeholder="Enter your number" required>
-          </div>
-          <div class="input-box">
-            <span class="details">Password</span>
-            <input type="text" placeholder="Enter your password" required>
-          </div>
-          <div class="input-box">
-            <span class="details">Confirm Password</span>
-            <input type="text" placeholder="Confirm your password" required>
-          </div>
-        </div>
-        <div class="gender-details">
-          <input type="radio" name="gender" id="dot-1">
-          <input type="radio" name="gender" id="dot-2">
-          <input type="radio" name="gender" id="dot-3">
-          <span class="gender-title">Gender</span>
-          <div class="category">
-            <label for="dot-1">
-            <span class="dot one"></span>
-            <span class="gender">Male</span>
-          </label>
-          <label for="dot-2">
-            <span class="dot two"></span>
-            <span class="gender">Female</span>
-          </label>
-          <label for="dot-3">
-            <span class="dot three"></span>
-            <span class="gender">Prefer not to say</span>
-            </label>
-          </div>
-        </div>
-        <div class="button">
-          <input type="submit" value="Register">
-        </div>
-      </form>
-    </div>
-  </div>
-
-</body>
+   <body>
+       <div class="container">
+           <header>Business Registration</header>
+   
+           <form action="#">
+               <div class="form first">
+                   <div class="details personal">
+                       <span class="title">Personal Details</span>
+   
+                       <div class="fields">
+                           <div class="input-field">
+                               <label>Full Name</label>
+                               <input type="text" placeholder="Enter your name" required>
+                           </div>
+   
+                           <div class="input-field">
+                               <label>Date of Birth</label>
+                               <input type="date" placeholder="Enter birth date" required>
+                           </div>
+   
+                           <div class="input-field">
+                               <label>Email</label>
+                               <input type="text" placeholder="Enter your email" required>
+                           </div>
+   
+                           <div class="input-field">
+                               <label>Mobile Number</label>
+                               <input type="number" placeholder="Enter mobile number" required>
+                           </div>
+   
+                           <div class="input-field">
+                               <label>Gender</label>
+                               <select required>
+                                   <option disabled selected>Select gender</option>
+                                   <option>Male</option>
+                                   <option>Female</option>
+                                   <option>Others</option>
+                               </select>
+                           </div>
+   
+                           <div class="input-field">
+                               <label>Age</label>
+                               <input type="number" placeholder="Enter your age" required>
+                           </div>
+                       </div>
+                   </div>
+   
+                   <div class="details ID">
+                       <span class="title">Business Details</span>
+   
+                       <div class="fields">
+                           <div class="input-field">
+                               <label>Business Name</label>
+                               <input type="text" placeholder="Enter your business name" required>
+                           </div>
+   
+                           <div class="input-field">
+                               <label>Business number</label>
+                               <input type="number" placeholder="Enter your business number" required>
+                           </div>
+   
+                           <div class="input-field">
+                               <label>Business Days</label>
+                               <select required>
+                                <option disabled selected>Select suitable range</option>
+                                <option>Monday-Friday</option>
+                                <option>Monday-Saturday</option>
+                                <option>Others</option>
+                            </select>
+                           </div>
+   
+                           <div class="input-field">
+                               <label>Business type</label>
+                               <input type="text" placeholder="Enter your business type" required>
+                           </div>
+   
+                           <div class="input-field">
+                               <label>Business Founded on</label>
+                               <input type="date" placeholder="Enter your business founded date" required>
+                           </div>
+   
+                           <div class="input-field">
+                               <label>Business tag line</label>
+                               <input type="text" placeholder="Enter your tag line" required>
+                           </div>
+                       </div>
+   
+                       <button class="nextBtn">
+                           <span class="btnText">Next</span>
+                           <i class="uil uil-navigator"></i>
+                       </button>
+                   </div> 
+               </div>
+   
+               <div class="form second">
+                   <div class="details address">
+                       <span class="title">Business Address</span>
+   
+                       <div class="fields">
+                           <div class="input-field">
+                               <label>Address line 1</label>
+                               <input type="text" placeholder="Address line 1" required>
+                               
+                             </div>
+   
+                           <div class="input-field">
+                            <label>State</label>
+                            <input type="text" placeholder="State" required>
+                           </div>
+                           
+                           
+                           <div class="input-field">
+                            <label>Block number</label>
+                            <input type="text" placeholder="Block number" required>
+                           </div>
+   
+                           <div class="input-field">
+                            <label>Address line 2</label>
+                               <input type="text" placeholder="Address line 2" required>
+                           </div>
+   
+                           <div class="input-field">
+                            <label>City</label>
+                               <input type="text" placeholder="City" required>
+                           </div>
+   
+                           <div class="input-field">
+                            <label>Pin Code</label>   
+                            <input type="number" placeholder="Pin Code" required>
+                           </div>
+   
+                           <div class="input-field">
+                            <label>Country</label>   
+                            <input type="number" placeholder="Country" required>
+                           </div>
+                       </div>
+                   </div>
+   
+                   <div class="details family">
+                       <span class="title">Family Details</span>
+   
+                       <div class="fields">
+                           <div class="input-field">
+                               <label>Father Name</label>
+                               <input type="text" placeholder="Enter father name" required>
+                           </div>
+   
+                           <div class="input-field">
+                               <label>Mother Name</label>
+                               <input type="text" placeholder="Enter mother name" required>
+                           </div>
+   
+                       </div>
+   
+                       <div class="buttons">
+                           <div class="backBtn">
+                               <i class="uil uil-navigator"></i>
+                               <span class="btnText">Back</span>
+                           </div>
+                           
+                           <button class="sumbit">
+                               <span class="btnText">Submit</span>
+                               <i class="uil uil-navigator"></i>
+                           </button>
+                       </div>
+                   </div> 
+               </div>
+           </form>
+       </div>
+   
+       <!--<script src="script.js"></script>-->
+   </body>
+   </html>
+   
+   
 </html>
