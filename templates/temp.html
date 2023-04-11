@@ -138,6 +138,9 @@ img {
   flex-wrap: wrap;
 }
 .card {
+  background-color: #f1f1f1;
+  border-radius: 5%;
+  box-shadow: 0 20px 8px 0 rgba(0, 0, 0, 0.2);
   position: relative;
   width: calc(50% - 20px);
   min-height: 300px;
@@ -167,59 +170,6 @@ img {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-.card .details .content {
-  padding: 20px;
-  box-sizing: border-box;
-}
-.card .details .content h2 {
-  margin: 0;
-  padding: 0;
-  font-size: 24px;
-  line-height: 0.85em;
-  font-weight: 600;
-}
-.card .details .content h2 span {
-  font-size: 14px;
-  color: #777;
-}
-.card .details .content ul {
-  margin: 0;
-  padding: 0;
-  display: flex;
-}
-.card .details .content ul li {
-  list-style: none;
-  margin-left: 2px;
-}
-.card .details .content ul li a {
-  color: #fff;
-  border: none;
-}
-.card .details .content ul li:nth-child(1) a {
-  background: #3b5995;
-}
-.card .details .content ul li:nth-child(2) a {
-  background: #55acee;
-}
-.card .details .content ul li:nth-child(3) a {
-  background: #b31217;
-}
-.card .details .content ul li:nth-child(4) a {
-  background: #0077b5;
-}
-.card .details .content a {
-  display: inline-block;
-  text-decoration: none;
-  padding: 5px 10px;
-  margin-top: 10px;
-  border: 2px solid #262626;
-  color: #262626;
-  font-weight: 500;
-}
-.card .details .content a:hover {
-  background: #262626;
-  color: #fff;
 }
 @media (max-width: 1200px) {
   .container {
@@ -261,7 +211,7 @@ img {
             border-radius: 5px;
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
             margin: 5%;
-            max-width: 40%;
+            max-width: 100%;
             
             padding: 20px;
             text-align: center;
@@ -294,6 +244,46 @@ img {
         input[type="submit"]:hover {
             background-color: #45a049;
         }
+
+
+        /* for te pop up css */
+  .open-button {
+  background-color: #48e665;
+  font-weight: bolder;
+  color: black;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  opacity: 0.8;
+  border-radius: 0.5em;
+  display: flex;
+  float:left;
+}
+
+/* The popup form - hidden by default */
+.form-popup {
+    display: none;
+    position: fixed;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color:black;
+    background-color: #FFEBA7;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    border-radius: 5%;
+}
+.overlay {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(0, 0, 0, 0.5);
+			z-index: 998;
+		}
+
 </style>
 
 </head>
@@ -305,16 +295,7 @@ img {
       </div>
       <div class="details">
         <div class="content">
-          <h2>Your Name<br>
-            <span>Founder of LoremIpsum</span>
-          </h2>
-          <ul>
-            <li><a href="#">FB</a></li>
-            <li><a href="#">TW</a></li>
-            <li><a href="#">YT</a></li>
-            <li><a href="#">IN</a></li>
-          </ul>
-          <a href="#">Read More</a>
+          
         </div>
       </div>
     </div>
@@ -324,7 +305,50 @@ img {
       </div>
       <div class="details">
         <div class="content">
-          <input type="button" value="ADD A PRODUCT">
+          <div id="overlay" class="overlay" style="display:none;"></div>
+          <button class="open-button" onclick="openForm()" >ADD A NEW PRODUCT</button>
+          <br>
+          <button>DELETE A PRODUCT</button>
+        <div class="form-popup" id="myForm">
+          <form id="service-form">
+            <div class="card1">
+              <h2>Select Service</h2>
+            <label for="service">Service:</label>
+            <select id="service" name="service">
+                <option value="Printing Documents">Printing Documents</option>
+                <option value="Printing T-shirts">Printing T-shirts</option>
+                <option value="Other">Other</option>
+            </select>
+            <div id="other-service" style="display:none;">
+                <label for="other">Other:</label>
+                <input type="text" id="other" name="other">
+            </div>
+            <label for="delivery">Delivery:</label>
+            <input type="radio" id="yes" name="delivery" value="yes">
+            <label for="yes">Yes</label>
+            <input type="radio" id="no" name="delivery" value="no" checked>
+            <label for="no">No</label>
+            <br>
+            <label for="price-type">Price Type:</label>
+            <select id="price-type" name="price-type">
+                <option value="product" selected>Price/Product</option>
+                <option value="service">Price/Service</option>
+                <option value="other">Other</option>
+            </select>
+            <div id="other-price" style="display:none;">
+                <label for="price">Price:</label>
+                <input type="text" id="price" name="price">
+            </div>
+            <label for="details">Details:</label>
+            <textarea id="details" name="details"></textarea>
+            <br>
+            <input type="submit" value="Submit">
+            <button type="button" class="btn cancel" onclick="closeForm()">Cancel</button>
+        </form>
+        
+        </div>
+        
+        </div>
         </div>
       </div>
     </div>
@@ -334,16 +358,7 @@ img {
       </div>
       <div class="details">
         <div class="content">
-          <h2>Your Name<br>
-            <span>Founder of LoremIpsum</span>
-          </h2>
-          <ul>
-            <li><a href="#">FB</a></li>
-            <li><a href="#">TW</a></li>
-            <li><a href="#">YT</a></li>
-            <li><a href="#">IN</a></li>
-          </ul>
-          <a href="#">Read More</a>
+          
         </div>
       </div>
     </div>
@@ -359,40 +374,77 @@ img {
     </div>
   </div>
 
-  <div class="card1">
-    <h2>Select Service</h2>
-    <form id="service-form">
-        <label for="service">Service:</label>
-        <select id="service" name="service">
-            <option value="Printing Documents">Printing Documents</option>
-            <option value="Printing T-shirts">Printing T-shirts</option>
-            <option value="Other">Other</option>
-        </select>
-        <div id="other-service" style="display:none;">
-            <label for="other">Other:</label>
-            <input type="text" id="other" name="other">
-        </div>
-        <label for="delivery">Delivery:</label>
-        <input type="radio" id="yes" name="delivery" value="yes">
-        <label for="yes">Yes</label>
-        <input type="radio" id="no" name="delivery" value="no" checked>
-        <label for="no">No</label>
-        <br>
-        <label for="price-type">Price Type:</label>
-        <select id="price-type" name="price-type">
-            <option value="product" selected>Price/Product</option>
-            <option value="service">Price/Service</option>
-            <option value="other">Other</option>
-        </select>
-        <div id="other-price" style="display:none;">
-            <label for="price">Price:</label>
-            <input type="text" id="price" name="price">
-        </div>
-        <label for="details">Details:</label>
-        <textarea id="details" name="details"></textarea>
-        <br>
-        <input type="submit" value="Submit">
-    </form>
+  
+    
 </div>
+
+<script>
+  function openForm() {
+      document.getElementById("myForm").style.display = "block";
+      document.getElementById("overlay").style.display = "block";
+    }
+function closeForm() {
+      document.getElementById("myForm").style.display = "none";
+      document.getElementById("overlay").style.display = "none";
+    }
+
+</script>
+<script>
+  // JS code to handle dynamic form elements
+  var serviceSelect = document.getElementById("service");
+  var otherServiceDiv = document.getElementById("other-service");
+  var otherServiceInput = document.getElementById("other");
+  var priceTypeSelect = document.getElementById("price-type");
+  var otherPriceDiv = document.getElementById("other-price");
+  var priceInput = document.getElementById("price");
+  var serviceForm = document.getElementById("service-form");
+  var cardsDiv = document.createElement("div");
+  // show/hide the "other" service input field based on selection
+  serviceSelect.addEventListener("change", function () {
+      if (serviceSelect.value === "Other") {
+          otherServiceDiv.style.display = "block";
+      } else {
+          otherServiceDiv.style.display = "none";
+          otherServiceInput.value = "";
+      }
+  });
+
+  // show/hide the "other" price input field based on selection
+  priceTypeSelect.addEventListener("change", function () {
+      if (priceTypeSelect.value === "other") {
+          otherPriceDiv.style.display = "block";
+      }
+      else {
+          otherPriceDiv.style.display = "none";
+          priceInput.value = "";
+      }
+  });
+
+  // create a new card for each submission
+  serviceForm.addEventListener("submit", function (event) {
+      event.preventDefault();
+      var service = serviceSelect.value;
+      if (service === "Other") {
+          service = otherServiceInput.value;
+      }
+      var delivery = document.querySelector('input[name="delivery"]:checked').value;
+      var priceType = priceTypeSelect.value;
+      var price = "";
+      if (priceType === "product") {
+          price = priceInput.value;
+      }
+      var details = document.getElementById("details").value;
+      var card = document.createElement("div");
+      card.className = "card1";
+      card.innerHTML = "<h3>" + service + "</h3>" +
+          "<p><strong>Delivery:</strong> " + delivery + "</p>" +
+          "<p><strong>Price Type:</strong> " + priceType + "</p>" +
+          (price ? "<p><strong>Price:</strong> " + price + "</p>" : "") +
+          "<p><strong>Details:</strong> " + details + "</p>";
+      cardsDiv.appendChild(card);
+      document.body.appendChild(cardsDiv);
+      serviceForm.reset();
+  });
+</script>
 </body>
 </html>
