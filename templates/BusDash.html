@@ -12,12 +12,23 @@
             padding: 0;
         }
 
-        .card {
+        .card1 {
             background-color: #f1f1f1;
             border-radius: 5px;
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-            margin: 50px auto;
-            max-width: 500px;
+            margin: 5%;
+            max-width: 40%;
+            
+            padding: 20px;
+            text-align: center;
+        }
+        .card2 {
+            background-color: #f1f1f1;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            margin: 1px 10px;
+            max-width: 40%;
+            
             padding: 20px;
             text-align: center;
         }
@@ -55,7 +66,7 @@
 </head>
 
 <body>
-    <div class="card">
+    <div class="card1">
         <h2>Select Service</h2>
         <form id="service-form">
             <label for="service">Service:</label>
@@ -90,7 +101,41 @@
             <input type="submit" value="Submit">
         </form>
     </div>
-
+    <div class="card2">
+        <h2>Select Service</h2>
+        <form id="service-form">
+            <label for="service">Service:</label>
+            <select id="service" name="service">
+                <option value="Printing Documents">Printing Documents</option>
+                <option value="Printing T-shirts">Printing T-shirts</option>
+                <option value="Other">Other</option>
+            </select>
+            <div id="other-service" style="display:none;">
+                <label for="other">Other:</label>
+                <input type="text" id="other" name="other">
+            </div>
+            <label for="delivery">Delivery:</label>
+            <input type="radio" id="yes" name="delivery" value="yes">
+            <label for="yes">Yes</label>
+            <input type="radio" id="no" name="delivery" value="no" checked>
+            <label for="no">No</label>
+            <br>
+            <label for="price-type">Price Type:</label>
+            <select id="price-type" name="price-type">
+                <option value="product" selected>Price/Product</option>
+                <option value="service">Price/Service</option>
+                <option value="other">Other</option>
+            </select>
+            <div id="other-price" style="display:none;">
+                <label for="price">Price:</label>
+                <input type="text" id="price" name="price">
+            </div>
+            <label for="details">Details:</label>
+            <textarea id="details" name="details"></textarea>
+            <br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
     <script>
         // JS code to handle dynamic form elements
         var serviceSelect = document.getElementById("service");
@@ -137,7 +182,7 @@
             }
             var details = document.getElementById("details").value;
             var card = document.createElement("div");
-            card.className = "card";
+            card.className = "card1";
             card.innerHTML = "<h3>" + service + "</h3>" +
                 "<p><strong>Delivery:</strong> " + delivery + "</p>" +
                 "<p><strong>Price Type:</strong> " + priceType + "</p>" +
