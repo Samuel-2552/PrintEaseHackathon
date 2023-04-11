@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <style>
+        /* Font */
+@import url('https://fonts.googleapis.com/css?family=Quicksand:400,700');
+
+/* Design */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  background-color: #ecf9ff;
+}
+
+body {
+  color: #272727;
+  font-family: 'Quicksand', serif;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 0;
+  padding: 1rem;
+}
+
+.main{
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+h1 {
+    font-size: 24px;
+    font-weight: 400;
+    text-align: center;
+}
+
+img {
+  height: auto;
+  max-width: 100%;
+  vertical-align: middle;
+}
+
+.btn {
+  color: #ffffff;
+  padding: 0.8rem;
+  font-size: 14px;
+  text-transform: uppercase;
+  border-radius: 4px;
+  font-weight: 400;
+  display: block;
+  width: 100%;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: transparent;
+}
+
+.btn:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.cards_item {
+  display: flex;
+  padding: 1rem;
+}
+
+@media (min-width: 40rem) {
+  .cards_item {
+    width: 50%;
+  }
+}
+
+@media (min-width: 56rem) {
+  .cards_item {
+    width: 33.3333%;
+  }
+}
+
+.card {
+  background-color: white;
+  border-radius: 0.25rem;
+  box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.card_content {
+  padding: 1rem;
+  background: linear-gradient(to bottom left, #EF8D9C 40%, #FFC39E 100%);
+}
+
+.card_title {
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: capitalize;
+  margin: 0px;
+}
+
+.card_text {
+  color: #ffffff;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  margin-bottom: 1.25rem;    
+  font-weight: 400;
+}
+    </style> -->
+<style>
+    body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #262626;
+  font-family: "poppins", sans-serif;
+}
+.container {
+  width: 1200px;
+  min-height: 600px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.card {
+  position: relative;
+  width: calc(50% - 20px);
+  min-height: 300px;
+  background: #fff;
+  margin: 10px;
+  box-sizing: border-box;
+}
+.card .imgBx {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+}
+.card .imgBx img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.card .details {
+  position: absolute;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.card .details .content {
+  padding: 20px;
+  box-sizing: border-box;
+}
+.card .details .content h2 {
+  margin: 0;
+  padding: 0;
+  font-size: 24px;
+  line-height: 0.85em;
+  font-weight: 600;
+}
+.card .details .content h2 span {
+  font-size: 14px;
+  color: #777;
+}
+.card .details .content ul {
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+.card .details .content ul li {
+  list-style: none;
+  margin-left: 2px;
+}
+.card .details .content ul li a {
+  color: #fff;
+  border: none;
+}
+.card .details .content ul li:nth-child(1) a {
+  background: #3b5995;
+}
+.card .details .content ul li:nth-child(2) a {
+  background: #55acee;
+}
+.card .details .content ul li:nth-child(3) a {
+  background: #b31217;
+}
+.card .details .content ul li:nth-child(4) a {
+  background: #0077b5;
+}
+.card .details .content a {
+  display: inline-block;
+  text-decoration: none;
+  padding: 5px 10px;
+  margin-top: 10px;
+  border: 2px solid #262626;
+  color: #262626;
+  font-weight: 500;
+}
+.card .details .content a:hover {
+  background: #262626;
+  color: #fff;
+}
+@media (max-width: 1200px) {
+  .container {
+    width: 100%;
+  }
+}
+@media (max-width: 991px) {
+  .card {
+    width: calc(70% - 20px);
+    margin: 10px auto;
+  }
+}
+@media (max-width: 768px) {
+  .card {
+    width: calc(70% - 20px);
+    margin: 10px auto;
+  }
+  .card .imgBx {
+    position: relative;
+    width: 100%;
+    height: 200px;
+  }
+  .card .details {
+    position: relative;
+    width: 100%;
+    height: 200px;
+  }
+}
+@media (max-width: 480px) {
+  .card {
+    width: calc(100% - 40px);
+    margin: 10px auto;
+  }
+}
+
+/* css for the content */
+.card1 {
+            background-color: #f1f1f1;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            margin: 5%;
+            max-width: 40%;
+            
+            padding: 20px;
+            text-align: center;
+        }
+        
+ select,input[type="text"],textarea {
+            margin-top: 5px;
+            width: 100%;
+            padding: 12px 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            resize: vertical;
+        }
+
+        textarea {
+            height: 100px;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+</style>
+
+</head>
+<body>
+<div class="container">
+    <div class="card">
+      <div class="imgBx">
+        <img src="1.jpeg" alt="">
+      </div>
+      <div class="details">
+        <div class="content">
+          <h2>Your Name<br>
+            <span>Founder of LoremIpsum</span>
+          </h2>
+          <ul>
+            <li><a href="#">FB</a></li>
+            <li><a href="#">TW</a></li>
+            <li><a href="#">YT</a></li>
+            <li><a href="#">IN</a></li>
+          </ul>
+          <a href="#">Read More</a>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="imgBx">
+        <img src="2.jpeg" alt="">
+      </div>
+      <div class="details">
+        <div class="content">
+          <input type="button" value="ADD A PRODUCT">
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="imgBx">
+        <img src="3.jpeg" alt="">
+      </div>
+      <div class="details">
+        <div class="content">
+          <h2>Your Name<br>
+            <span>Founder of LoremIpsum</span>
+          </h2>
+          <ul>
+            <li><a href="#">FB</a></li>
+            <li><a href="#">TW</a></li>
+            <li><a href="#">YT</a></li>
+            <li><a href="#">IN</a></li>
+          </ul>
+          <a href="#">Read More</a>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="imgBx">
+        <img src="4.jpeg" alt="">
+      </div>
+      <div class="details">
+        <div class="content">
+           
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card1">
+    <h2>Select Service</h2>
+    <form id="service-form">
+        <label for="service">Service:</label>
+        <select id="service" name="service">
+            <option value="Printing Documents">Printing Documents</option>
+            <option value="Printing T-shirts">Printing T-shirts</option>
+            <option value="Other">Other</option>
+        </select>
+        <div id="other-service" style="display:none;">
+            <label for="other">Other:</label>
+            <input type="text" id="other" name="other">
+        </div>
+        <label for="delivery">Delivery:</label>
+        <input type="radio" id="yes" name="delivery" value="yes">
+        <label for="yes">Yes</label>
+        <input type="radio" id="no" name="delivery" value="no" checked>
+        <label for="no">No</label>
+        <br>
+        <label for="price-type">Price Type:</label>
+        <select id="price-type" name="price-type">
+            <option value="product" selected>Price/Product</option>
+            <option value="service">Price/Service</option>
+            <option value="other">Other</option>
+        </select>
+        <div id="other-price" style="display:none;">
+            <label for="price">Price:</label>
+            <input type="text" id="price" name="price">
+        </div>
+        <label for="details">Details:</label>
+        <textarea id="details" name="details"></textarea>
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+</div>
+</body>
+</html>
