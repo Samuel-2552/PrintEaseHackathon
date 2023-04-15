@@ -19,22 +19,11 @@
             border-radius: 5px;
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
             margin: 5%;
-            max-width: 40%;
+            max-width: 100%;
             
             padding: 20px;
             text-align: center;
         }
-        .card2 {
-            background-color: #f1f1f1;
-            border-radius: 5px;
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-            margin: 1px 10px;
-            max-width: 40%;
-            
-            padding: 20px;
-            text-align: center;
-        }
-
         select,
         input[type="text"],
         textarea {
@@ -581,8 +570,11 @@
       <textarea id="details" name="details"></textarea>
       <br>
       <input type="submit" value="Submit">
-  </form>
+      <button type="button" class="btn cancel" onclick="closeForm()">Cancel</button>
+    </form>
 </div>
+</div>
+<div id="overlay" class="overlay" style="display:none;"></div>
 </div>
 <script>
   // JS code to handle dynamic form elements
@@ -639,6 +631,8 @@
       cardsDiv.appendChild(card);
       document.body.appendChild(cardsDiv);
       serviceForm.reset();
+      alert("Your new service added sucessfully");
+      closeForm();
   });
 </script>
 
@@ -647,12 +641,7 @@
       document.getElementById("myForm").style.display = "block";
       document.getElementById("overlay").style.display = "block";
     }
-    function viewproducts() {
-      document.getElementById("viewprod").style.display = "block";
-      document.getElementById("overlay").style.display = "block";
-    }
     function closeForm() {
-      document.getElementById("viewprod").style.display = "none";
       document.getElementById("myForm").style.display = "none";
       document.getElementById("overlay").style.display = "none";
     }
