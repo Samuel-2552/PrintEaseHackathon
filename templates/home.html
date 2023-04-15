@@ -1,36 +1,923 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-	<title>Print@Ease</title>
-	<link rel="stylesheet" type="text/css" href="index_style.css">
-<link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.3.1/css/fontawesome.min.css" integrity="sha384-QYIZto+st3yW+o8+5OHfT6S482Zsvz2WfOzpFSXMF9zqeLcFV0/wlZpMtyFcZALm" crossorigin="anonymous"> -->
+  <!-- navbar -->
+  <!-- FIXED TOP -->
+  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <!-- CSS File 
+  <link href="assets/css/style.css" rel="stylesheet">
+  -->
+  <!--typed jquerry-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
+
+
+
+
+  <title>PrintEase</title>
+  <link rel="icon" type="image/x-icon" href="{{fav_icon}}">
+
+  <script>
+    if (window.performance && window.performance.navigation.type === window.performance.navigation.TYPE_BACK_FORWARD) {
+      window.location = "{{ip}}";
+    }
+
+
+  </script>
+  <script src="static\script.js"></script>
+  <link rel="stylesheet" href="static\index_style.css">
+  <link rel="stylesheet" href="static\dash_style.css">
+  <style>
+    /* cards css */
+    * {
+      box-sizing: border-box;
+    }
+
+
+    /* Float four columns side by side */
+    .column {
+      float: left;
+      width: 25%;
+      padding: 0 10px;
+    }
+
+    /* Remove extra left and right margins, due to padding */
+    .row {
+      margin: 0 -5px;
+    }
+
+    /* Clear floats after the columns */
+    .row:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+
+    /* Responsive columns */
+    @media screen and (max-width: 600px) {
+      .column {
+        width: 100%;
+        display: block;
+        margin-bottom: 20px;
+      }
+    }
+
+    /* Style the counter cards */
+    .card {
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.9);
+      padding: 16px;
+      text-align: center;
+      background-color: #FFEBA7;
+    }
+
+    #cardtext {
+      color: black;
+      font-weight: bold;
+    }
+
+    /* hover cards */
+    .ag-courses-item_link {
+      display: block;
+      padding: 30px 20px;
+      background-color: #121212;
+
+      overflow: hidden;
+
+      position: relative;
+    }
+
+    .ag-courses-item_link:hover,
+    .ag-courses-item_link:hover .ag-courses-item_date {
+      text-decoration: none;
+      color: #FFF;
+    }
+
+    .ag-courses-item_link:hover .ag-courses-item_bg {
+      -webkit-transform: scale(10);
+      -ms-transform: scale(10);
+      transform: scale(10);
+    }
+
+    .ag-courses-item_bg {
+      height: 128px;
+      width: 128px;
+      background-color: #10e35a;
+
+      z-index: 1;
+      position: absolute;
+      top: -75px;
+      right: -75px;
+
+      border-radius: 50%;
+
+      -webkit-transition: all .5s ease;
+      -o-transition: all .5s ease;
+      transition: all .5s ease;
+    }
+
+   
+    .ag-courses-item_title {
+  min-height: 87px;
+  margin: 0 0 25px;
+
+  overflow: hidden;
+
+  font-weight: bold;
+  font-size: 30px;
+  color: #FFF;
+
+  z-index: 2;
+  position: relative;
+}
+   
+
+    /* Styling for the pop-up window */
+    .popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: black;
+      background-color: #FFEBA7;
+      padding: 20px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+      z-index: 999;
+      border-radius: 5%;
+    }
+
+    /* Styling for the overlay */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 998;
+    }
+
+    
+
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900');
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css");
+
+@media screen and (min-width: 150px) and(max-width: 575px) {
+    #logotext{
+      float:center;
+      align-items: center;
+    }
+}
+
+
+
+#loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 30%;
+  width:auto;
+}
+.content {
+  display: none;
+}
+
+body{
+	font-family: 'Poppins', sans-serif;
+	font-weight: 300;
+	font-size: 15px;
+	line-height: 1.7;
+	color: #c4c3ca;
+	background-color: #1f2029;
+	overflow-x: hidden;
+}
+a {
+	cursor: pointer;
+  transition: all 200ms linear;
+}
+a:hover {
+	text-decoration: none;
+}
+.link {
+  color: #c4c3ca;
+}
+.link:hover {
+  color: #ffeba7;
+}
+p {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.7;
+}
+h6 span{
+  padding: 0 20px;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.section{
+  position: relative;
+  width: 100%;
+  display: block;
+}
+.full-height{
+  min-height: 100vh;
+}
+[type="checkbox"]:checked,
+[type="checkbox"]:not(:checked){
+  position: absolute;
+  left: -9999px;
+}
+.checkbox:checked + label,
+.checkbox:not(:checked) + label{
+  position: relative;
+  display: block;
+  text-align: center;
+  width: 60px;
+  height: 16px;
+  border-radius: 8px;
+  padding: 0;
+  margin: 10px auto;
+  cursor: pointer;
+  background-color: #ffeba7;
+}
+.checkbox:checked + label:before,
+.checkbox:not(:checked) + label:before{
+  position: absolute;
+  display: block;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  color: #ffeba7;
+  background-color: #102770;
+  font-family: 'bootstrap-icons';
+  content: '\F13F';
+  z-index: 20;
+  top: -10px;
+  left: -10px;
+  line-height: 36px;
+  text-align: center;
+  font-size: 24px;
+  transition: all 0.5s ease;
+}
+.checkbox:checked + label:before {
+  transform: translateX(44px) rotate(-270deg);
+}
+
+.image{
+  width:260px;
+
+}
+.card-3d-wrap {
+  position: relative;
+  width: 440px;
+  max-width: 100%;
+  height: 400px;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  perspective: 800px;
+  
+}
+.card-3d-wrapper {
+  width: 100%;
+  height: 100%;
+  position:absolute;    
+  top: 0;
+  left: 0;  
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  transition: all 600ms ease-out; 
+}
+.card-front, .card-back {
+  width: 110%;
+  height: 120%;
+  background-color: #2a2b38;
+  background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat.svg');
+  background-position: bottom center;
+  background-repeat: no-repeat;
+  background-size: 200%;
+  position: absolute;
+  border-radius: 6px;
+  
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -o-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+.card-back {
+  transform: rotateY(180deg);
+}
+.checkbox:checked ~ .card-3d-wrap .card-3d-wrapper {
+  transform: rotateY(180deg);
+}
+.center-wrap{
+  position: absolute;
+  width: 100%;
+  top:230px;
+  transform: translate3d(0, -50%, 35px) perspective(100px);
+  z-index: 20;
+  display: block;
+}
+
+
+.form-group{ 
+  position: relative;
+  display: block;
+    margin: 0;
+    padding: 0;
+}
+.form-style {
+  padding: 13px 20px;
+  padding-left: 55px;
+  height: 48px;
+  width: 100%;
+  font-weight: 500;
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 22px;
+  letter-spacing: 0.5px;
+  outline: none;
+  color: #c4c3ca;
+  background-color: #1f2029;
+  border: none;
+  -webkit-transition: all 200ms linear;
+  transition: all 200ms linear;
+  box-shadow: 0 4px 8px 0 rgba(21,21,21,.2);
+}
+.form-style:focus,
+.form-style:active {
+  border: none;
+  outline: none;
+  box-shadow: 0 4px 8px 0 rgba(21,21,21,.2);
+}
+.input-icon {
+  position: absolute;
+  top: 0;
+  left: 18px;
+  height: 48px;
+  font-size: 24px;
+  line-height: 48px;
+  text-align: left;
+  color: #ffeba7;
+  -webkit-transition: all 200ms linear;
+    transition: all 200ms linear;
+}
+
+.form-group input:-ms-input-placeholder  {
+  color: #c4c3ca;
+  opacity: 0.7;
+  -webkit-transition: all 200ms linear;
+    transition: all 200ms linear;
+}
+.form-group input::-moz-placeholder  {
+  color: #c4c3ca;
+  opacity: 0.7;
+  -webkit-transition: all 200ms linear;
+    transition: all 200ms linear;
+}
+.form-group input:-moz-placeholder  {
+  color: #c4c3ca;
+  opacity: 0.7;
+  -webkit-transition: all 200ms linear;
+    transition: all 200ms linear;
+}
+.form-group input::-webkit-input-placeholder  {
+  color: #c4c3ca;
+  opacity: 0.7;
+  -webkit-transition: all 200ms linear;
+    transition: all 200ms linear;
+}
+.form-group input:focus:-ms-input-placeholder  {
+  opacity: 0;
+  -webkit-transition: all 200ms linear;
+    transition: all 200ms linear;
+}
+.form-group input:focus::-moz-placeholder  {
+  opacity: 0;
+  -webkit-transition: all 200ms linear;
+    transition: all 200ms linear;
+}
+.form-group input:focus:-moz-placeholder  {
+  opacity: 0;
+  -webkit-transition: all 200ms linear;
+    transition: all 200ms linear;
+}
+.form-group input:focus::-webkit-input-placeholder  {
+  opacity: 0;
+  -webkit-transition: all 200ms linear;
+    transition: all 200ms linear;
+}
+
+.btn{  
+  border-radius: 4px;
+  height: 44px;
+  font-size: 13px;
+  font-weight: bold;
+  text-transform: uppercase;
+  -webkit-transition : all 200ms linear;
+  transition: all 200ms linear;
+  padding: 0 30px;
+  letter-spacing: 1px;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  -ms-justify-content: center;
+  justify-content: center;
+  -ms-flex-pack: center;
+  text-align: center;
+  border: none;
+  background-color: #ffeba7;
+  color: black;
+  box-shadow: 0 8px 24px 0 rgba(255,235,167,.2);
+}
+.btn:active,
+.btn:focus{  
+  background-color: #102770;
+  color: #ffeba7;
+  box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
+}
+.btn:hover{  
+  background-color: #102770;
+  color: #ffeba7;
+  box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
+}
+
+
+
+
+.logo {
+	position: absolute;
+	top: 30px;
+	right: 30px;
+	display: block;
+	z-index: 100;
+	transition: all 250ms linear;
+}
+.logo img {
+	height: 26px;
+	width: auto;
+	display: block;
+}
+ 
+
+/*button css */
+.logout{
+    position:absolute;
+    display:flex;
+    justify-items: flex-end;
+    border:0.16em solid rgba(203, 244, 21, 0);
+    border-radius:4em;
+    box-sizing: border-box;
+    text-decoration:none;
+    font-family: "Gill Sans", sans-serif; 
+    color:black;
+    text-shadow: 0 0.04em 0.04em rgba(0,0,0,0.35);
+    text-align:center;
+    transition: all 0.2s;
+    font-style: italic;
+    font-size: 20px;
+    line-height: 1.7;
+}
+.dropbtn {
+  background-color: #FFEBA7;
+  width:50px;
+  height:50px;
+  font-weight: bolder;
+  border-radius: 50%;
+  color: black;
+  font-size: 26px;
+  border: none;
+  cursor: pointer;
+}
+.css1{
+  font-size:50px;
+  font-family: georgia;
+  font-style:italic;
+  font-weight:bold;
+  color:#FFEBA7;
+  text-shadow: 2px 2px 8px black;
+}
+.dropbtn:hover, .dropbtn:focus {
+  background-color: #fff;
+}
+
+.dropdown {
+  align-items: left;
+  
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  right:10px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown a:hover {background-color: #ddd;}
+
+.show {display: block;}
+
+
+* {
+  box-sizing: border-box;
+}
+
+#map {
+  width: 80%;
+  height: 300px;
+}
+
+/* Float four columns side by side */
+.column {
+  float: left;
+  width: 25%;
+  padding: 0 10px;
+}
+
+/* Remove extra left and right margins, due to padding */
+.row {
+  margin: 0 -5px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive columns */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+    margin-top: 20px;
+  }
+}
+
+/* Style the counter cards */
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.9);
+  padding: 16px;
+  text-align: center;
+  background-color: #FFEBA7;
+}
+
+#cardtext {
+  color: black;
+  font-weight: bold;
+}
+
+/* hover cards */
+.ag-courses-item_link {
+  display: block;
+  padding: 30px 20px;
+  background-color: #121212;
+
+  overflow: hidden;
+
+  position: relative;
+}
+
+.ag-courses-item_link:hover,
+.ag-courses-item_link:hover .ag-courses-item_date {
+  text-decoration: none;
+  color: #FFF;
+}
+
+.ag-courses-item_link:hover .ag-courses-item_bg {
+  -webkit-transform: scale(10);
+  -ms-transform: scale(10);
+  transform: scale(10);
+}
+
+.ag-courses-item_bg {
+  height: 128px;
+  width: 128px;
+  background-color: #10e35a;
+
+  z-index: 1;
+  position: absolute;
+  top: -75px;
+  right: -75px;
+
+  border-radius: 50%;
+
+  -webkit-transition: all .5s ease;
+  -o-transition: all .5s ease;
+  transition: all .5s ease;
+}
+
+
+.ag-courses-item_title {
+  min-height: 87px;
+  margin: 0 0 25px;
+
+  overflow: hidden;
+
+  font-weight: bold;
+  font-size: 30px;
+  color: #FFF;
+
+  z-index: 2;
+  position: relative;
+}
+
+
+
+/* Upload css */
+.imageuploadify {
+  position: relative;
+  margin: auto;
+  display: flex;
+  padding: 0;
+  flex-direction: column;
+  text-align: center;
+  color: #FFEBA7;
+}
+.imageuploadify .imageuploadify-images-list span.imageuploadify-message {
+  font-size: 24px;
+  border-top: 1px solid #FFEBA7;
+  border-bottom: 1px solid #FFEBA7;
+  padding: 10px;
+  display: inline-block;
+}
+.imageuploadify .imageuploadify-images-list button.btn-default {
+  display: block;
+  color: #FFEBA7;
+  border-color: #FFEBA7;
+  border-radius: 1em;
+  margin: 25px auto;
+  width: 50%;
+  max-width: 500px;
+}
+.imageuploadify .imageuploadify-images-list .imageuploadify-container {
+  width: 100px;
+  height: 100px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 1em;
+  float: left;
+  border-radius: 12px;
+  box-shadow: 0 0 4px 0 #888;
+}
+.imageuploadify
+  .imageuploadify-images-list
+  .imageuploadify-container
+  button.btn-close{
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  width: 20px;
+  height: 20px;
+  border-radius: 15px;
+  font-size: 10px;
+  line-height: 1.42;
+  padding: 2px 0;
+  text-align: center;
+  z-index: 3;
+}
+.imageuploadify .imageuploadify-images-list .imageuploadify-container img {
+  height: 100px;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: auto;
+}
+.imageuploadify
+  .imageuploadify-images-list
+  .imageuploadify-container
+  .imageuploadify-details {
+  position: absolute;
+  top: 0;
+  padding-top: 20px;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  background: rgb(88, 100, 60);
+  z-index: 2;
+  opacity: 0;
+}
+.imageuploadify
+  .imageuploadify-images-list
+  .imageuploadify-container
+  .imageuploadify-details
+  span {
+
+  display: block;
+}
+
+  </style>
+
+
 </head>
+
 <body>
-	<a href="{{ url_for('CustLog') }}"><button onclick="">
-        <div class="chome">  	
-		<label>Customer Login</label>
-        <svg xmlns="http://www.w3.org/2000/svg" width="50%" height="50%" fill="currentColor" class="bi bi-person-rolodex" viewBox="0 0 16 16">
-            <path d="M8 9.05a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/>
-            <path d="M1 1a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h.5a.5.5 0 0 0 .5-.5.5.5 0 0 1 1 0 .5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5.5.5 0 0 1 1 0 .5.5 0 0 0 .5.5h.5a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H6.707L6 1.293A1 1 0 0 0 5.293 1H1Zm0 1h4.293L6 2.707A1 1 0 0 0 6.707 3H15v10h-.085a1.5 1.5 0 0 0-2.4-.63C11.885 11.223 10.554 10 8 10c-2.555 0-3.886 1.224-4.514 2.37a1.5 1.5 0 0 0-2.4.63H1V2Z"/>
-          </svg>
-    </button></a>
-    <a href="{{ url_for('BusLog') }}">    <button><div class="bhome">  	
-            <label>Business Login</label>
-            <svg xmlns="http://www.w3.org/2000/svg" width="50%" height="50%" fill="currentColor" class="bi bi-building" viewBox="0 0 16 16">
-                <path d="M4 2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1Zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1Zm3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1ZM4 5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1ZM7.5 5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Zm2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1ZM4.5 8a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Zm2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1Zm3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Z"/>
-                <path d="M2 1a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V1Zm11 0H3v14h3v-2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5V15h3V1Z"/>
-              </svg>    
-        </div></button></a>
+  <img src="{{load_img}}" id="loading">
+  <div class="content">
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/" style="color:#FFEBA7"><img src="{{fav_icon}}" height="50px"> PrintEase</a>
 
-            
 
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>           
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+          <span class="navbar-toggler-icon"></span>
+
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="/login" style="color:#FFEBA7">{{name}}</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#aboutus" style="color:#FFEBA7">ABOUT US</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/contact" style="color:#FFEBA7">CONTACT US</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/team" style="color:#FFEBA7">TEAM</a>
+            </li>
+          </ul>
+        </div>
+        <div class="dropdown" id="dropdown">
+          <button onclick="myFunction()" class="dropbtn">{{user}}</button>
+          <div id="myDropdown" class="dropdown-content">
+            <a href="#home" type="button" class="btn btn-primary" style="color: #000"><i style="float: left;"
+                class="fas fa-wallet fa-lg"></i><span style="float: right;">₹{{wallet}}</span></a>
+            <a href="/logout" type="button" class="btn btn-primary " style="color: #000;"><i style="float: left;"
+                class="fas fa-sign-out-alt fa-lg"></i><span style="float: right;">Logout</span></a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+    <div style="display: flex;justify-content: center;align-items: center;">
+      <div style="display:flex; flex-wrap: wrap;">
+        <h2 Scrollamount=15 style="text-align:center"><span style="color: #FFEBA7;font-size:35px;"
+            id="notification"></span>
+        </h2>
+      </div>
+    </div>
+    <br><br><br><br><br><br>
+    <section id="hero" class="d-flex flex-column justify-content-center">
+      <div style="text-align:center">
+        <h1 style="color: #FFEBA7; font-size: 65px;">PrintEase</h1>
+        <p><span style="color: #fff;font-size: 20px;" id="typed-text"></span></p>
+        <div class="social-links">
+          <button style="font-size:26px;background-color: #FFEBA7; color: black;font-weight: bold;border-radius: 9px;"
+            onclick="location.href='#services'">{{name}} <i class="fa fa-rocket"></i></button>
+        </div>
+      </div>
+    </section>
+    <center>
+      <br><br>
+      <div class="diff_logins">
+        <button style="font-size:26px;background-color: #FFEBA7; color: black;font-weight: bold;border-radius: 9px;"
+          onclick="location.href='/CustLog'">Customer Login<i class="fa fa-rocket"></i></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button style="font-size:26px;background-color: #FFEBA7; color: black;font-weight: bold;border-radius: 9px;"
+          onclick="location.href='/BusLog'">Business Login<i class="fa fa-rocket"></i></button>
+      </div>
+    </center>
+    <!-- ======= About Section ======= -->
+    <br><br><br><br><br><br><br><br><br><br><br><br><br id="aboutus"><br><br><br><br><br>
+    <section id="about" class="about">
+      <div class="container" data-aos="fade-up">
+        <div class="section-title">
+          <h1 style="font-weight: bold;text-align: center;">About Us</h1>
+          <br>
+          <h4 style="color:#FFEBA7;text-align: center;">PrintEase: Streamlined Hassle Free Printing service for REC
+            Students!</h4>
+        </div>
+        <br><br>
+        <div class="abt">
+          <div>
+
+            <p class="fst-italic" style="color:wheat;font-size: large;line-height:40px;">
+              Our aim is to streamline the process of searching for and ordering printing services from local printer
+              shops. Progress updates are shared with the customer, and upon completion, the customer is notified to
+              come and collect their printouts. This application aims to make the process of ordering and receiving
+              printing services more efficient and convenient for both customers and printer shops.
+            </p>
+
+            <p class="fst-italic" style="color:wheat;font-size: large;line-height:40px;">
+              The application allows users to send documents to a connected printer and make payments for the printing
+              service directly from their mobile devices. The system is designed to streamline the printing process,
+              making it more convenient and efficient for users. The application uses a secure connection to communicate
+              with the printer, ensuring that the user's sensitive information is protected.
+            </p>
+            <br><br><br><br>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Services -->
+      <div id="services">
+        <br><br>
+        <h1 style="font-weight: bold;text-align: center;">OUR SERVICES</h1>
+        <br><br>
+          <div class="row">
+            <div class="column">
+              <div class="card">
+                <div class="ag-courses-item_link">
+                  <div class="ag-courses-item_bg"></div>
+                  <div class="ag-courses-item_title">
+                    Search Shops Near Me
+                  </div>
+                </div>
+              </div>
+            </div>
+          <div class="column">
+            <div class="card">
+              <div class="ag-courses-item_link">
+              <div class="ag-courses-item_bg"></div>
+              <div class="ag-courses-item_title">
+                Login / Sign-Up <br>To avail our services
+                  
+              </div>
+            </div>
+            </div>
+          </div>
+        
+          <div class="column">
+            <div class="card">
+              <div class="ag-courses-item_link">
+                <div class="ag-courses-item_bg"></div>
+                <div class="ag-courses-item_title">
+                  Immediate Printing with High Priority
+                </div>
+              </div>
+            </div>
+          </div>
+        
+        <div class="column">
+            <div class="card">
+              <div class="ag-courses-item_link">
+                <div class="ag-courses-item_bg"></div>
+                <div class="ag-courses-item_title">
+                  Book an Appointment
+                </div>
+              </div>
+            </div>
+          </div>
+        
+      </div>
+  </div>
+  <br><br><br><br><br>
+  </section><!-- End About Section -->
+
+
+
+
+  </div>
+  <script>
+    setTimeout(function () {
+      document.getElementById("loading").style.display = "none";
+      document.querySelector(".content").style.display = "block";
+    }, 3000);
+
+
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
 
 </html>
 
+<!-- test -->
+<style>
+
+</style>
