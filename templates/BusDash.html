@@ -205,13 +205,7 @@
   
 }
 
-#msg {
-  color: red;
-}
-#msg2{
-  color: red;
-}
-#msg3{
+#msg,#msg2,#msg3,#msg1{
   color: red;
 }
 .fa-plus {
@@ -361,14 +355,11 @@
         <p>Price in (INR)</p>
         <input type="text" class="form-control" id="price" name="price" />
         <div id="msg2"></div>
+        <p>Quantity (Per:)</p>
+        <input type="text" class="form-control" name="" id="type" />
+        <div id="msg1"></div>
         <p>Description</p>
-        <textarea
-          name=""
-          class="form-control"
-          id="textarea"
-          cols="30"
-          rows="5"
-        ></textarea>
+        <textarea name="" class="form-control" id="textarea" cols="30" rows="5"></textarea>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
@@ -386,9 +377,12 @@
     let textInput = document.getElementById("textInput");
     let cost = document.getElementById("price");
     let del = document.getElementById("delivery");
+    let type = document.getElementById("type");
     let textarea = document.getElementById("textarea");
     let msg = document.getElementById("msg");
+    let msg1 = document.getElementById("msg1");
     let msg2 = document.getElementById("msg2");
+    let msg3 = document.getElementById("msg3");
     let tasks = document.getElementById("tasks");
     let add = document.getElementById("add");
     let delivery="Yes";
@@ -409,9 +403,14 @@
         console.log("failure");
         msg3.innerHTML = "Enter that you can deliver or not ";
       } 
+      else if(type.value === ""){
+        console.log("failure");
+        msg1.innerHTML = "Enter the quantity type ";
+      }
       else {
         msg3.innerHTML= "";
         msg2.innerHTML = "";
+        msg1.innerHTML = "";
         msg.innerHTML = "";
         acceptData();
         add.setAttribute("data-bs-dismiss", "modal");
@@ -430,6 +429,7 @@
         text: textInput.value,
         delivery: del.value,
         price: price.value,
+        qty: type.value,
         description: textarea.value,
       });
 
@@ -446,8 +446,9 @@
             Delivery Availability: 
             <span class="medium text-secondary">${x.delivery}</span>
             Price:
-            <br>
             <span class="medium text-secondary"> ${x.price}</span>
+            Quantity per:
+            <span class="medium text-secondary"> ${x.qty}</span>
             <p>${x.description}</p>
     
             <span class="options">
@@ -465,7 +466,8 @@
 
   textInput.value = selectedTask.children[0].innerHTML;
   del.value = selectedTask.children[1].innerHTML;
-  price.value = selectedTask.children[3].innerHTML;
+  price.value = selectedTask.children[2].innerHTML;
+  type.value = selectedTask.children[3].innerHTML;
   textarea.value = selectedTask.children[4].innerHTML;
 
   deleteTask(e);
@@ -483,6 +485,7 @@
   textInput.value = "";
   price.value = "";
   del.value = "";
+  type.value = "";
   textarea.value = "";
 };
 // (() => {
