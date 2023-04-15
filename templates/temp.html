@@ -120,6 +120,7 @@
       height:80%;
         
       }
+    }
 .open-button {
   background-color: #48e665;
   font-weight: bolder;
@@ -419,7 +420,7 @@
             <div class="solu_description">
               <p>Your service will be displayed for the users. So update your services time to time to buid a happy business :)</p>
               <button type="button" class="read_more_btn">Remove A Service</button>
-              <button type="button" class="read_more_btn">Add A New Service</button>
+              <button type="button" class="read_more_btn open-button" onclick="openForm()">Add A New Service</button>
             </div>
           </div>
         </div>
@@ -546,7 +547,7 @@
 </div>
 
 
-
+<div class="form-popup" id="myForm">
 <div class="card1">
   <h2>Select Service</h2>
   <form id="service-form">
@@ -581,6 +582,7 @@
       <br>
       <input type="submit" value="Submit">
   </form>
+</div>
 </div>
 <script>
   // JS code to handle dynamic form elements
@@ -638,6 +640,23 @@
       document.body.appendChild(cardsDiv);
       serviceForm.reset();
   });
+</script>
+
+<script>
+    function openForm() {
+      document.getElementById("myForm").style.display = "block";
+      document.getElementById("overlay").style.display = "block";
+    }
+    function viewproducts() {
+      document.getElementById("viewprod").style.display = "block";
+      document.getElementById("overlay").style.display = "block";
+    }
+    function closeForm() {
+      document.getElementById("viewprod").style.display = "none";
+      document.getElementById("myForm").style.display = "none";
+      document.getElementById("overlay").style.display = "none";
+    }
+
 </script>
 
 </body>
