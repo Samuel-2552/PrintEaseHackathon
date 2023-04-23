@@ -20,6 +20,22 @@
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
+    <style>
+
+.btn-toggle input[type="radio"]:checked ~ .form-group.business {
+  display: block;
+}
+
+.form-group.business input {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+.business-fields {
+  display: none;
+}
+
+    </style>
+
 </head>
 
 <body class="bg-gradient-primary">
@@ -57,51 +73,85 @@
                                             id="exampleInputPassword" placeholder="Password">
                                     </div>
                                     <div class="col-sm-6">
-                                        <input type="password" class="form-control form-control-user"
-                                            id="exampleRepeatPassword" placeholder="Repeat Password">
+                                        <input type="password" class="form-control form-control-user" id="exampleRepeatPassword" placeholder="Repeat Password">
                                     </div>
-                                    <div class="form-group row">
-                                        <div class="col-sm-6 mb-3 mb-sm-0">
-                                            <input type="radio" name="radio" checked/>
-                                            <span>HTML</span>
                                     </div>
-                                </div>
-                                <a href="login.html" class="btn btn-primary btn-user btn-block">
-                                    Register Account
-                                </a>
-                                <hr>
-                                <a href="dash.html" class="btn btn-google btn-user btn-block">
-                                    <i class="fab fa-google fa-fw"></i> Register with Google
-                                </a>
-                                <a href="dash.html" class="btn btn-facebook btn-user btn-block">
-                                    <i class="fab fa-facebook-f fa-fw"></i> Register with Facebook
-                                </a>
-                            </form>
+                            <!-- Register as customer or business -->
+<div class="form-group">
+    <div class="btn-group-toggle" data-toggle="buttons">
+      <label class="btn btn-toggle active">
+        <input type="radio" name="register-type" id="customer-radio" value="customer" checked> Register as Customer
+      </label>
+      <label class="btn btn-toggle">
+        <input type="radio" name="register-type" id="business-radio" value="business"> Register as Business
+      </label>
+    </div>
+  </div>
+  
+  <!-- Business registration fields (hidden by default) -->
+  <div class="business-fields" >
+    <div class="form-group">
+      <input type="text" class="form-control form-control-user" id="businessName" name="businessName" placeholder="Business Name">
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control form-control-user" id="businessAddress" name="businessAddress" placeholder="Business Address">
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control form-control-user" id="businessPhone" name="businessPhone" placeholder="Business Phone Number">
+    </div>
+  </div>
+  
+
+                            <button type="submit" class="btn btn-primary btn-user btn-block">
+                                Register Account
+                            </button>
+
                             <hr>
-                            <div class="text-center">
-                                <a class="small" href="forgot-password.html">Forgot Password?</a>
-                            </div>
-                            <div class="text-center">
-                                <a class="small" href="login.html">Already have an account? Login!</a>
-                            </div>
+
+                            <a href="dash.html" class="btn btn-google btn-user btn-block">
+                                <i class="fab fa-google fa-fw"></i> Register with Google
+                            </a>
+                            <a href="dash.html" class="btn btn-facebook btn-user btn-block">
+                                <i class="fab fa-facebook-f fa-fw"></i> Register with Facebook
+                            </a>
+                        </form>
+                        <hr>
+                        <div class="text-center">
+                            <a class="small" href="forgot-password.html">Forgot Password?</a>
+                        </div>
+                        <div class="text-center">
+                            <a class="small" href="login.html">Already have an account? Login!</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+</div>
 
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+<!-- Bootstrap core JavaScript-->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
+<!-- Core plugin JavaScript-->
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
+<!-- Custom scripts for all pages-->
+<script src="js/sb-admin-2.min.js"></script>
+
+<script>
+    $(function() {
+  // Hide business registration fields when "Register as Customer" is selected
+  $('#customer-radio').click(function() {
+    $('.business-fields').slideUp();
+  });
+  // Show business registration fields when "Register as Business" is selected
+  $('#business-radio').click(function() {
+    $('.business-fields').slideDown();
+  });
+});
+
+</script>
 </body>
-
 </html>
