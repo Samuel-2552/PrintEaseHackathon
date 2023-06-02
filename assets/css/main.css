@@ -904,7 +904,12 @@ section {
   font-family: var(--font-primary);
   margin-bottom: 25px;
 }
-
+.pricing h5 {
+  color: var(--color-primary);
+  font-weight: 400;
+  font-family: var(--font-primary);
+  margin-bottom: 25px;
+}
 .pricing h4 sup {
   font-size: 28px;
 }
