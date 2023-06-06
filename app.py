@@ -14,6 +14,11 @@ def about():
 def services():
     return render_template('services.html')
 
+@app.route('/servicedetails')
+def servicedetails():
+    return render_template('service-details copy.html')
+
+
 @app.route('/pricing')
 def pricing():
     return render_template('pricing.html')

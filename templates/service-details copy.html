@@ -30,7 +30,7 @@
 
   <!-- Template Main CSS File -->
   <link href="static/assets/css/main.css" rel="stylesheet">
-
+  <link href="static/assets/css/services.css" rel="stylesheet">
   <!-- =======================================================
   * Template Name: Logis
   * Updated: Mar 10 2023 with Bootstrap v5.2.3
@@ -38,17 +38,6 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
-
-  <!-- style for service tabs -->
-  <style>
-    .tab {
-      display: none;
-    }
-  
-    .tab.active {
-      display: block;
-    }
-  </style>
 </head>
 
 <body>
@@ -107,68 +96,54 @@
 
     <!-- ======= Service Details Section ======= -->
     <section id="service-details" class="service-details">
-      <div class="container" data-aos="fade-up">
+      
+<div class="tabset">
+  <!-- Tab 1 -->
+  <input type="radio" name="tabset" id="tab1" aria-controls="document-printing" checked>
+  <label for="tab1">Document Printing</label>
+  <!-- Tab 2 -->
+  <input type="radio" name="tabset" id="tab2" aria-controls="personalized-cups">
+  <label for="tab2">Personalized Cups</label>
+  <!-- Tab 3 -->
+  <input type="radio" name="tabset" id="tab3" aria-controls="custom-t-shirts">
+  <label for="tab3">Custom T-Shirts</label>
+  <!-- Tab 4 -->
+  <input type="radio" name="tabset" id="tab4" aria-controls="promotional-items">
+  <label for="tab4">Promotional Items</label>
+  <!-- Tab 5 -->
+  <input type="radio" name="tabset" id="tab5" aria-controls="3d-printing">
+  <label for="tab5">3D Printing</label>
+  <!-- Tab 6 -->
+  <input type="radio" name="tabset" id="tab6" aria-controls="large-format-printing">
+  <label for="tab6">Large Format Printing</label>
 
-        <div class="row gy-4">
-
-          <div class="col-lg-4">
-            <div class="container">            
-              <div class="services-list">
-                <a href="#" onclick="openTab(event, 'storage')" class="active">Storage</a>
-                <a href="#" onclick="openTab(event, 'logistics')">Logistics</a>
-                <a href="#" onclick="openTab(event, 'cargo')">Cargo</a>
-                <a href="#" onclick="openTab(event, 'trucking')">Trucking</a>
-                <a href="#" onclick="openTab(event, 'packaging')">Packaging</a>
-                <a href="#" onclick="openTab(event, 'warehousing')">Warehousing</a>
-              </div>
-            
-              <div class="tab active" id="storage">
-                <div class="col-lg-8">
-                  <h4>Enim qui eos rerum in delectus</h4>
-                  <p>Nam voluptatem quasi numquam quas fugiat ex temporibus quo est. Quia aut quam quod facere ut non occaecati ut aut. Nesciunt mollitia illum tempore corrupti sed eum reiciendis. Maxime modi rerum.</p>
-                </div>
-              </div>
-            
-              <div class="tab" id="logistics">
-                <div class="col-lg-8">
-                  <h4>Enim qui eos rerum in delectus</h4>
-                  <p>Nam voluptatem quasi numquam quas fugiat ex temporibus quo est. Quia aut quam quod facere ut non occaecati ut aut. Nesciunt mollitia illum tempore corrupti sed eum reiciendis. Maxime modi rerum.</p>
-                </div>
-              </div>
-            
-              <div class="tab" id="cargo">
-                <div class="col-lg-8">
-                  <h4>Enim qui eos rerum in delectus</h4>
-                  <p>Nam voluptatem quasi numquam quas fugiat ex temporibus quo est. Quia aut quam quod facere ut non occaecati ut aut. Nesciunt mollitia illum tempore corrupti sed eum reiciendis. Maxime modi rerum.</p>
-                </div>
-              </div>
-            
-              <div class="tab" id="trucking">
-                <div class="col-lg-8">
-                  <h4>Enim qui eos rerum in delectus</h4>
-                  <p>Nam voluptatem quasi numquam quas fugiat ex temporibus quo est. Quia aut quam quod facere ut non occaecati ut aut. Nesciunt mollitia illum tempore corrupti sed eum reiciendis. Maxime modi rerum.</p>
-                </div>
-              </div>
-            
-              <div class="tab" id="packaging">
-                <div class="col-lg-8">
-                  <h4>Enim qui eos rerum in delectus</h4>
-                  <p>Nam voluptatem quasi numquam quas fugiat ex temporibus quo est. Quia aut quam quod facere ut non occaecati ut aut. Nesciunt mollitia illum tempore corrupti sed eum reiciendis. Maxime modi rerum.</p>
-                </div>
-              </div>
-            
-              <div class="tab" id="warehousing">
-                <div class="col-lg-8">
-                  <h4>Enim qui eos rerum in delectus</h4>
-                  <p>Nam voluptatem quasi numquam quas fugiat ex temporibus quo est. Quia aut quam quod facere ut non occaecati ut aut. Nesciunt mollitia illum tempore corrupti sed eum reiciendis. Maxime modi rerum.</p>
-                </div>
-              </div>
-
-        </div>
-
-      </div>
-      </div>
-      </div>
+  <div class="tab-panels">
+    <section id="document-printing" class="tab-panel">
+      <h2>Document Printing</h2>
+      <p>We provide top-notch printing services for all your important documents, including brochures, flyers, business cards, and presentations. With our commitment to excellence, we guarantee crisp, clear, and professional results for all your printing needs.</p>
+    </section>
+    <section id="personalized-cups" class="tab-panel">
+      <h2>Personalized Cups</h2>
+      <p>Customize your cups for home, office, or special events. Choose from a variety of styles and materials, including ceramic, glass, and travel mugs. Add your unique designs or company logo to add a personal touch to your cups.</p>
+    </section>
+    <section id="custom-t-shirts" class="tab-panel">
+      <h2>Custom T-Shirts</h2>
+      <p>Make a statement with our stylish and comfortable custom t-shirts. Select from a wide range of colors, sizes, and materials to suit any occasion. Add your artwork, slogans, or logos to create personalized t-shirts that reflect your unique style.</p>
+    </section>
+    <section id="promotional-items" class="tab-panel">
+      <h2>Promotional Items</h2>
+      <p>Boost your brand visibility with our customizable promotional items. Whether it's pens, keychains, tote bags, or more, we have a wide selection of products that can be tailored to your marketing campaigns, events, or corporate gifts.</p>
+    </section>
+    <section id="3d-printing" class="tab-panel">
+      <h2>3D Printing</h2>
+      <p>Experience the power of cutting-edge 3D printing technology to bring your intricate designs and models to life. Whether it's prototyping, architectural models, or custom items, our 3D printing service ensures precision and top-notch quality in every project.</p>
+    </section>
+    <section id="large-format-printing" class="tab-panel">
+      <h2>Large Format Printing</h2>
+      <p>Make a lasting impact with our large format printing services. From banners and posters to signage, our high-resolution prints deliver stunning visuals and durability. Perfect for advertising, events, or interior design purposes.</p>
+    </section>
+  </div>
+</div>
     </section><!-- End Service Details Section -->
 
   </main><!-- End #main -->
