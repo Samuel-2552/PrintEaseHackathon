@@ -76,7 +76,15 @@
           <p data-aos="fade-up" data-aos-delay="100">We connect local shops with customers for all the printing services, we're not limited to printing of documents, but also provide service of connecting to 3D printing shops, printing posters, printing T-shirts, etc.</p>
 
           <form action="#" class="form-search d-flex align-items-stretch mb-3" data-aos="fade-up" data-aos-delay="200">
-            <input type="text" class="form-control" placeholder="ZIP code or CitY">
+            <select  class="form-control" name="services" id="Servicedropdown" center>
+              <option value=0>-- Select a Service --</option>
+              <option value="documentprinting">Document printing</option>
+              <option value="CustomT-Shirts">Custom T-Shirts</option>
+              <option value="PersonalizedCups">Personalized Cups</option>
+              <option value="PromotionalProducts">Promotional Products</option>
+              <option value="3-D printing">3-D printing</option>
+              <option value="Largeformatprinting">Large format printing</option>
+            </select>
             <button type="submit" class="btn btn-primary">Search</button>
           </form>
 

@@ -98,8 +98,31 @@ def register():
     # Render the sign-up page for GET requests
     return render_template('register.html')
 
-@app.route('/registerbusiness')
+@app.route('/registerbusiness', methods=['GET', 'POST'])
 def registerbusiness():
+    if request.method == 'POST':
+        # Retrieve form data
+        first_name = request.form['first_name']
+        last_name = request.form['last_name']
+        email = request.form['email']
+        password = request.form['password']
+        business_name = request.form['business_name']
+        business_address = request.form['business_address']
+        business_phone = request.form['business_phone']
+
+        # Create a connection to the SQLite database
+        conn = sqlite3.connect(DB_NAME)
+        cursor = conn.cursor()
+
+        # Execute the INSERT query to store the data in the 'business' table
+        cursor.execute("INSERT INTO business (first_name, last_name, email, password, business_name, business_address, business_phone) VALUES (?, ?, ?, ?, ?, ?, ?)",
+                       (first_name, last_name, email, password, business_name, business_address, business_phone))
+
+        # Commit the changes and close the database connection
+        conn.commit()
+        conn.close()
+
+        return 'Registration Successful'
     return render_template('register business.html')
 
 
