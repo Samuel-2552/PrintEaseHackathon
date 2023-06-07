@@ -1,6 +1,28 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
+import sqlite3
 
 app = Flask(__name__)
+
+DB_NAME = 'login.db'
+
+# Create a table to store user login information
+def create_table():
+    conn = sqlite3.connect(DB_NAME)
+    cursor = conn.cursor()
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS users (
+            id INTEGER UNIQUE AUTOINCREMENT,
+            email PRIMARY KEY TEXT NOT NULL,
+            first_name TEXT NOT NULL,
+            last_name TEXT NOT NULL,
+            password TEXT NOT NULL
+        )
+    ''')
+    conn.commit()
+    conn.close()
+
+# Initialize the database
+create_table()
 
 @app.route('/')
 def index():
@@ -29,6 +51,18 @@ def contact():
 
 @app.route('/login')
 def login():
+    if request.method == 'POST':
+        email = request.form['email']
+        password = request.form['password']
+        
+        # Insert the login details into the database
+        conn = sqlite3.connect(DB_NAME)
+        cursor = conn.cursor()
+        cursor.execute('INSERT INTO users (email, password) VALUES (?, ?)', (email, password))
+        conn.commit()
+        conn.close()
+        
+        return 'Login successful'
     return render_template('login.html')
 
 @app.route('/register')
