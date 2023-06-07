@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>User Registration</title>
+    <title>Print@Ease Business Registration</title>
 
     <!-- Custom fonts for this template-->
     <link href="static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -46,7 +46,7 @@
             <div class="card-body p-0">
                 <!-- Nested Row within Card Body -->
                 <div class="row">
-                    <div class="col-lg-5 d-none d-lg-block"><img src="static/assets/img/signup.png" alt="" class="img-fluid" center></div>
+                    <div class="col-lg-5 d-none d-lg-block" center><img src="static/assets/img/signup.png" alt="" class="img-fluid" ></div>
                     <div class="col-lg-7">
                         <div class="p-5">
                             <div class="text-center">
@@ -75,19 +75,25 @@
                                     <div class="col-sm-6">
                                         <input type="password" class="form-control form-control-user" id="exampleRepeatPassword" placeholder="Repeat Password">
                                     </div>
-                                    </div>
+                                </div>
+                                <div class="form-group">
+                                  <input type="text" class="form-control form-control-user" id="businessName" name="businessName" placeholder="Business Name">
+                                </div>
+                                <div class="form-group">
+                                  <input type="text" class="form-control form-control-user" id="businessAddress" name="businessAddress" placeholder="Business Address">
+                                </div>
+                                <div class="form-group">
+                                  <input type="text" class="form-control form-control-user" id="businessPhone" name="businessPhone" placeholder="Business Phone Number">
+                                </div>
+                            
+                            <!-- Register as customer or business -->
                             <button type="submit" class="btn btn-primary btn-user btn-block">
                                 Register Account
                             </button>
 
                             <hr>
-
-                            <a href="/registerbusiness" class="btn btn-google btn-user btn-block">
-                                <i class="fab fa-fw"></i> Business Registration
-                            </a>
-                        </form>
-                        <hr>
-                        <div class="text-center">
+                                                  </form>
+                          <div class="text-center">
                             <a class="small" href="/forgot">Forgot Password?</a>
                         </div>
                         <div class="text-center">
