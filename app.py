@@ -21,6 +21,23 @@ def verify_login(email, password):
         return True
     else:
         return False
+    
+# Function to verify user login
+def verify_businesslogin(email, password):
+    conn = sqlite3.connect(DB_NAME)
+    cursor = conn.cursor()
+
+    # Check if the email and password combination exists in the 'users' table
+    cursor.execute("SELECT * FROM business WHERE email = ? AND password = ?", (email, password))
+    result = cursor.fetchone()
+
+    conn.close()
+
+    # If a row is returned, the credentials are valid; otherwise, they are invalid
+    if result is not None:
+        return True
+    else:
+        return False
 
 
 @app.route('/')
@@ -67,8 +84,20 @@ def login():
     # Render the login page for GET requests
     return render_template('login.html')
 
-@app.route('/loginbusiness')
+@app.route('/loginbusiness', methods=['GET', 'POST'])
 def loginbusiness():
+    if request.method == 'POST':
+        email = request.form['email']
+        password = request.form['password']
+
+        # Perform login verification
+        if verify_businesslogin(email, password):
+            # Redirect to the dashboard or desired page on successful login
+            return "Logged In Successfully"
+        # redirect('/dashboard')
+        else:
+            # Invalid credentials, render login page with an error message
+            return render_template('login business.html', error='Invalid email or password')
     return render_template('login business.html')
 
 
