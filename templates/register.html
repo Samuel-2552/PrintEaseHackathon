@@ -20,21 +20,7 @@
     <!-- Custom styles for this template-->
     <link href="static/css/sb-admin-2.min.css" rel="stylesheet">
 
-    <style>
-
-.btn-toggle input[type="radio"]:checked ~ .form-group.business {
-  display: block;
-}
-
-.form-group.business input {
-  margin-top: 10px;
-  margin-bottom: 20px;
-}
-.business-fields {
-  display: none;
-}
-
-    </style>
+    
 
 </head>
 
@@ -52,30 +38,27 @@
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Create an User Account!</h1>
                             </div>
-                            <form class="user">
+                            <form class="user" action="/register" method="post">
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="text" class="form-control form-control-user" id="exampleFirstName"
-                                            placeholder="First Name">
+                                           name="first_name" placeholder="First Name">
                                     </div>
                                     <div class="col-sm-6">
                                         <input type="text" class="form-control form-control-user" id="exampleLastName"
-                                            placeholder="Last Name">
+                                        name="last_name" placeholder="Last Name">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <input type="email" class="form-control form-control-user" id="exampleInputEmail"
-                                        placeholder="Email Address">
+                                        name="email" placeholder="Email Address">
                                 </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                <div class="form-group">
+                                    <div >
                                         <input type="password" class="form-control form-control-user"
-                                            id="exampleInputPassword" placeholder="Password">
+                                            name="password" id="exampleInputPassword" placeholder="Password">
                                     </div>
-                                    <div class="col-sm-6">
-                                        <input type="password" class="form-control form-control-user" id="exampleRepeatPassword" placeholder="Repeat Password">
-                                    </div>
-                                    </div>
+                                </div>
                             <button type="submit" class="btn btn-primary btn-user btn-block">
                                 Register Account
                             </button>
