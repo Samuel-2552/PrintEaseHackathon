@@ -51,19 +51,12 @@ def contact():
 
 @app.route('/login')
 def login():
-    if request.method == 'POST':
-        email = request.form['email']
-        password = request.form['password']
-        
-        # Insert the login details into the database
-        conn = sqlite3.connect(DB_NAME)
-        cursor = conn.cursor()
-        cursor.execute('INSERT INTO users (email, password) VALUES (?, ?)', (email, password))
-        conn.commit()
-        conn.close()
-        
-        return 'Login successful'
     return render_template('login.html')
+
+@app.route('/loginbusiness')
+def loginbusiness():
+    return render_template('login business.html')
+
 
 @app.route('/register')
 def register():
@@ -77,6 +70,10 @@ def registerbusiness():
 @app.route('/forgot')
 def forgot():
     return render_template('forgot-password.html')
+
+@app.route('/forgotbusiness')
+def forgotbusiness():
+    return render_template('forgot-password business.html')
 
 
 if __name__ == '__main__':
