@@ -69,6 +69,11 @@ def login():
 def register():
     return render_template('register.html')
 
+@app.route('/registerbusiness')
+def registerbusiness():
+    return render_template('register business.html')
+
+
 @app.route('/forgot')
 def forgot():
     return render_template('forgot-password.html')
