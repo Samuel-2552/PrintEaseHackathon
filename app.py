@@ -11,8 +11,8 @@ def create_table():
     cursor = conn.cursor()
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS users (
-            id INTEGER UNIQUE AUTOINCREMENT,
-            email PRIMARY KEY TEXT NOT NULL,
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            email  TEXT NOT NULL,
             first_name TEXT NOT NULL,
             last_name TEXT NOT NULL,
             password TEXT NOT NULL
