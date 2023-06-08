@@ -259,5 +259,24 @@ def forgotbusiness():
     # return render_template('forgot-password business.html')
 
 
+#every service navigations
+
+#document printing service
+@app.route('/documentprinting')
+def documentprinting():
+    if 'user_id' in session:
+        # User is authenticated, retrieve user details from the session
+        user_id = session['user_id']
+
+        # Retrieve user details from the database using the user_id
+        # ...
+        print(user_id)
+
+        return render_template('document_printing.html', user=user_id, log=1)
+    else:
+        # User is not authenticated, redirect to the login page
+        return render_template('document_printing.html')
+
+
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
