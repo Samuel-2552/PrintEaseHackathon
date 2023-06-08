@@ -64,24 +64,57 @@ def index():
 
 @app.route('/about')
 def about():
-    return render_template('about.html')
+    if 'user_id' in session:
+        # User is authenticated, retrieve user details from the session
+        user_id = session['user_id']
+        return render_template('about.html', user=user_id, log=1)
+    else:
+        # User is not authenticated, redirect to the about page
+        return render_template('about.html')
 
 @app.route('/services')
 def services():
-    return render_template('services.html')
+    if 'user_id' in session:
+        # User is authenticated, retrieve user details from the session
+        user_id = session['user_id']
+        return render_template('services.html', user=user_id, log=1)
+    else:
+        # User is not authenticated, redirect to the services page
+        return render_template('services.html')
 
 @app.route('/servicedetails')
 def servicedetails():
-    return render_template('service-details copy.html')
+    if 'user_id' in session:
+        # User is authenticated, retrieve user details from the session
+        user_id = session['user_id']
+        return render_template('service-details copy.html', user=user_id, log=1)
+    else:
+        # User is not authenticated, redirect to the service details page
+        return render_template('service-details copy.html')
+    # return render_template('service-details copy.html')
 
 
 @app.route('/pricing')
 def pricing():
-    return render_template('pricing.html')
+    if 'user_id' in session:
+        # User is authenticated, retrieve user details from the session
+        user_id = session['user_id']
+        return render_template('pricing.html', user=user_id, log=1)
+    else:
+        # User is not authenticated, redirect to the pricing page
+        return render_template('pricing.html')
+    # return render_template('pricing.html')
 
 @app.route('/contact')
 def contact():
-    return render_template('contact.html')
+    if 'user_id' in session:
+        # User is authenticated, retrieve user details from the session
+        user_id = session['user_id']
+        return render_template('contact.html', user=user_id, log=1)
+    else:
+        # User is not authenticated, redirect to the contact page
+        return render_template('contact.html')
+    # return render_template('contact.html')
 
 # Route for handling the login form
 @app.route('/login', methods=['GET', 'POST'])
@@ -120,7 +153,14 @@ def loginbusiness():
         else:
             # Invalid credentials, render login page with an error message
             return render_template('login business.html', error='Invalid email or password')
-    return render_template('login business.html')
+    if 'user_id' in session:
+        # User is authenticated, retrieve user details from the session
+        user_id = session['user_id']
+        return redirect('/')
+    else:
+        # User is not authenticated, redirect to the login business page
+        return render_template('login business.html')
+    # return render_template('login business.html')
 
 
 # Route for handling the sign-up form
@@ -145,9 +185,16 @@ def register():
 
         # Redirect to the login page or any desired page on successful signup
         return redirect('/login')
-
+    
+    if 'user_id' in session:
+        # User is authenticated, retrieve user details from the session
+        user_id = session['user_id']
+        return redirect('/')
+    else:
+        # User is not authenticated, redirect to the register page
+        return render_template('register.html')
     # Render the sign-up page for GET requests
-    return render_template('register.html')
+    # return render_template('register.html')
 
 @app.route('/registerbusiness', methods=['GET', 'POST'])
 def registerbusiness():
@@ -173,8 +220,15 @@ def registerbusiness():
         conn.commit()
         conn.close()
 
-        return 'Registration Successful'
-    return render_template('register business.html')
+        return redirect('/loginbusiness')
+    if 'user_id' in session:
+        # User is authenticated, retrieve user details from the session
+        user_id = session['user_id']
+        return redirect('/')
+    else:
+        # User is not authenticated, redirect to the register business page
+        return render_template('register business.html')
+    # return render_template('register business.html')
 
 
 @app.route('/logout')
@@ -184,11 +238,25 @@ def logout():
 
 @app.route('/forgot')
 def forgot():
-    return render_template('forgot-password.html')
+    if 'user_id' in session:
+        # User is authenticated, retrieve user details from the session
+        user_id = session['user_id']
+        return redirect('/')
+    else:
+        # User is not authenticated, redirect to the forgot page
+        return render_template('forgot-password.html')
+    # return render_template('forgot-password.html')
 
 @app.route('/forgotbusiness')
 def forgotbusiness():
-    return render_template('forgot-password business.html')
+    if 'user_id' in session:
+        # User is authenticated, retrieve user details from the session
+        user_id = session['user_id']
+        return redirect('/')
+    else:
+        # User is not authenticated, redirect to the forgot business page
+        return render_template('forgot-password business.html')
+    # return render_template('forgot-password business.html')
 
 
 if __name__ == '__main__':
