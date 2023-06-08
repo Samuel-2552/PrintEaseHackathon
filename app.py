@@ -1,7 +1,12 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, session
+from flask_session import Session
 import sqlite3
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'hds215sdf8sg54sdf8sd'
+# app.config['SESSION_FILE_DIR'] = 'static\session_data.json'
+app.config['SESSION_TYPE'] = 'filesystem'
+Session(app)
 
 DB_NAME = 'database.db'
 
@@ -10,39 +15,52 @@ def verify_login(email, password):
     conn = sqlite3.connect(DB_NAME)
     cursor = conn.cursor()
 
-    # Check if the email and password combination exists in the 'users' table
     cursor.execute("SELECT * FROM users WHERE email = ? AND password = ?", (email, password))
     result = cursor.fetchone()
 
     conn.close()
 
-    # If a row is returned, the credentials are valid; otherwise, they are invalid
     if result is not None:
+        # Store user ID in the session
+        session['user_id'] = result
         return True
     else:
         return False
+
     
-# Function to verify user login
+# Function to verify business login
 def verify_businesslogin(email, password):
     conn = sqlite3.connect(DB_NAME)
     cursor = conn.cursor()
 
-    # Check if the email and password combination exists in the 'users' table
     cursor.execute("SELECT * FROM business WHERE email = ? AND password = ?", (email, password))
     result = cursor.fetchone()
 
     conn.close()
 
-    # If a row is returned, the credentials are valid; otherwise, they are invalid
     if result is not None:
+        # Store business ID in the session
+        session['business_id'] = result[0]
         return True
     else:
         return False
 
 
+
 @app.route('/')
 def index():
-    return render_template('index.html')
+    if 'user_id' in session:
+        # User is authenticated, retrieve user details from the session
+        user_id = session['user_id']
+
+        # Retrieve user details from the database using the user_id
+        # ...
+        print(user_id)
+
+        return render_template('index.html', user=user_id, log=1)
+    else:
+        # User is not authenticated, redirect to the login page
+        return render_template('index.html')
 
 @app.route('/about')
 def about():
@@ -75,14 +93,18 @@ def login():
         # Perform login verification
         if verify_login(email, password):
             # Redirect to the dashboard or desired page on successful login
-            return "Logged In Successfully"
+            return redirect('/')
         # redirect('/dashboard')
         else:
             # Invalid credentials, render login page with an error message
             return render_template('login.html', error='Invalid email or password')
-
-    # Render the login page for GET requests
-    return render_template('login.html')
+    if 'user_id' in session:
+            # User is authenticated, retrieve user details from the session
+        user_id = session['user_id']
+        return redirect('/') 
+    else:
+        # Render the login page for GET requests
+        return render_template('login.html')
 
 @app.route('/loginbusiness', methods=['GET', 'POST'])
 def loginbusiness():
@@ -154,6 +176,11 @@ def registerbusiness():
         return 'Registration Successful'
     return render_template('register business.html')
 
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect('/')
 
 @app.route('/forgot')
 def forgot():

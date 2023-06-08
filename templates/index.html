@@ -42,10 +42,7 @@
   <!-- ======= Header ======= -->
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
-
       <a href="index.html" class="logo d-flex align-items-center">
-        <!-- Uncomment the line below if you also wish to use an image logo -->
-        <!-- <img src="static/assets/img/logo.png" alt=""> -->
         <h1>Print@Ease</h1>
       </a>
 
@@ -58,11 +55,15 @@
           <li><a href="/services">Services</a></li>
           <li><a href="/pricing">Pricing</a></li>
           <li><a href="/contact">Contact</a></li>
-          <li><a class="get-a-quote" href="/login">Log In</a></li>
-          <li><a class="get-a-quote" href="/register">Sign Up</a></li>
+          
+          {% if log==1 %}
+            <li><a class="get-a-quote" href="/logout">Logout</a></li>
+          {% else %}
+            <li><a class="get-a-quote" href="/login">Log In</a></li>
+            <li><a class="get-a-quote" href="/register">Sign Up</a></li>
+          {% endif %}
         </ul>
       </nav><!-- .navbar -->
-
     </div>
   </header><!-- End Header -->
   <!-- End Header -->
