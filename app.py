@@ -277,6 +277,88 @@ def documentprinting():
         # User is not authenticated, redirect to the login page
         return render_template('document_printing.html')
 
+#Personalized cups services
+@app.route('/personalizedcups')
+def personalizedcups():
+    if 'user_id' in session:
+        # User is authenticated, retrieve user details from the session
+        user_id = session['user_id']
+
+        # Retrieve user details from the database using the user_id
+        # ...
+        print(user_id)
+
+        return render_template('personalized cups.html', user=user_id, log=1)
+    else:
+        # User is not authenticated, redirect to the login page
+        return render_template('personalized cups.html')
+
+#large format printing services
+@app.route('/largeformatprinting')
+def largeformatprinting():
+    if 'user_id' in session:
+        # User is authenticated, retrieve user details from the session
+        user_id = session['user_id']
+
+        # Retrieve user details from the database using the user_id
+        # ...
+        print(user_id)
+
+        return render_template('large format printing.html', user=user_id, log=1)
+    else:
+        # User is not authenticated, redirect to the login page
+        return render_template('large format printing.html')
+
+#custom t shirts services
+@app.route('/customtshirts')
+def customtshirts():
+    if 'user_id' in session:
+        # User is authenticated, retrieve user details from the session
+        user_id = session['user_id']
+
+        # Retrieve user details from the database using the user_id
+        # ...
+        print(user_id)
+
+        return render_template('custom t shirts.html', user=user_id, log=1)
+    else:
+        # User is not authenticated, redirect to the login page
+        return render_template('custom t shirts.html')
+
+#promotional products services
+@app.route('/promotionalproducts')
+def promotionalproducts():
+    if 'user_id' in session:
+        # User is authenticated, retrieve user details from the session
+        user_id = session['user_id']
+
+        # Retrieve user details from the database using the user_id
+        # ...
+        print(user_id)
+
+        return render_template('promotional products.html', user=user_id, log=1)
+    else:
+        # User is not authenticated, redirect to the login page
+        return render_template('promotional products.html')
+
+#3 D printing services
+@app.route('/threedprinting')
+def threedprinting():
+    if 'user_id' in session:
+        # User is authenticated, retrieve user details from the session
+        user_id = session['user_id']
+
+        # Retrieve user details from the database using the user_id
+        # ...
+        print(user_id)
+
+        return render_template('3d printing.html', user=user_id, log=1)
+    else:
+        # User is not authenticated, redirect to the login page
+        return render_template('3d printing.html')
+
+
+
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
