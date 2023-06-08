@@ -40,7 +40,7 @@ def verify_businesslogin(email, password):
 
     if result is not None:
         # Store business ID in the session
-        session['business_id'] = result[0]
+        session['user_id'] = result
         return True
     else:
         return False

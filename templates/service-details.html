@@ -72,8 +72,12 @@
           <li><a href="/services" class="active">Services</a></li>
           <li><a href="/pricing">Pricing</a></li>
           <li><a href="/contact">Contact</a></li>
-          <li><a class="get-a-quote" href="/login">Log In</a></li>
-          <li><a class="get-a-quote" href="/register">Sign Up</a></li>
+          {% if log==1 %}
+            <li><a class="get-a-quote" href="/logout">Logout</a></li>
+          {% else %}
+            <li><a class="get-a-quote" href="/login">Log In</a></li>
+            <li><a class="get-a-quote" href="/register">Sign Up</a></li>
+          {% endif %}
         </ul>
       </nav><!-- .navbar -->
 
