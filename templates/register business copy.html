@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <style>
+         .col-lg-5.d-none.d-lg-block{
+            margin-top: 160px; /* Adjust the margin-top value as per your requirement */
+        }
+        </style>
+   
+
+    <title>Print@Ease Business Registration</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="static/css/sb-admin-2.min.css" rel="stylesheet">
+
+    <style>
+
+.btn-toggle input[type="radio"]:checked ~ .form-group.business {
+  display: block;
+}
+
+.form-group.business input {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+.business-fields {
+  display: none;
+}
+
+    </style>
+
+</head>
+
+<body class="bg-gradient-primary">
+
+    <div class="container">
+
+        <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card-body p-0">
+                <!-- Nested Row within Card Body -->
+                <div class="row">
+                    <div class="col-lg-5 d-none d-lg-block" center><img src="static/assets/img/signup.png" alt="" class="img-fluid" ></div>
+                    <div class="col-lg-7">
+                        <div class="p-5">
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4">Create an Business Account!</h1>
+                            </div>
+                            <form id="regForm" class="user" action="/registerbusiness" method="post">
+                                    
+                                    <div class="tab">Name:
+                                        <br>
+                                        <input type="text" class="form-control form-control-user" id="exampleFirstName" name="first_name" placeholder="First Name">
+                                        <br>
+                                        <input type="text" class="form-control form-control-user" id="exampleLastName"
+                                        name="last_name" placeholder="Last Name">
+                                        <br>
+                                        Contact Info:
+                                        <input type="email" class="form-control form-control-user" id="exampleInputEmail"
+                                    name="email" placeholder="Email Address"><br>
+                                        <input type="password" class="form-control form-control-user"
+                                        name="password" id="exampleInputPassword" placeholder="Password">
+                                        <br>
+                                    </div>
+                                    
+                                    <div class="tab">Business Details:
+                                        <input type="text" class="form-control form-control-user" id="businessName" name="business_name" placeholder="Business Name">
+                                        <br>
+                                        <input type="text" class="form-control form-control-user" id="businessAddress" name="business_address" placeholder="Business Address">
+                                        <br>
+                                        <input type="text" class="form-control form-control-user" id="businessPhone" name="business_phone" placeholder="Business Phone Number">
+                                        <br>
+                                    </div>
+                                    
+                                    <div class="tab">
+                                      
+                                    <label for="servicecheck" style="color:black">Choose the services you offer:</label>
+                                    <div class="servicecheck">
+                                    <input type="checkbox" id="Service1" name="Service1" value="Large Format Printing">
+                                    <label for="Service1">Large Format Printing</label><br>
+                                    <input type="checkbox" id="Service2" name="Service2" value="Promotional Products">
+                                    <label for="Service2">Promotional Products</label><br>    
+                                    <input type="checkbox" id="Service3" name="Service3" value="Document Printing">
+                                    <label for="Service3">Document Printing</label><br>
+                                    <input type="checkbox" id="Service4" name="Service4" value="Personalized Cups">
+                                    <label for="Service4">Personalized Cups</label><br>
+                                    <input type="checkbox" id="Service5" name="Service5" value="3D Printing">
+                                    <label for="Service5">3D Printing</label><br>
+                                    <input type="checkbox" id="Service6" name="Service6" value="Custom T-Shirts">
+                                    <label for="Service6">Custom T-Shirts</label>
+                                  </div>
+                              
+                                    </div>
+                                    
+                                    <div class="tab"><b>Shop Information and Delivery Options:</b><br>
+                                        <p>Do you offer Delivery Services:</p>
+                                        <input type="radio" id="yes" name="delivery" value="Yes">
+                                        <label for="yes">Yes</label><br>
+                                        <input type="radio" id="no" name="delivery" value="No">
+                                        <label for="no">No</label><br><br>
+                                        <p>Shop Timings:</p>
+                                        <label for="opentime">Openning time:</label>
+                                        <input type="time" id="opentime" name="opentime">
+                                        <br>
+                                        <br>
+                                        <label for="closetime">Closing time:</label>
+                                        <input type="time" id="closetime" name="closetime">
+                                    </div>
+                                    
+                                    <div style="overflow:auto;">
+                                      <div style="float:right;">
+                                        <button type="button" class="btn btn-primary btn-user btn-block" id="nextBtn" onclick="nextPrev(1)">Next</button>
+                                        <button type="button" class="btn btn-primary btn-user btn-block"  id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+                                       
+                                      </div>
+                                    </div>
+                                    
+                                    <!-- Circles which indicates the steps of the form: -->
+                                    <div style="text-align:center;margin-top:40px;">
+                                      <span class="step"></span>
+                                      <span class="step"></span>
+                                      <span class="step"></span>
+                                      <span class="step"></span>
+                                    </div>
+                                        
+                                    <br>
+
+                            <hr long>
+                            </form>
+                        <div class="text-center">
+                            <a class="small" href="/loginbusiness">Already have an account? Login!</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Bootstrap core JavaScript-->
+<script src="static/vendor/jquery/jquery.min.js"></script>
+<script src="static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="static/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="static/js/sb-admin-2.min.js"></script>
+
+<script>
+    $(function() {
+  // Hide business registration fields when "Register as Customer" is selected
+  $('#customer-radio').click(function() {
+    $('.business-fields').slideUp();
+  });
+  // Show business registration fields when "Register as Business" is selected
+  $('#business-radio').click(function() {
+    $('.business-fields').slideDown();
+  });
+});
+
+</script>
+</body>
+</html>

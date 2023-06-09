@@ -227,7 +227,7 @@ def registerbusiness():
         return redirect('/')
     else:
         # User is not authenticated, redirect to the register business page
-        return render_template('register business.html')
+        return render_template('register business copy.html')
     # return render_template('register business.html')
 
 
